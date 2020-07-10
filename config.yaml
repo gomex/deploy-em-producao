@@ -46,17 +46,17 @@ params:
   # Customizable navbar. For a dropdown, add a "sublinks" list.
   navbar:
   - title: Sobre
-    url: /
+    url: /sobre
   - title: Licença
-    url: /
+    url: https://creativecommons.org/licenses/by/4.0/
   - title: Colaboração
     sublinks:
-    - title: Repositório
-      url: /
+    - title: Como está sendo construído
+      url: /construido
     - title: Como colaborar
-      url: /
+      url: /como-colaborar
     - title: Quem já colaborou
-      url: /
+      url: /quem-colaborou
   #- title: Log in
   #  url: /
   #- title: Sign up
