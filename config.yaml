@@ -90,7 +90,7 @@ params:
       # Icon (from /images/illustrations/icons/___.svg)
       icon: doc-sync
     - title: Colaborativo
-      text: Esse livro é a soma de um esforço comunitário, ou seja, é a obra de várias mãos. Um trabalho feito por uma comunidade vibrante e dedicada para manter o conhecimento como ele é por origem, aberto!
+      text: Esse livro é a soma de um esforço comunitário, ou seja, é a obra de várias mãos. Um trabalho feito por uma comunidade vibrante e dedicada para manter o conhecimento como ele é, por origem aberto!
       icon: laptop-globe
     - title: DRM Free
       text: Somos contra a qualquer tipo de controle da informação, ou seja, esse livro NUNCA será distribuído sob DRM ou qualquer mecanismo parecido.
