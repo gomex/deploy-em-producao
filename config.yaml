@@ -20,6 +20,7 @@ params:
   navbarlogo:
   # Logo (from static/images/logos/___)
     #image: logos/fresh.svg
+    image: logos/deploy.png
     link: /
   font:
     name: "Open Sans"
