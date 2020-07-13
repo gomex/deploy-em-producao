@@ -12,7 +12,7 @@ Tudo isso dentro de um ambiente controlado. Quando você executa esse teste voc�
 
 Com o passar do tempo esse trabalho manual foi substituído por testes automatizados que podem ser reaproveitados e executados de forma mais rápida e assertiva em relação aos manuais.
 
-Mas nem tudo são flores nessa história, criar e manter uma suíte de testes automatizados saudável requer esforço. Existem muitos desafios envolvidos que vamos ver no decorrer dos próximos capítulos.
+Mas nem tudo são flores nessa história, criar e manter uma suíte de testes automatizados saudável requer esforço. Existem muitos desafios envolvidos que vamos ver no decorrer dos próximos tópicos.
 
 Mesmo com esses desafios é importante entender que escrever testes é parte do processo de entrega de software e ajuda a manter a entrega das qualidades. Isso não pode ser negociado. É um esforço que compensa quando você consegue pegar os bugs antes de chegar em produção ao invés de esperar que algum cliente ligue reclamando.
 
