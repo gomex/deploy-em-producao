@@ -1,12 +1,12 @@
 ## Definindo Testes
 
-Existem muitas definições na literatura sobre tipos e técnicas de teste, no contexto desse livro eu vou usar a categorização feita pelo Google, que pode ser conferida no livro [Software Engineering at Google](https://www.amazon.com.br/Software-Engineering-Google-Titus-Winters/dp/1492082791). É uma visão que lembra a pirâmide de testes orginal citada pelo [Martin Fowler](https://martinfowler.com/articles/practical-test-pyramid.html) só que o critério de classificação utilizado é o "tamanho" do teste.
+Existem muitas definições na literatura sobre tipos e técnicas de teste, no nosso contexto eu vou usar a categorização feita pelo Google, que pode ser conferida no livro [Software Engineering at Google](https://www.amazon.com.br/Software-Engineering-Google-Titus-Winters/dp/1492082791). É uma visão que lembra a pirâmide de testes orginal citada pelo [Martin Fowler](https://martinfowler.com/articles/practical-test-pyramid.html) só que o critério de classificação utilizado é o "tamanho" do teste.
 
 Essa categorização se refere a quantidade de processos envolvidos no teste, quanto mais processos e componentes, maior o "tamanho".
 
 <p align="center">
   <a href="https://github.com/samycici/deploy-em-producao">
-    <img src="images/test_pyramid.png" alt="Pirâmide de Testes">
+    <img src="images/piramide_testes.png" alt="Pirâmide de Testes">
   </a>
 </p>
 
