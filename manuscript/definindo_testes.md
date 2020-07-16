@@ -10,7 +10,7 @@ Eu acredito que essa é uma abordagem melhor para falar sobre teste já que pode
 
 São 3 as categorizações:
 
-- Pequeno: são os testes mais contidos, geralmente são utilizados dublês de teste para evitar chamadas externas as funções testadas. São testes rápidos e determinísticos;
+- Pequeno: são os testes mais contidos, geralmente são utilizados dublês de teste para evitar chamadas externas às funções testadas. São testes rápidos e determinísticos;
 - Médio: aqui temos testes que executam múltiplos processos mas ainda assim sem acessar componentes externos, nessa categoria entram os testes que acessam banco de dados por exemplo;
 - Grande: esses testes são os que necessitam de uma maior complexidade para execução, nesse momento os sistemas já estão integrados. São mais lentos e menos determinísticos.
 
@@ -51,7 +51,7 @@ describe('The Auth Controller', () => {
 
 Esse é um teste que tem o escopo limitado, nesse caso testar o registro de um novo usuário e não tem dependências externas a essa função, tanto que ao invés de ser utilizada a integração com o banco de dados, utilizamos uma biblioteca para mockar o model.
 
-Esses testes ajudam muito na manutenibilidade posto que como exercitam um escopo mais contido, se um deles quebra você consegue rapidamente identificar o ponto de falha, diferente de um caso onde por exemplo você tivesse mais elementos envolvidos como um banco de dados, um container da aplicação, etc.
+Esses testes ajudam muito na manutenibilidade posto que como exercitam um escopo mais contido, se um deles quebra você consegue rapidamente identificar o ponto de falha, diferente de um caso onde, por exemplo, você tivesse mais elementos envolvidos como um banco de dados, um container da aplicação, etc.
 
 No decorrer desse tópico vamos falar mais sobre isso, mas vale já começar a reforçar que os testes precisam trazer segurança para o time fazer o deploy em produção sem peso na consciência. Se os testes não revelam os bugs ou se quebram demais desnecessariamente o time acaba perdendo a confiança e a crença de que os testes são um elemento importante no processo de desenvolvimento. Por isso você deve tratar testes como trata código de produção: utilizando boas práticas, fazendo refactor para implementar melhorias e sempre buscando otimização.
 
@@ -63,7 +63,8 @@ Como vimos a ideia dos testes unitários é ter um escopo mais limitado mas como
 É aí que entra o conceito de dublês de teste, uma forma de substituir esses componentes que são externos ao objetivo do nosso teste. Outro benefício de utilizar dublês é otimizar o tempo de execução dos testes.
 
 Os dublês podem ser categorizados em alguns patterns:
-- Fake: os fakes possuem uma resposta fixa sempre independente de como são chamados, podem ser implementados através de uma classe ou função. Uma vantagem de usar fake é que você não precisa ter nenhuma dependência externa, mas por outro lado você só consegue validar a saída e não todo o fluxo de comportamento. Você por exemplo pode construir um fake para testar envio de e-mail.
+
+- Fake: os fakes possuem uma resposta fixa, independente de como são chamados, podem ser implementados através de uma classe ou função. Uma vantagem de usar fake é que você não precisa ter nenhuma dependência externa como uma biblioteca, mas por outro lado você só consegue validar a saída e não todo o fluxo de comportamento. Você por exemplo pode construir um fake para testar envio de e-mail.
 
 ```javascript
 module.exports = class Mail {
@@ -91,15 +92,15 @@ module.exports = class Mail {
 
 - Mock: os mocks são capazes de substituir a dependência permitindo assim verificar vários comportamentos. Você pode utilizar por exemplo para verificar se uma função foi chamada e se ela foi chamada com os argumentos esperados.
 
-Quando se fala da utilização de dublês existe quase uma questão filosófica: "mockar ou não mockar, eis a questão". Existem alguns casos que são inevitáveis, como por exemplo testar funções que disparam email, ou utilizam alguma integração externa, nesses casos os dublês com certeza trazem produtividade ao tornarem a execução dos testes mais rápida e menos intermitente. 
+Quando se fala da utilização de dublês existe quase uma questão filosófica: **"mockar ou não mockar, eis a questão"**. Existem alguns casos que são inevitáveis, como por exemplo testar funções que disparam email, ou utilizam alguma integração externa, nesses casos os dublês com certeza trazem produtividade ao tornarem a execução dos testes mais rápida e menos intermitente. 
 
 Por outro lado precisamos lembrar que não estamos testando o comportamento 100% como vai ser executado em produção. Por isso é importante considerar alguns pontos antes de optar pelo uso de dublês e além disso ter testes de diferentes tipos que ajudem nessas validações.
 
-Se a implementação real permite uma execução rápida, determinística e simples, faz mais sentido utilizar essa implementação nos testes.Por exemplo uma função que valida CPF, datas, endereço, listas, etc.
+Se a implementação real permite uma execução rápida, determinística e simples, faz mais sentido utilizar essa implementação nos testes. Por exemplo uma função que valida CPF, datas, endereço, listas, etc.
 
 Se não for esse o caso, você precisa avaliar o tempo de execução, o quanto o teste é determinístico ou não (se você não consegue controlar o teste, as chances de você ter intermitência aumentam absurdamente) e o quanto é fácil ou difícil construir as dependências.
 
-Lembre-se de avaliar seu contexto SEMPRE!! E optar pela solução que te traz mais segurança no seu proceso de desenvolvimento.
+Lembre-se de avaliar seu contexto SEMPRE!! E optar pela solução que traz mais segurança para o seu proceso de desenvolvimento.
 
 Para se aprofundar nesse assunto eu indico a leitura do  [xUnit Patterns - Test Double](http://xunitpatterns.com/Test%20Double.html).
 
@@ -150,18 +151,18 @@ describe('The register process', () => {
 
 Nesse teste de exemplo estamos usando o [SuperTest](https://github.com/visionmedia/supertest) para servir nossa API e criando um novo usuário diretamente no banco de dados. Assim conseguimos validar todo fluxo do comportamento desde as validações que essa rota faz para resgistrar um novo usuário até conferir que ele foi efetivamente criado.
 
-Lembrando que conforme incluímos mais componentes nos testes, a tendência é que eles demorem um pouco mais e que tenham mais pontos de falha. É um risco que devemos ter consciência de que assumimos e precisamos aprender a lidar com ele já que testes isolados não conseguem por si só garantir todos os cenários necessários.
+Lembrando que conforme incluímos mais componentes nos testes, a tendência é que eles demorem um pouco mais e que tenham mais pontos de falha. É um risco que devemos ter consciência de que assumimos e precisamos aprender a lidar com ele, já que testes isolados não conseguem por si só garantir todos os cenários necessários.
 
 #### Testes de Contrato
-O advento dos microserviços trouxe esse tipo de teste pra um destaque. A comunicação entre esse serviços é um possível ponto de falha. 
+O advento dos microserviços trouxe esse tipo de teste pra um destaque posto que a comunicação entre esses serviços é um possível ponto de falha. 
 
-Imagine que você tem um serviço A que consome recursos de um serviço B. O serviço B tem um atributo chamado `email` que não é obrigatório e como esse atributo não é importante para o modelo de negócio do produto A, ele nunca passou esse atributo e nem pretende fazer isso. De repente o serviço B vê a necessidade de tornar o `email` obrigatório e como ele não tem visibilidade que quem são os seus consumidores, ele simplesmente sobe essa alteração para produção e a partir daí o serviço A passa a receber um erro 422 para TODAS as suas chamadas. Daí começa toda aquela saga que nós conhecemos, incidente em produção, corre para ver o que aconteceu, identifica o problema e com sorte consegue com que o serviço B reverta a alteração até que isso seja melhor alinhado.
+Imagine que você tem um serviço A que consome recursos de um serviço B. O serviço B tem um atributo chamado `email` que não é obrigatório e como esse atributo não é importante para o modelo de negócio do produto A, ele nunca passou esse atributo e nem pretende fazer isso. De repente o serviço B vê a necessidade de tornar o `email` obrigatório e como ele não tem visibilidade que quem são os seus consumidores, ele simplesmente sobe essa alteração para produção e a partir daí o serviço A passa a receber um erro 422 para TODAS as suas chamadas. Daí começa aquela saga que nós conhecemos: abre um incidente em produção, corre para ver o que aconteceu, identifica o problema e com sorte consegue com que o serviço B reverta a alteração até que isso seja melhor alinhado.
 
 É nesse cenário que entram os testes de contrato orientado ao consumidor.
 
 Nesse teste o consumidor, serviço A da nossa história, tem um contrato escrito especificando suas expectativas em relação ao serviço B e esse contrato é executado no momento dos testes. O pulo do gato aqui é que esses contratos também ficam disponíveis para o serviço B baixar e conferir se as suas mudanças não quebraram nenhuma expectativa. Desse jeito o serviço B além de conhecer todos os seus consumidores e como eles se comportam, também tem uma validação automatizada no seu próprio pipeline que vai impedir que novas mudanças sejam promovidas se algum desses contratos foi quebrado.
 
-A ferramenta mais madura altualmente para esse tipo de teste é o [Pact](https://docs.pact.io/). Na imagem abaixo você consegue ver exatamente esse fluxo:
+A ferramenta mais madura altualmente para esse tipo de teste é o [Pact](https://docs.pact.io/). Na imagem abaixo você consegue ver exatamente esse fluxo descrito:
 
 ![Pact Flow](images/pact.png)
 
@@ -173,12 +174,11 @@ Existem alguns pontos cegos entre os testes que comentamos anteriormente:
 - Se estamos usando dublês por exemplo, quem garante que aqueles dublês são fiéis a implementação real? E se o time esquecer de atualizar um dublê de um comportamento que foi alterado? 
 - Questões de configuração de ambiente, e se o time esquecer de configurar aquela variável na especificação do container? E se tiver um problema na conexão do container da aplicação com o banco de dados?
 - Compatibilidade de plataformas
-- "Caos" do mundo real: E se a região primária dos meus servidores na Amazon cair?
 
 Apesar desses testes serem complementares aos anteriores, eles normalmente violam algumas propriedades, eles são mais lentos devido ao número de componentes envolvidos, eles costumam ser mais intermitentes e eles são mais difíceis de escalar, nem todo mundo consegue ter um ambiente de sandbox igual ao de produção por exemplo. Vamos então conhecer alguns desses testes.
 
 #### Testes ponta-a-ponta
-Os famosos teste ponta-a-ponta, assim como o nome já diz, são testes onde o comportamento do usuário simulando o mais próximo possível do mundo real. Então se o seu projeto é uma API, seria um teste executado na infra-estrutura o mais próxima de produção, passando por todos os componentes e algumas vezes até utilizando serviços externos.
+Os famosos teste ponta-a-ponta, assim como o nome já diz, são testes onde o comportamento do usuário é simulado o mais próximo possível do mundo real. Então se o seu projeto é uma API, seria um teste executado na infraestrutura o mais próxima de produção, passando por todos os componentes e algumas vezes até utilizando serviços externos.
 
 Se o seu projeto tem interface web, seria um teste simulando todo o fluxo de abrir um browser, realizar ações e depois finalizar. Se é um aplicativo móvel, você precisaria instalar esse aplicativo, abrir, realizar as ações e depois desinstalar, você poderia usar um aparelho real ou um simulador por exemplo.
 
@@ -197,7 +197,7 @@ Outro tipo de teste que está no grupo dos grandões são os testes de desempenh
 
 São testes com um foco em métricas, então não vamos olhar apenas se um registro foi criado e sim que quando eu crio 100 registros por segundo, eu tenho um determinado consumo de recursos ou até mesmo que meus recursos não tem capacidade suficiente para criar esses 100 registros.
 
-Uma ferramenta muito famosa para esses testes é o [JMeter](https://jmeter.apache.org/) mas hoje em dia existem várias outras as a code que facilitam a criação dos testes e a sua execução dentro de um pipeline.
+Uma ferramenta muito famosa para esses testes é o [JMeter](https://jmeter.apache.org/) mas hoje em dia existem várias outras *as a code* que facilitam a criação dos testes e a sua execução dentro de um pipeline.
 
 ```yml
 scenarios:
@@ -284,10 +284,10 @@ Um outro tipo de teste onde você consegue garantir a compatilidade é o teste d
 
 #### Outras Verificações
 
-Aqui temos algumas verficações bônus que vão te ajudar a elevar a barra de qualidade do seu projeto e garantir que as entregas em produção estão tinindo. 
+Aqui temos algumas verficações bônus que vão te ajudar a elevar a barra de qualidade do seu projeto e garantir que as entregas em produção estão *tinindo*. 
 
 ##### Análise Estática
-A análise estática é uma prática que verifica a qualidade do seu código fonte. Essas verificações podem ser executadas antes mesmo do push através de um hook e antes mesmo de enviar suas alterações você já fica sabendo se ofendeu alguma regra de estilo de código ou teve algum problema com a cobertura dos testes.
+A análise estática é uma prática que verifica a qualidade do seu código fonte. Essas verificações podem ser executadas antes mesmo do push através de um hook fazendo com que antes mesmo de enviar suas alterações você já fica sabendo se ofendeu alguma regra de estilo de código ou teve algum problema com a cobertura dos testes.
 
 Uma das ferramentas mais famosas é o [SonarQube](https://www.sonarqube.org/) que tem uma versão on-promisse e cloud, nele você consegue observar algumas métricas que te ajudam inclusive a corrigir bugs e encontrar falhas de segurança antes que as alterações cheguem no cliente. Ele já tem alguns templates de boas práticas baseadas na linguagem, mas você pode configurar e incluir outras verificações como por exemplo [regras de segurança baseadas na OWASP](https://docs.sonarqube.org/latest/user-guide/security-rules/).
 
@@ -296,11 +296,11 @@ Uma das ferramentas mais famosas é o [SonarQube](https://www.sonarqube.org/) qu
 A gente volta nesse assunto quando formos falar de Testes Contínuos e onde encaixar cada uma das verficiações que falamos aqui. :)
 
 ##### Testes de Mutação
-Por fim temos os testes de mutação. A ideia desse tipo de teste é validar a efetivadade dos seus testes. A métrica de cobertura de testes por si só pode ser um número enganoso já que basta que algum teste exercite aquela linha de código que ela já é considerada coberta por testes, mesmos que não tenha nenhuma asserção.
+Por fim temos os testes de mutação. A ideia desse tipo de teste é validar a efetivadade dos seus testes. A métrica de cobertura de testes por si só pode ser um número enganoso já que basta que algum teste exercite aquela linha de código que ela já é considerada coberta por testes, mesmo que não tenha nenhuma asserção.
 
 Nos testes de mutação, alguns mutantes são inseridos em tempo de execução no código da aplicação e toda vez que uma alteração é realizada os testes são executados para verificar se vão quebrar. Se o teste quebrar, significa que ele realmente está sendo efetivo posto que uma alteração foi introduzida no código, como por exemplo alterar uma condicional de `!request.authUser.emailConfirmedAt` para `request.authUser.emailConfirmedAt`, e o teste detectou isso como uma anomalia. Agora, se o código for alterado e o teste não quebrar, significa que tem um ponto cego ali que não está sendo testado.
 
-Esses testes requerem bastante recurso computacional, o que inviabiliza executá-los em um pipeline de dia a dia por exemplo, o que eu tenho feito é sempre executar esses testes na master e nas releases para validar a efetividade dos testes.
+Esses testes requerem bastante recurso computacional, o que inviabiliza executá-los em um pipeline de dia a dia, o que eu tenho feito é sempre executar esses testes na master e nas releases para validar a efetividade dos testes.
 
 O exemplo abaixo é do [Stryker Mutator](https://stryker-mutator.io/), uma ferramenta para execução de testes de mutação, ele também provê um dashboard para publicação dos resultados.
 
