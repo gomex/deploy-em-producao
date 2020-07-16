@@ -17,7 +17,7 @@ São 3 as categorizações:
 ### Pequenos
 
 #### Testes Unitários
-Testes Unitários são aqueles que tem um escopo mais limitado, normalmente uma simples classe ou método. Esses testes são os que vão te ajudar no dia a dia do processo de desenvolvimento já que eles são mais rápidos de executar, devido ao escopo mais contido. Isso ajuda a otimizar a produtividade dado que esses testes podem ser executados antes de fazer o push para o repositório (vamos falar mais sobre isso no tópico sobre Testes Contínuos).
+Testes Unitários são aqueles que tem um escopo mais limitado, normalmente uma simples classe ou método. Esses testes são os que vão te ajudar no dia a dia do processo de desenvolvimento já que eles são mais rápidos de executar, devido ao escopo mais contido. Isso ajuda a otimizar a produtividade dado que esses testes podem ser executados antes de fazer o push para o repositório (vamos falar mais sobre isso no tópico sobre [Testes Contínuos](testes_continuous.md)).
 
 Exemplo de um teste unitário que testa um controller de autenticação:
 
