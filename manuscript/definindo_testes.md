@@ -161,7 +161,7 @@ Imagine que você tem um serviço A que consome recursos de um serviço B. O ser
 
 Nesse teste o consumidor, serviço A da nossa história, tem um contrato escrito especificando suas expectativas em relação ao serviço B e esse contrato é executado no momento dos testes. O pulo do gato aqui é que esses contratos também ficam disponíveis para o serviço B baixar e conferir se as suas mudanças não quebraram nenhuma expectativa. Desse jeito o serviço B além de conhecer todos os seus consumidores e como eles se comportam, também tem uma validação automatizada no seu próprio pipeline que vai impedir que novas mudanças sejam promovidas se algum desses contratos foi quebrado.
 
-A ferramenta mais madura altualmente para esse tipo de teste é o [Pact](https://docs.pact.io/).
+A ferramenta mais madura altualmente para esse tipo de teste é o [Pact](https://docs.pact.io/). Na imagem abaixo você consegue ver exatamente esse fluxo:
 
 ![Pact Flow](images/pact.png)
 
@@ -175,27 +175,170 @@ Existem alguns pontos cegos entre os testes que comentamos anteriormente:
 - Compatibilidade de plataformas
 - "Caos" do mundo real: E se a região primária dos meus servidores na Amazon cair?
 
-É aqui que entram os testes que englobam mais componentes dentro do seu projeto.
+Apesar desses testes serem complementares aos anteriores, eles normalmente violam algumas propriedades, eles são mais lentos devido ao número de componentes envolvidos, eles costumam ser mais intermitentes e eles são mais difíceis de escalar, nem todo mundo consegue ter um ambiente de sandbox igual ao de produção por exemplo. Vamos então conhecer alguns desses testes.
 
 #### Testes ponta-a-ponta
-TODO
+Os famosos teste ponta-a-ponta, assim como o nome já diz, são testes onde o comportamento do usuário simulando o mais próximo possível do mundo real. Então se o seu projeto é uma API, seria um teste executado na infra-estrutura o mais próxima de produção, passando por todos os componentes e algumas vezes até utilizando serviços externos.
+
+Se o seu projeto tem interface web, seria um teste simulando todo o fluxo de abrir um browser, realizar ações e depois finalizar. Se é um aplicativo móvel, você precisaria instalar esse aplicativo, abrir, realizar as ações e depois desinstalar, você poderia usar um aparelho real ou um simulador por exemplo.
+
+Além do fluxo propriamente dito que acabamos de falar, existe um passo anterior que é garantir que os dados que você precisa para esse teste realmente existem. Como por exemplo se você precisar estar logado para testar o envio de e-mail, você precisa garantir que existe um usuário com esse permissionamento para ser utilizado no teste, senão o seu teste já começa quebrando.
+
+Apesar desses pontos esses testes também tem sua importância principalmente por serem mais fiéis ao comportamento do usuário final. Por isso é importante avaliar o nível de fidelidade que você quer para o seus testes. Eu sei que quando falamos de testes ponta-a-ponta logo vem a cabeça a imagem da pirâmide de testes invertida, mas esqueça isso por um momento e faça uma análise crítica do quanto esses testes são importantes para o seu produto. 
+
+Existem algumsa formas de minimizar o impacto desses testes dentro do seu fluxo de entrega em produção, você pode por exemplo executar esses testes em paralelo, isso vai te fazer ganhar um pouco mais de tempo. Outra opção é criar suítes menores com um escopo mais definido, por exemplo se estamos falando de um sistema de pagamentos e temos os fluxos de transações e os fluxos de cadastro de novos clientes, você pode categorizar essas suítes e se você está fazendo uma modificação no fluxo de transações, talvez não seja necessário rodar todos os testes de cadastro.
+
+Aqui você também pode mesclar uma estratégia de dublês, ao invés de fazer chamadas a integrações de terceiros que você não controla, você pode ter uma classe fake respondendo o que você precisa e exercitar os fluxos sem medo de receber uma resposta estranha de uma integração terceira. Você pode executar esses testes em um ambiente compartilhado com outras pessoas ou ser capaz de recriar o ambiente de teste toda vez que uma nova execução for iniciada, tendo assim mais controle desse ambiente e menos chances de enfrentar intermitências.
+
+Uma dica aqui é: avalie os riscos envolvidos e decida a abordagem que traz mais segurança para o seu time!
 
 #### Testes de Desempenho
-TODO
+Outro tipo de teste que está no grupo dos grandões são os testes de desempenho, esses testes normalmente são executados em um ambiente isolado e exercitam todos os componentes da infraestrutura mas você também pode avaliar a perfomance de pequenas unidades para identificar se houve degradação de performance entre uma versão e outra.
+
+São testes com um foco em métricas, então não vamos olhar apenas se um registro foi criado e sim que quando eu crio 100 registros por segundo, eu tenho um determinado consumo de recursos ou até mesmo que meus recursos não tem capacidade suficiente para criar esses 100 registros.
+
+Uma ferramenta muito famosa para esses testes é o [JMeter](https://jmeter.apache.org/) mas hoje em dia existem várias outras as a code que facilitam a criação dos testes e a sua execução dentro de um pipeline.
+
+```yml
+scenarios:
+    - name: "Perform a search at Google"
+      flow:
+      - function: "generatingRandomSearchQuery"
+      - post:
+          headers:
+            X-RapidAPI-Host: "google-search3.p.rapidapi.com"
+            X-RapidAPI-Key: "{{ $processEnvironment.RAPID_API_KEY }}"
+          url: "/search"
+          json:
+            country: "US"
+            get_total: false
+            hl: "us"
+            language: "lang_en"
+            max_results: 100
+            q: "{{ random }}"
+            uule: ""
+          expect:
+            - statusCode: 200
+            - contentType: json
+```
+
+Esse é um exemplo de um script de teste do [Artillery](https://artillery.io/). No meu [blog pessoal](https://medium.com/assertqualityassurance/testes-de-performance-com-artillery-e-datadog-2f2265134202) tem um post contando como utilizá-lo integrado com o DataDog para captura das métricas.
+
+Esse e outros testes não funcionais vão te ajudar muito a validar questões de configuração e infraestrutura, calibrar seu auto-scaling e econtrar gargalos antes que eles te surpreendam em produção.
 
 #### Testes de Compatibilidade
-TODO
+Quando falamos de aplicações que tem alguma interface os testes de compatibilidade se tornam extremamente importantes já que conforme sua base de clientes vai crescendo fica impossível acompanhar manualmente os testes das diferentes versões em diferentes plataformas. 
 
-#### Testes Exploratórios
-TODO
+Existem serviços onde você consegue executar seus testes em diferentes browsers, sistemas operacionais e resoluções por exemplo, como a [Saucelabs](https://saucelabs.com/) e o [BrowserStack](https://www.browserstack.com/). O mesmo pode ser feito para aplicativos Android e iOs, considerando diferentes versões e modelos de aparelhos.
+
+Um outro tipo de teste onde você consegue garantir a compatilidade é o teste de regressão visual, ferramentas como o [BackstopJs](https://github.com/garris/BackstopJS) proporcionam isso. Abaixo você consegue ver um exemplo de um teste utilizando o batckstop.
+
+```json
+{
+  "id": "pokedex_test",
+  "viewports": [
+    {
+      "label": "tablet",
+      "width": 1024,
+      "height": 768
+    }
+  ],
+  "onBeforeScript": "chromy/onBefore.js",
+  "onReadyScript": "chromy/onReady.js",
+  "scenarios": [
+    {
+      "label": "Pokedex Página 404",
+      "cookiePath": "backstop_data/engine_scripts/cookies.json",
+      "url": "http://localhost:3000/#/404",
+      "referenceUrl": "",
+      "readyEvent": "",
+      "readySelector": "",
+      "delay": 10000,
+      "hideSelectors": [],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": "",
+      "selectors": [],
+      "selectorExpansion": true,
+      "misMatchThreshold" : 0.1,
+      "requireSameDimensions": true
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "backstop_data/bitmaps_reference",
+    "bitmaps_test": "backstop_data/bitmaps_test",
+    "engine_scripts": "backstop_data/engine_scripts",
+    "html_report": "backstop_data/html_report",
+    "ci_report": "backstop_data/ci_report"
+  },
+  "report": ["browser"],
+  "engine": "chrome",
+  "engineFlags": [],
+  "asyncCaptureLimit": 5,
+  "asyncCompareLimit": 50,
+  "debug": false,
+  "debugWindow": false
+}
+```
 
 #### Outras Verificações
 
 Aqui temos algumas verficações bônus que vão te ajudar a elevar a barra de qualidade do seu projeto e garantir que as entregas em produção estão tinindo. 
 
 ##### Análise Estática
-TODO
+A análise estática é uma prática que verifica a qualidade do seu código fonte. Essas verificações podem ser executadas antes mesmo do push através de um hook e antes mesmo de enviar suas alterações você já fica sabendo se ofendeu alguma regra de estilo de código ou teve algum problema com a cobertura dos testes.
+
+Uma das ferramentas mais famosas é o [SonarQube](https://www.sonarqube.org/) que tem uma versão on-promisse e cloud, nele você consegue observar algumas métricas que te ajudam inclusive a corrigir bugs e encontrar falhas de segurança antes que as alterações cheguem no cliente. Ele já tem alguns templates de boas práticas baseadas na linguagem, mas você pode configurar e incluir outras verificações como por exemplo [regras de segurança baseadas na OWASP](https://docs.sonarqube.org/latest/user-guide/security-rules/).
+
+![Sonar](images/sonar.png)
+
+A gente volta nesse assunto quando formos falar de Testes Contínuos e onde encaixar cada uma das verficiações que falamos aqui. :)
 
 ##### Testes de Mutação
-TODO
+Por fim temos os testes de mutação. A ideia desse tipo de teste é validar a efetivadade dos seus testes. A métrica de cobertura de testes por si só pode ser um número enganoso já que basta que algum teste exercite aquela linha de código que ela já é considerada coberta por testes, mesmos que não tenha nenhuma asserção.
 
+Nos testes de mutação, alguns mutantes são inseridos em tempo de execução no código da aplicação e toda vez que uma alteração é realizada os testes são executados para verificar se vão quebrar. Se o teste quebrar, significa que ele realmente está sendo efetivo posto que uma alteração foi introduzida no código, como por exemplo alterar uma condicional de `!request.authUser.emailConfirmedAt` para `request.authUser.emailConfirmedAt`, e o teste detectou isso como uma anomalia. Agora, se o código for alterado e o teste não quebrar, significa que tem um ponto cego ali que não está sendo testado.
+
+Esses testes requerem bastante recurso computacional, o que inviabiliza executá-los em um pipeline de dia a dia por exemplo, o que eu tenho feito é sempre executar esses testes na master e nas releases para validar a efetividade dos testes.
+
+O exemplo abaixo é do [Stryker Mutator](https://stryker-mutator.io/), uma ferramenta para execução de testes de mutação, ele também provê um dashboard para publicação dos resultados.
+
+```javascript
+/**
+ * @type {import('@stryker-mutator/api/core').StrykerOptions}
+ */
+module.exports = {
+  mutator: 'javascript',
+  packageManager: 'npm',
+  reporters: ['html', 'clear-text', 'progress', 'dashboard'],
+  testRunner: 'jest',
+  transpilers: [],
+  coverageAnalysis: 'off',
+  dashboard: {
+    project: 'github.com/samycici/auth-app'
+  },
+  mutate: [
+    'server/**/*.js'
+  ],
+  jest: {
+    projectType: 'custom',
+    configFile: 'jest.config.js',
+    enableFindRelatedTests: false
+  },
+  timeoutMS: 15000,
+  tempDirName: '.stryker-tmp'
+}
+```
+
+Importante lembrar que no caso dos testes de mutação não basta apenas executar, depois da execução é necessário analisar os resultados e planejar como aumentar a cobertura.
+
+### Conclusão
+
+Testes são uma parte crucial do processo de entrega de software, para conseguir fazer entregas de qualidade em produção é imprescindível ter testes que tragam segurança para o time que caso exista algum problema nas alterações realizadas ao longo do ciclo de vida da aplicação, eles vão ser alertados o mais cedo possível e conseguir corrigir antes que esses problemas impactem um cliente.
+
+Reforçando a reflexão do início desse tópico sobre a questão da pirâmide de testes, é importante ler diferentes visões e entender o quê dessas visões se encaixa com a sua realidade. Isso se aplica a tudo que você leu aqui!! A parte de dublês de teste é um bom exemplo, existem vertentes onde as pessoas defendem com unhas e dentes a utilização deles e outras vertentes que acreditam que os testes tem que reproduzir o comportamento mais próximo da realidade possível. Não existe uma abordagem certa ou errada, existe uma abordagem que atende às necessidades da sua empresa, seu time, seu projeto e qualquer que seja a escolha tem que estar claro as consequências que vem com ela. Você pode optar por uma abordagem mockista e enfrentar problemas em pontos cegos de integração ou uma abordagem free mocks e acabar com uma suíte de testes que leva horas para executar e apresenta um comportamento instável.
+
+Tudo tem ônus e bônus.
+
+Agora que já definimos os testes, vamos entender como encaixá-los no seu processo automatizado de entrega.
