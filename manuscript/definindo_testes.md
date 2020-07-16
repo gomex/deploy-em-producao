@@ -58,17 +58,124 @@ No decorrer desse tópico vamos falar mais sobre isso, mas vale já começar a r
 Não tem como falar de testes unitários sem tocar no assunto de dublês de teste, que é o que vamos abordar no próximo tópico.
 
 #### Dublês de Testes
-TODO
+Como vimos a ideia dos testes unitários é ter um escopo mais limitado mas como fazer isso se normalmente nossas funções acionam outros componentes como o próprio banco de dados, outras funções ou até mesmo sistemas externos?
+
+É aí que entra o conceito de dublês de teste, uma forma de substituir esses componentes que são externos ao objetivo do nosso teste. Outro benefício de utilizar dublês é otimizar o tempo de execução dos testes.
+
+Os dublês podem ser categorizados em alguns patterns:
+- Fake: os fakes possuem uma resposta fixa sempre independente de como são chamados, podem ser implementados através de uma classe ou função. Uma vantagem de usar fake é que você não precisa ter nenhuma dependência externa, mas por outro lado você só consegue validar a saída e não todo o fluxo de comportamento. Você por exemplo pode construir um fake para testar envio de e-mail.
+
+```javascript
+module.exports = class Mail {
+  to () {
+    return this
+  }
+
+  subject () {
+    return this
+  }
+
+  data () {
+    return this
+  }
+
+  send () {
+    return this
+  }
+}
+```
+
+- Spy: os spies possibilitam a "gravação" do comportamento que está sendo espionado, assim podemos testar por exemplo se uma função foi chamada, quantas vezes ela foi chamada e quais os parâmetros. Aqui podemos testar um comportamento interno, o que é uma vantagem, mas não múltiplos comportamentos de uma vez.
+
+- Stub: diferentes dos spies, os stubs conseguem mudar comportamentos, dependendo de como forem chamados, permitindo testar mais cenários. Pode ser usado inclusive para testar código assíncrono.
+
+- Mock: os mocks são capazes de substituir a dependência permitindo assim verificar vários comportamentos. Você pode utilizar por exemplo para verificar se uma função foi chamada e se ela foi chamada com os argumentos esperados.
+
+Quando se fala da utilização de dublês existe quase uma questão filosófica: "mockar ou não mockar, eis a questão". Existem alguns casos que são inevitáveis, como por exemplo testar funções que disparam email, ou utilizam alguma integração externa, nesses casos os dublês com certeza trazem produtividade ao tornarem a execução dos testes mais rápida e menos intermitente. 
+
+Por outro lado precisamos lembrar que não estamos testando o comportamento 100% como vai ser executado em produção. Por isso é importante considerar alguns pontos antes de optar pelo uso de dublês e além disso ter testes de diferentes tipos que ajudem nessas validações.
+
+Se a implementação real permite uma execução rápida, determinística e simples, faz mais sentido utilizar essa implementação nos testes.Por exemplo uma função que valida CPF, datas, endereço, listas, etc.
+
+Se não for esse o caso, você precisa avaliar o tempo de execução, o quanto o teste é determinístico ou não (se você não consegue controlar o teste, as chances de você ter intermitência aumentam absurdamente) e o quanto é fácil ou difícil construir as dependências.
+
+Lembre-se de avaliar seu contexto SEMPRE!! E optar pela solução que te traz mais segurança no seu proceso de desenvolvimento.
+
+Para se aprofundar nesse assunto eu indico a leitura do  [xUnit Patterns - Test Double](http://xunitpatterns.com/Test%20Double.html).
+
 
 ### Médios
+No tópico anterior abordamos testes que são mais auto-contidos, aqui já começamos a falar de algumas integrações entre componentes para validar os fluxos.
 
 #### Testes de Integração
-TODO
+Nos testes de integração já começamos por exemplo a fazer testes que exercitam uma instância local de banco de dados.
+
+```javascript
+import Chance from 'chance'
+import server from '@server/app'
+import supertest from 'supertest'
+import {
+  disconnect
+} from '@tests/utils/mongoose'
+import User from '@models/User'
+
+const app = () => supertest(server)
+
+const chance = new Chance()
+
+const user = {
+  name: 'test user',
+  email: chance.email(),
+  password: 'password'
+}
+const REGISTER_ENDPOINT = '/api/v1/auth/register'
+
+describe('The register process', () => {
+  beforeEach(async () => {
+    await User.deleteMany({})
+  })
+
+  it('Should register a new user', async () => {
+    const response = await app().post(REGISTER_ENDPOINT).send(user)
+    expect(response.status).toBe(200)
+    expect(response.body.message).toBe('Account registered.')
+    expect(response.body.data.token).toBeDefined()
+  })
+
+  afterAll(async () => {
+    await disconnect()
+  })
+})
+```
+
+Nesse teste de exemplo estamos usando o [SuperTest](https://github.com/visionmedia/supertest) para servir nossa API e criando um novo usuário diretamente no banco de dados. Assim conseguimos validar todo fluxo do comportamento desde as validações que essa rota faz para resgistrar um novo usuário até conferir que ele foi efetivamente criado.
+
+Lembrando que conforme incluímos mais componentes nos testes, a tendência é que eles demorem um pouco mais e que tenham mais pontos de falha. É um risco que devemos ter consciência de que assumimos e precisamos aprender a lidar com ele já que testes isolados não conseguem por si só garantir todos os cenários necessários.
 
 #### Testes de Contrato
-TODO
+O advento dos microserviços trouxe esse tipo de teste pra um destaque. A comunicação entre esse serviços é um possível ponto de falha. 
+
+Imagine que você tem um serviço A que consome recursos de um serviço B. O serviço B tem um atributo chamado `email` que não é obrigatório e como esse atributo não é importante para o modelo de negócio do produto A, ele nunca passou esse atributo e nem pretende fazer isso. De repente o serviço B vê a necessidade de tornar o `email` obrigatório e como ele não tem visibilidade que quem são os seus consumidores, ele simplesmente sobe essa alteração para produção e a partir daí o serviço A passa a receber um erro 422 para TODAS as suas chamadas. Daí começa toda aquela saga que nós conhecemos, incidente em produção, corre para ver o que aconteceu, identifica o problema e com sorte consegue com que o serviço B reverta a alteração até que isso seja melhor alinhado.
+
+É nesse cenário que entram os testes de contrato orientado ao consumidor.
+
+Nesse teste o consumidor, serviço A da nossa história, tem um contrato escrito especificando suas expectativas em relação ao serviço B e esse contrato é executado no momento dos testes. O pulo do gato aqui é que esses contratos também ficam disponíveis para o serviço B baixar e conferir se as suas mudanças não quebraram nenhuma expectativa. Desse jeito o serviço B além de conhecer todos os seus consumidores e como eles se comportam, também tem uma validação automatizada no seu próprio pipeline que vai impedir que novas mudanças sejam promovidas se algum desses contratos foi quebrado.
+
+A ferramenta mais madura altualmente para esse tipo de teste é o [Pact](https://docs.pact.io/).
+
+![Pact Flow](images/pact.png)
+
+Seja o seu serviço um consumidor ou provedor, é importante se preocupar com os contratos.
 
 ### Grandes
+
+Existem alguns pontos cegos entre os testes que comentamos anteriormente:
+- Se estamos usando dublês por exemplo, quem garante que aqueles dublês são fiéis a implementação real? E se o time esquecer de atualizar um dublê de um comportamento que foi alterado? 
+- Questões de configuração de ambiente, e se o time esquecer de configurar aquela variável na especificação do container? E se tiver um problema na conexão do container da aplicação com o banco de dados?
+- Compatibilidade de plataformas
+- "Caos" do mundo real: E se a região primária dos meus servidores na Amazon cair?
+
+É aqui que entram os testes que englobam mais componentes dentro do seu projeto.
 
 #### Testes ponta-a-ponta
 TODO
@@ -84,7 +191,7 @@ TODO
 
 #### Outras Verificações
 
-Aqui temos algumas verficações bônus que vão te ajudar a elevar a barra de qualidade do seu projeto. 
+Aqui temos algumas verficações bônus que vão te ajudar a elevar a barra de qualidade do seu projeto e garantir que as entregas em produção estão tinindo. 
 
 ##### Análise Estática
 TODO
