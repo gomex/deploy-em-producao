@@ -1,1 +1,3 @@
 introducao.md
+como-esta-sendo-construido.md
+como-ler.md
