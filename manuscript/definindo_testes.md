@@ -14,42 +14,46 @@ São 3 as categorizações:
 - Médio: aqui temos testes que executam múltiplos processos mas ainda assim sem acessar componentes externos, nessa categoria entram os testes que acessam banco de dados por exemplo;
 - Grande: esses testes são os que necessitam de uma maior complexidade para execução, nesse momento os sistemas já estão integrados. São mais lentos e menos determinísticos.
 
-### Pequenos
+### Testes Pequenos
 
 #### Testes Unitários
-Testes Unitários são aqueles que tem um escopo mais limitado, normalmente uma simples classe ou método. Esses testes são os que vão te ajudar no dia a dia do processo de desenvolvimento já que eles são mais rápidos de executar, devido ao escopo mais contido. Isso ajuda a otimizar a produtividade dado que esses testes podem ser executados antes de fazer o push para o repositório (vamos falar mais sobre isso no tópico sobre [Testes Contínuos](testes_continuous.md)).
 
-Exemplo de um teste unitário que testa um controller de autenticação:
+Testes Unitários são aqueles que tem um escopo mais limitado, normalmente uma simples classe ou método. Esses testes são os que vão te ajudar no dia a dia do processo de desenvolvimento já que eles são mais rápidos de executar, devido ao escopo mais contido. Isso ajuda a otimizar a produtividade dado que esses testes podem ser executados antes de fazer o push para o repositório.
+
+Imagine a seguinte função:
 
 ```javascript
-import User from '@models/User'
-import mockingoose from 'mockingoose'
-import Response from '@tests/utils/response'
-import authController from '@controllers/auth.controller'
-
-const user = {
-  name: 'Test User',
-  email: 'test@user.com',
-  password: 'password'
+# handler.js
+function getNameAccordingLanguage(language) {
+  switch(language) {
+    case "en":
+      return "Paul";
+    case "br":
+      return "Paulo";
+    case "el":
+      return "Πάολο";
+    default:
+      return "👨🏿";
+  }
 }
-
-describe('The Auth Controller', () => {
-
-  it('Should register a new user with the required fields', async () => {
-    const request = {
-      body: user
-    }
-    const response = new Response()
-    const jsonSpy = jest.spyOn(response, 'json')
-
-    mockingoose(User).toReturn(user, 'create')
-
-    await authController.register(request, response)
-    expect(jsonSpy).toHaveBeenCalledWith(expect.objectContaining(accountRegistered))
-  })
+module.exports.getNameAccordingLanguage = getNameAccordingLanguage;
 ```
 
-Esse é um teste que tem o escopo limitado, nesse caso testar o registro de um novo usuário e não tem dependências externas a essa função, tanto que ao invés de ser utilizada a integração com o banco de dados, utilizamos uma biblioteca para mockar o model.
+E aqui temos um teste unitário que valida apenas o escopo dessa função:
+
+```javascript
+# __tests__/handler.test.js
+const handler = require('../handler');
+
+test('Name is informed based on Language', () => {
+  expect(handler.getNameAccordingLanguage("en")).toBe("Paul");
+  expect(handler.getNameAccordingLanguage("br")).toBe("Paulo");
+  expect(handler.getNameAccordingLanguage("el")).toBe("Πάολο");
+  expect(handler.getNameAccordingLanguage("bla")).toBe("👨🏿");
+});
+```
+
+Esse é um teste que tem o escopo limitado, nesse caso testar que dada uma entrada, nesse caso o idiona, recebemos como resultado o nome "Paulo" de acordo com cada idioma.
 
 Esses testes ajudam muito na manutenibilidade posto que como exercitam um escopo mais contido, se um deles quebra você consegue rapidamente identificar o ponto de falha, diferente de um caso onde, por exemplo, você tivesse mais elementos envolvidos como um banco de dados, um container da aplicação, etc.
 
@@ -58,41 +62,117 @@ No decorrer desse tópico vamos falar mais sobre isso, mas vale já começar a r
 Não tem como falar de testes unitários sem tocar no assunto de dublês de teste, que é o que vamos abordar no próximo tópico.
 
 #### Dublês de Testes
-Como vimos a ideia dos testes unitários é ter um escopo mais limitado mas como fazer isso se normalmente nossas funções acionam outros componentes como o próprio banco de dados, outras funções ou até mesmo sistemas externos?
+
+Como vimos a ideia dos testes unitários é ter um escopo mais limitado, mas como fazer isso se normalmente nossas funções acionam outros componentes como o próprio banco de dados, outras funções ou até mesmo sistemas externos?
 
 É aí que entra o conceito de dublês de teste, uma forma de substituir esses componentes que são externos ao objetivo do nosso teste. Outro benefício de utilizar dublês é otimizar o tempo de execução dos testes.
 
-Os dublês podem ser categorizados em alguns patterns:
-
-- Fake: os fakes possuem uma resposta fixa, independente de como são chamados, podem ser implementados através de uma classe ou função. Uma vantagem de usar fake é que você não precisa ter nenhuma dependência externa como uma biblioteca, mas por outro lado você só consegue validar a saída e não todo o fluxo de comportamento. Você por exemplo pode construir um fake para testar envio de e-mail.
+Vamos utilizar o seguinte código como exemplo e o método que será testado é o getPokemon que retorna um pokemon cadastrado no banco de dados:
 
 ```javascript
-module.exports = class Mail {
-  to () {
-    return this
+const Database = {
+  find() {}
+}
+
+class PokemonsController {
+  constructor(Database) {
+    this.Database = Database;
   }
 
-  subject () {
-    return this
-  }
-
-  data () {
-    return this
-  }
-
-  send () {
-    return this
+  getPokemon() {
+    return this.Database.find('pokemon');
   }
 }
 ```
 
-- Spy: os spies possibilitam a "gravação" do comportamento que está sendo espionado, assim podemos testar por exemplo se uma função foi chamada, quantas vezes ela foi chamada e quais os parâmetros. Aqui podemos testar um comportamento interno, o que é uma vantagem, mas não múltiplos comportamentos de uma vez.
+Os dublês podem ser categorizados em alguns patterns:
 
-- Stub: diferentes dos spies, os stubs conseguem mudar comportamentos, dependendo de como forem chamados, permitindo testar mais cenários. Pode ser usado inclusive para testar código assíncrono.
+- Fake: os fakes possuem uma resposta fixa, independente de como são chamados, podem ser implementados através de uma classe ou função. Uma vantagem de usar fake é que você não precisa ter nenhuma dependência externa como uma biblioteca, mas por outro lado você só consegue validar a saída e não todo o fluxo de comportamento. No exemplo abaixo criamos um fake que vai sempre retornar as informações do Pikachu quando for chamado dentro do teste, ou seja, ao invés da realmente acessarmos o banco de dados para pegar essas informações, o fake fará esse papel de fornecer os dados.  Nesse teste verificamos que a resposta de “getPokemon” do controller responde com os mesmos dados declarados no "databaseResponse", que são os dados do Pikachu.
 
-- Mock: os mocks são capazes de substituir a dependência permitindo assim verificar vários comportamentos. Você pode utilizar por exemplo para verificar se uma função foi chamada e se ela foi chamada com os argumentos esperados.
+```javascript
+describe('PokemonsController getPokemon()', () => {
+  it('should return a Pokemon', () => {
+    const databaseResponse = {
+      id: 1,
+      name: 'Pikachu',
+      species: 'mouse',
+      type: 'eletric'
+    };
 
-Quando se fala da utilização de dublês existe quase uma questão filosófica: **"mockar ou não mockar, eis a questão"**. Existem alguns casos que são inevitáveis, como por exemplo testar funções que disparam email, ou utilizam alguma integração externa, nesses casos os dublês com certeza trazem produtividade ao tornarem a execução dos testes mais rápida e menos intermitente. 
+    const fakeDatabase = {
+      find() {
+        return databaseResponse;
+      }
+    }
+    const pokemonsController = new PokemonsController(fakeDatabase);
+    const response = pokemonsController.getPokemon();
+
+    expect(response).to.be.eql(databaseResponse);
+  });
+});
+```
+
+- Spy: os spies possibilitam a "gravação" do comportamento que está sendo espionado, assim podemos testar por exemplo se uma função foi chamada, quantas vezes ela foi chamada e quais os parâmetros. Aqui podemos testar um comportamento interno, o que é uma vantagem, mas não múltiplos comportamentos de uma vez. Para criar spies precisamos da ajuda de bibliotecas da própria linguagem. Dessa vez vamos precisar da ajuda da biblioteca [sinonjs](https://sinonjs.org/) para criar o spy.
+
+Vamos adicionar um spy na função "find" para que o Sinon devolva uma referência a essa função. No assert verificamos se a função foi chamada com o parâmetro esperado que é "pokemon".
+
+```javascript
+describe('PokemonsController get()', () => {
+  it('should find a pokemon from database with correct parameters', () => {
+    const find = sinon.spy(Database, 'find');
+
+    const pokemonsController = new PokemonsController(Database);
+    pokemonsController.getPokemon();
+
+    sinon.assert.calledWith(find, 'pokemon');
+    find.restore();
+  });
+});
+```
+
+- Stub: diferentes dos spies, os stubs conseguem mudar comportamentos, dependendo de como forem chamados, permitindo testar mais cenários. Pode ser usado inclusive para testar código assíncrono. Nesse caso além de verificarmos se a função foi chamada da forma correta e modificar o comportamento para fazer uma asserção de resultado esperado também. Nesse exemplo "injetamos" os dados do Pikachu para que a nossa função getPokemon retorne esses dados. Lembrando que não estamos acessando o banco de dados de verdade em nenhum momento.
+
+```javascript
+describe('PokemonsController getPokemon()', () => {
+  it('should return a pokemon info', () => {
+    const databaseResponse = {
+      id: 1,
+      name: 'Pikachu',
+      species: 'mouse',
+      type: 'eletric'
+    };
+
+    const find = sinon.stub(Database, 'find');
+    find.withArgs('pokemon').returns(databaseResponse);
+
+    const pokemonsController = new PokemonsController(Database);
+    const response = pokemonController.getPokemon();
+
+    sinon.assert.calledWith(find, 'pokemon');
+    expect(response).to.be.eql(databaseResponse);
+    find.restore();
+  });
+});
+```
+
+- Mock: os mocks são capazes de substituir a dependência permitindo assim verificar vários comportamentos. Você pode utilizar por exemplo para verificar se uma função foi chamada e se ela foi chamada com os argumentos esperados. Aqui temos 2 asserts, a primeira para verificar se o método “find” foi chamado uma vez e na segunda se ele foi chamado com o argumento "pokemon", e depois o “verify()” verifica que as expectativas foram atingidas.
+
+```javascript
+describe('PokemonController get()', () => {
+  it('should call database with correct arguments', () => {
+    const databaseMock = sinon.mock(Database);
+    databaseMock.expects('find').once().withArgs('pokemon');
+
+    const pokemonsController = new PokemonsController(Database);
+    pokemonsController.get();
+
+    databaseMock.verify();
+    databaseMock.restore();
+  });
+});
+```
+
+Quando se fala da utilização de dublês existe quase uma questão filosófica: **"mockar ou não mockar, eis a questão"**. Existem alguns casos que são inevitáveis, como por exemplo testar funções que disparam email, ou utilizam alguma integração externa, nesses casos os dublês com certeza trazem produtividade ao tornarem a execução dos testes mais rápida e menos intermitente.
 
 Por outro lado precisamos lembrar que não estamos testando o comportamento 100% como vai ser executado em produção. Por isso é importante considerar alguns pontos antes de optar pelo uso de dublês e além disso ter testes de diferentes tipos que ajudem nessas validações.
 
@@ -102,59 +182,78 @@ Se não for esse o caso, você precisa avaliar o tempo de execução, o quanto o
 
 Lembre-se de avaliar seu contexto SEMPRE!! E optar pela solução que traz mais segurança para o seu proceso de desenvolvimento.
 
-Para se aprofundar nesse assunto eu indico a leitura do  [xUnit Patterns - Test Double](http://xunitpatterns.com/Test%20Double.html).
+Para se aprofundar nesse assunto eu indico a leitura do [xUnit Patterns - Test Double](http://xunitpatterns.com/Test%20Double.html).
 
+### Testes Médios
 
-### Médios
 No tópico anterior abordamos testes que são mais auto-contidos, aqui já começamos a falar de algumas integrações entre componentes para validar os fluxos.
 
 #### Testes de Integração
+
 Nos testes de integração já começamos por exemplo a fazer testes que exercitam uma instância local de banco de dados.
 
 ```javascript
-import Chance from 'chance'
 import server from '@server/app'
 import supertest from 'supertest'
-import {
-  disconnect
-} from '@tests/utils/mongoose'
-import User from '@models/User'
 
 const app = () => supertest(server)
 
-const chance = new Chance()
-
 const user = {
   name: 'test user',
-  email: chance.email(),
+  email: 'test@mail.com',
   password: 'password'
 }
-const REGISTER_ENDPOINT = '/api/v1/auth/register'
 
 describe('The register process', () => {
-  beforeEach(async () => {
-    await User.deleteMany({})
-  })
 
   it('Should register a new user', async () => {
-    const response = await app().post(REGISTER_ENDPOINT).send(user)
+    const response = await app().post('/api/v1/auth/register').send(user)
     expect(response.status).toBe(200)
     expect(response.body.message).toBe('Account registered.')
     expect(response.body.data.token).toBeDefined()
   })
+})
+```
 
-  afterAll(async () => {
-    await disconnect()
+Nesse teste temos o seguinte:
+
+```javascript
+import server from '@server/app'
+import supertest from 'supertest'
+
+const app = () => supertest(server)
+```
+
+Nessa primeira parte temos o import do nosso app `import server from '@server/app'`, que é o arquivo da aplicação node onde estão todas as rotas de uma aplicação [express](https://expressjs.com/pt-br/). O `import supertest from 'supertest'` se refere ao import do [SuperTest](https://github.com/visionmedia/supertest) que é a biblioteca que estamos utilizando para fazer os testes aqui e `const app = () => supertest(server)` onde servimos a nossa API para ser possível que tenhamos acesso ao endpoint que será testado.
+
+```javascript
+const user = {
+  name: 'test user',
+  email: 'test@mail.com',
+  password: 'password'
+}
+```
+
+Aqui temos ums constante chamada user, que iremos utilizar no nosso teste. 
+
+```javascript
+describe('The register process', () => {
+
+  it('Should register a new user', async () => {
+    const response = await app().post('/api/v1/auth/register').send(user)
+    expect(response.status).toBe(200)
+    expect(response.body.message).toBe('Account registered.')
   })
 })
 ```
 
-Nesse teste de exemplo estamos usando o [SuperTest](https://github.com/visionmedia/supertest) para servir nossa API e criando um novo usuário diretamente no banco de dados. Assim conseguimos validar todo fluxo do comportamento desde as validações que essa rota faz para resgistrar um novo usuário até conferir que ele foi efetivamente criado.
+Nessa última parte temos o teste em si, onde estamos acessando o endpoint de registro de usuários `/api/v1/auth/register` e enviando os dados através do nosso `user`. Depois disso temos as famosas asserções, representadas pelo expect, para conferir que a resposta foi um HTTP status 200, e a mensagem recebida foi `'Account registered.'`.
 
 Lembrando que conforme incluímos mais componentes nos testes, a tendência é que eles demorem um pouco mais e que tenham mais pontos de falha. É um risco que devemos ter consciência de que assumimos e precisamos aprender a lidar com ele, já que testes isolados não conseguem por si só garantir todos os cenários necessários.
 
 #### Testes de Contrato
-O advento dos microserviços trouxe esse tipo de teste pra um destaque posto que a comunicação entre esses serviços é um possível ponto de falha. 
+
+O advento dos microserviços trouxe esse tipo de teste pra um destaque posto que a comunicação entre esses serviços é um possível ponto de falha.
 
 Imagine que você tem um serviço A que consome recursos de um serviço B. O serviço B tem um atributo chamado `email` que não é obrigatório e como esse atributo não é importante para o modelo de negócio do produto A, ele nunca passou esse atributo e nem pretende fazer isso. De repente o serviço B vê a necessidade de tornar o `email` obrigatório e como ele não tem visibilidade que quem são os seus consumidores, ele simplesmente sobe essa alteração para produção e a partir daí o serviço A passa a receber um erro 422 para TODAS as suas chamadas. Daí começa aquela saga que nós conhecemos: abre um incidente em produção, corre para ver o que aconteceu, identifica o problema e com sorte consegue com que o serviço B reverta a alteração até que isso seja melhor alinhado.
 
@@ -168,31 +267,34 @@ A ferramenta mais madura altualmente para esse tipo de teste é o [Pact](https:/
 
 Seja o seu serviço um consumidor ou provedor, é importante se preocupar com os contratos.
 
-### Grandes
+### Testes Grandes
 
 Existem alguns pontos cegos entre os testes que comentamos anteriormente:
-- Se estamos usando dublês por exemplo, quem garante que aqueles dublês são fiéis a implementação real? E se o time esquecer de atualizar um dublê de um comportamento que foi alterado? 
+
+- Se estamos usando dublês por exemplo, quem garante que aqueles dublês são fiéis a implementação real? E se o time esquecer de atualizar um dublê de um comportamento que foi alterado?
 - Questões de configuração de ambiente, e se o time esquecer de configurar aquela variável na especificação do container? E se tiver um problema na conexão do container da aplicação com o banco de dados?
 - Compatibilidade de plataformas
 
 Apesar desses testes serem complementares aos anteriores, eles normalmente violam algumas propriedades, eles são mais lentos devido ao número de componentes envolvidos, eles costumam ser mais intermitentes e eles são mais difíceis de escalar, nem todo mundo consegue ter um ambiente de sandbox igual ao de produção por exemplo. Vamos então conhecer alguns desses testes.
 
 #### Testes ponta-a-ponta
+
 Os famosos teste ponta-a-ponta, assim como o nome já diz, são testes onde o comportamento do usuário é simulado o mais próximo possível do mundo real. Então se o seu projeto é uma API, seria um teste executado na infraestrutura o mais próxima de produção, passando por todos os componentes e algumas vezes até utilizando serviços externos.
 
 Se o seu projeto tem interface web, seria um teste simulando todo o fluxo de abrir um browser, realizar ações e depois finalizar. Se é um aplicativo móvel, você precisaria instalar esse aplicativo, abrir, realizar as ações e depois desinstalar, você poderia usar um aparelho real ou um simulador por exemplo.
 
 Além do fluxo propriamente dito que acabamos de falar, existe um passo anterior que é garantir que os dados que você precisa para esse teste realmente existem. Como por exemplo se você precisar estar logado para testar o envio de e-mail, você precisa garantir que existe um usuário com esse permissionamento para ser utilizado no teste, senão o seu teste já começa quebrando.
 
-Apesar desses pontos esses testes também tem sua importância principalmente por serem mais fiéis ao comportamento do usuário final. Por isso é importante avaliar o nível de fidelidade que você quer para o seus testes. Eu sei que quando falamos de testes ponta-a-ponta logo vem a cabeça a imagem da pirâmide de testes invertida, mas esqueça isso por um momento e faça uma análise crítica do quanto esses testes são importantes para o seu produto. 
+Apesar desses pontos esses testes também tem sua importância principalmente por serem mais fiéis ao comportamento do usuário final. Por isso é importante avaliar o nível de fidelidade que você quer para o seus testes. Eu sei que quando falamos de testes ponta-a-ponta logo vem a cabeça a imagem da pirâmide de testes invertida, mas esqueça isso por um momento e faça uma análise crítica do quanto esses testes são importantes para o seu produto.
 
-Existem algumsa formas de minimizar o impacto desses testes dentro do seu fluxo de entrega em produção, você pode por exemplo executar esses testes em paralelo, isso vai te fazer ganhar um pouco mais de tempo. Outra opção é criar suítes menores com um escopo mais definido, por exemplo se estamos falando de um sistema de pagamentos e temos os fluxos de transações e os fluxos de cadastro de novos clientes, você pode categorizar essas suítes e se você está fazendo uma modificação no fluxo de transações, talvez não seja necessário rodar todos os testes de cadastro.
+Existem algumas formas de minimizar o impacto desses testes dentro do seu fluxo de entrega em produção, você pode por exemplo executar esses testes em paralelo, isso vai te fazer ganhar um pouco mais de tempo. Outra opção é criar suítes menores com um escopo mais definido, por exemplo se estamos falando de um sistema de pagamentos e temos os fluxos de transações e os fluxos de cadastro de novos clientes, você pode categorizar essas suítes e se você está fazendo uma modificação no fluxo de transações, talvez não seja necessário rodar todos os testes de cadastro.
 
 Aqui você também pode mesclar uma estratégia de dublês, ao invés de fazer chamadas a integrações de terceiros que você não controla, você pode ter uma classe fake respondendo o que você precisa e exercitar os fluxos sem medo de receber uma resposta estranha de uma integração terceira. Você pode executar esses testes em um ambiente compartilhado com outras pessoas ou ser capaz de recriar o ambiente de teste toda vez que uma nova execução for iniciada, tendo assim mais controle desse ambiente e menos chances de enfrentar intermitências.
 
 Uma dica aqui é: avalie os riscos envolvidos e decida a abordagem que traz mais segurança para o seu time!
 
 #### Testes de Desempenho
+
 Outro tipo de teste que está no grupo dos grandões são os testes de desempenho, esses testes normalmente são executados em um ambiente isolado e exercitam todos os componentes da infraestrutura mas você também pode avaliar a perfomance de pequenas unidades para identificar se houve degradação de performance entre uma versão e outra.
 
 São testes com um foco em métricas, então não vamos olhar apenas se um registro foi criado e sim que quando eu crio 100 registros por segundo, eu tenho um determinado consumo de recursos ou até mesmo que meus recursos não tem capacidade suficiente para criar esses 100 registros.
@@ -227,66 +329,19 @@ Esse é um exemplo de um script de teste do [Artillery](https://artillery.io/). 
 Esse e outros testes não funcionais vão te ajudar muito a validar questões de configuração e infraestrutura, calibrar seu auto-scaling e econtrar gargalos antes que eles te surpreendam em produção.
 
 #### Testes de Compatibilidade
-Quando falamos de aplicações que tem alguma interface os testes de compatibilidade se tornam extremamente importantes já que conforme sua base de clientes vai crescendo fica impossível acompanhar manualmente os testes das diferentes versões em diferentes plataformas. 
+
+Quando falamos de aplicações que possuem a chamada interface de usuário, ou seja, uma aplicação web que acessamos via browser ou um aplicativo utilizado via smartphone, os testes de compatibilidade se tornam extremamente importantes já que conforme sua base de clientes vai crescendo fica impossível acompanhar manualmente os testes das diferentes versões em diferentes plataformas. No caso de aplicações web por exemplo, podemos acessar utilizando o Safari, Chrome, Brave, Firefox, Internet Explorer, Edge e quando falamos de mobile temos uma infinidade de marcas de aparelho como Samsung, Apple, LG, Nokia, Xaiomi, entre outras, além das versões de iOS e Android. Compatibilidade é garantir que sua aplicação funciona nos diferentes devices que o seu usuário pode estar utlizando para acessá-la.
 
 Existem serviços onde você consegue executar seus testes em diferentes browsers, sistemas operacionais e resoluções por exemplo, como a [Saucelabs](https://saucelabs.com/) e o [BrowserStack](https://www.browserstack.com/). O mesmo pode ser feito para aplicativos Android e iOs, considerando diferentes versões e modelos de aparelhos.
 
-Um outro tipo de teste onde você consegue garantir a compatilidade é o teste de regressão visual, ferramentas como o [BackstopJs](https://github.com/garris/BackstopJS) proporcionam isso. Abaixo você consegue ver um exemplo de um teste utilizando o batckstop.
-
-```json
-{
-  "id": "pokedex_test",
-  "viewports": [
-    {
-      "label": "tablet",
-      "width": 1024,
-      "height": 768
-    }
-  ],
-  "onBeforeScript": "chromy/onBefore.js",
-  "onReadyScript": "chromy/onReady.js",
-  "scenarios": [
-    {
-      "label": "Pokedex Página 404",
-      "cookiePath": "backstop_data/engine_scripts/cookies.json",
-      "url": "http://localhost:3000/#/404",
-      "referenceUrl": "",
-      "readyEvent": "",
-      "readySelector": "",
-      "delay": 10000,
-      "hideSelectors": [],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": "",
-      "selectors": [],
-      "selectorExpansion": true,
-      "misMatchThreshold" : 0.1,
-      "requireSameDimensions": true
-    }
-  ],
-  "paths": {
-    "bitmaps_reference": "backstop_data/bitmaps_reference",
-    "bitmaps_test": "backstop_data/bitmaps_test",
-    "engine_scripts": "backstop_data/engine_scripts",
-    "html_report": "backstop_data/html_report",
-    "ci_report": "backstop_data/ci_report"
-  },
-  "report": ["browser"],
-  "engine": "chrome",
-  "engineFlags": [],
-  "asyncCaptureLimit": 5,
-  "asyncCompareLimit": 50,
-  "debug": false,
-  "debugWindow": false
-}
-```
+Um outro tipo de teste onde você consegue garantir a compatilidade é o teste de regressão visual, ferramentas como o [BackstopJs](https://github.com/garris/BackstopJS) proporcionam isso.
 
 #### Outras Verificações
 
-Aqui temos algumas verficações bônus que vão te ajudar a elevar a barra de qualidade do seu projeto e garantir que as entregas em produção estão *tinindo*. 
+Aqui temos algumas verficações bônus que vão te ajudar a elevar a barra de qualidade do seu projeto e garantir que as entregas em produção estão tinindo.
 
 ##### Análise Estática
+
 A análise estática é uma prática que verifica a qualidade do seu código fonte. Essas verificações podem ser executadas antes mesmo do push através de um hook fazendo com que antes mesmo de enviar suas alterações você já fica sabendo se ofendeu alguma regra de estilo de código ou teve algum problema com a cobertura dos testes.
 
 Uma das ferramentas mais famosas é o [SonarQube](https://www.sonarqube.org/) que tem uma versão on-promisse e cloud, nele você consegue observar algumas métricas que te ajudam inclusive a corrigir bugs e encontrar falhas de segurança antes que as alterações cheguem no cliente. Ele já tem alguns templates de boas práticas baseadas na linguagem, mas você pode configurar e incluir outras verificações como por exemplo [regras de segurança baseadas na OWASP](https://docs.sonarqube.org/latest/user-guide/security-rules/).
@@ -296,6 +351,7 @@ Uma das ferramentas mais famosas é o [SonarQube](https://www.sonarqube.org/) qu
 A gente volta nesse assunto quando formos falar de Testes Contínuos e onde encaixar cada uma das verficiações que falamos aqui. :)
 
 ##### Testes de Mutação
+
 Por fim temos os testes de mutação. A ideia desse tipo de teste é validar a efetivadade dos seus testes. A métrica de cobertura de testes por si só pode ser um número enganoso já que basta que algum teste exercite aquela linha de código que ela já é considerada coberta por testes, mesmo que não tenha nenhuma asserção.
 
 Nos testes de mutação, alguns mutantes são inseridos em tempo de execução no código da aplicação e toda vez que uma alteração é realizada os testes são executados para verificar se vão quebrar. Se o teste quebrar, significa que ele realmente está sendo efetivo posto que uma alteração foi introduzida no código, como por exemplo alterar uma condicional de `!request.authUser.emailConfirmedAt` para `request.authUser.emailConfirmedAt`, e o teste detectou isso como uma anomalia. Agora, se o código for alterado e o teste não quebrar, significa que tem um ponto cego ali que não está sendo testado.
@@ -304,32 +360,7 @@ Esses testes requerem bastante recurso computacional, o que inviabiliza executá
 
 O exemplo abaixo é do [Stryker Mutator](https://stryker-mutator.io/), uma ferramenta para execução de testes de mutação, ele também provê um dashboard para publicação dos resultados.
 
-```javascript
-/**
- * @type {import('@stryker-mutator/api/core').StrykerOptions}
- */
-module.exports = {
-  mutator: 'javascript',
-  packageManager: 'npm',
-  reporters: ['html', 'clear-text', 'progress', 'dashboard'],
-  testRunner: 'jest',
-  transpilers: [],
-  coverageAnalysis: 'off',
-  dashboard: {
-    project: 'github.com/samycici/auth-app'
-  },
-  mutate: [
-    'server/**/*.js'
-  ],
-  jest: {
-    projectType: 'custom',
-    configFile: 'jest.config.js',
-    enableFindRelatedTests: false
-  },
-  timeoutMS: 15000,
-  tempDirName: '.stryker-tmp'
-}
-```
+![Testes de Mutação](images/mutacao.png)
 
 Importante lembrar que no caso dos testes de mutação não basta apenas executar, depois da execução é necessário analisar os resultados e planejar como aumentar a cobertura.
 

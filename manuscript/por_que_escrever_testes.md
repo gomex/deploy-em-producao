@@ -2,11 +2,9 @@
 
 Quando falamos de teste, estamos basicamente falando de uma lista de passos que são executados seja manual ou automaticamente:
 
-```
 1. Em primeiro lugar você tem um comportamento que precisa ser verificado
 2. Uma entrada que vai ser passada para o seu sistema
 3. Uma saída que pode ser observada
-```
 
 Tudo isso dentro de um ambiente controlado. Quando você executa esse teste você descobre se o sistema se comporta ou não como o esperado. Há algum tempo atrás esse processo era feito majoritariamente de forma manual, despendendo muito tempo, às vezes meses, para conseguir dizer se uma versão podia ser implantada em produção ou não.
 
