@@ -21,7 +21,7 @@ Só pra alinhar e facilitar o entendimento, o nome do repositório exemplo é go
 
 Essa pessoa que pretende colaborar, ela faz um fork do seu repositório e agora ela tem um repositório chamado colaboradora/idade-de-animal (imaginando que o usuário dessa pessoa seja "colaboradora", ok?). Esse repositório tem uma ligação simbólica com o gomex/idade-de-animal.
 
-![Repositório Fork](/images/pullrequest1.png)
+![Repositório Fork](images/pullrequest1.png)
 
 Todas as mudanças feitas no "colaboradora/idade-de-animal" serão visíveis apenas nesse repositório e todas as mudanças feitas no "gomex/idade-de-animal" depois desse fork não serão automaticamente atualizadas no "colaboradora/idade-de-animal", mas por definição não seria um problema, afinal a funcionalidade que a pessoa está trabalhando deve ser específica, ou seja, o que ela está trabalhando não deveria conflitar com as alterações que acontecem no repositório original, ou seja, não tem mais ninguém além dela trabalhando em "idade de gato", né? Falaremos sobre resolução de conflitos depois.
 
@@ -45,7 +45,7 @@ Quando começar a trabalhar em uma funcionalidade nova do repositório. Eu faço
 
 Existe um Padrão para criação de branch? Eu gosto do modelo "feature/nome-da-funcionalidade" assim fica muito claro para todo mundo no que você está trabalhando. Se você usa algum sistema de ticket para gerenciar as tarefas você pode colocar o identificador do ticket também: ""feature/nome-da-funcionalidade#435".
 
-![Proposta de fluxo para pull request](/images/pullrequest2.png)
+![Proposta de fluxo para pull request](images/pullrequest2.png)
 
 Lembre-se que sua branch precisa ser bem específica, ou seja, se "aparecer" outra demanda, o aconselhável é abrir outra branch a partir de branch "oficial" (que normalmente é a "master").
 
@@ -53,7 +53,7 @@ Quando você tiver muita confiança que seu código entrega tudo que a funcional
 
 Segue abaixo um ótimo exemplo:
 
-![Exemplo de pull request](/images/pullrequest3.png)
+![Exemplo de pull request](images/pullrequest3.png)
 
 O ideal é que o PR tenha o seguinte conteúdo:
 
@@ -96,11 +96,11 @@ A maioria das organizações seguem alguns padrões para como escrever código, 
 
 Esse padrão deve estar claro em algum lugar, e a pessoa que vai colaborar deve ler isso antes, mas nem sempre isso é possível e dessa forma a colaboração pode não seguir esse padrão. Você que está avaliando deve deixar bem claro para pessoa qual regra ela está infligindo e qual parte do código isso acontece. O github oferece a funcionalidade de comentar nas linhas do código do PR.
 
-![Comentário no review](/images/pullrequest4.png)
+![Comentário no review](images/pullrequest4.png)
 
 Depois que comentar todo o PR, não se esqueça de finalizar sua revisão, pois caso não faça isso a pessoa que fez o PR não verá seu comentário.
 
-![Revisão de PR](/images/pullrequest5.png)
+![Revisão de PR](images/pullrequest5.png)
 
 Se precisar que a pessoa atualize algo para que o PR seja aceito escolha a opção de "Request changes" (Solicita mudanças), caso contrário aprove ou comente sem aprovar, caso precise de mais tempo para decidir sobre aceitar ou não.
 
