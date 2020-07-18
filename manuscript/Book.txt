@@ -1,3 +1,6 @@
 introducao.md
 como-esta-sendo-construido.md
 como-ler.md
+o-que-e-deploy.md
+o-que-e-pr.md
+o-que-tem-que-ter-no-pipeline.md
