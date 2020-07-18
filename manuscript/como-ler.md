@@ -15,12 +15,12 @@ A ideia do livro é ser um local onde se possa congregar conhecimentos sobre com
 
 A ideia é que ele aborde as seguintes coisas:
 
- 1. Conceitos básicos sobre entrega de produtos em produção (Ex. O que é Pipeline, como funciona, o que tem que ter nele e afins);
+1. Conceitos básicos sobre entrega de produtos em produção (Ex. O que é Pipeline, como funciona, o que tem que ter nele e afins);
 
 A idéia aqui é falar sobre as melhores práticas de cada etapa da entrega também (ex. testes de integração, migração de banco de dados e etc).
 
- 2. Como entregar determinados tipos de sofware em produção;
- 
+2. Como entregar determinados tipos de sofware em produção;
+
    a) Entregando Django (python) em produção;
    b) Entregando Ruby on Rails em produção;
    c) etc.
