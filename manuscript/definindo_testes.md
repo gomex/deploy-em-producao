@@ -87,7 +87,9 @@ class PokemonsController {
 
 Os dublês podem ser categorizados em alguns patterns:
 
-- Fake: os fakes possuem uma resposta fixa, independente de como são chamados, podem ser implementados através de uma classe ou função. Uma vantagem de usar fake é que você não precisa ter nenhuma dependência externa como uma biblioteca, mas por outro lado você só consegue validar a saída e não todo o fluxo de comportamento.
+##### Fake
+
+Os fakes possuem uma resposta fixa, independente de como são chamados, podem ser implementados através de uma classe ou função. Uma vantagem de usar fake é que você não precisa ter nenhuma dependência externa como uma biblioteca, mas por outro lado você só consegue validar a saída e não todo o fluxo de comportamento.
 
 ```javascript
 describe('PokemonsController getPokemon()', () => {
@@ -138,7 +140,9 @@ const response = pokemonsController.getPokemon();
 expect(response).to.be.eql(databaseResponse);
 ```
 
-- Spy: os spies possibilitam a "gravação" do comportamento que está sendo espionado, assim podemos testar por exemplo se uma função foi chamada, quantas vezes ela foi chamada e quais os parâmetros. Aqui podemos testar um comportamento interno, o que é uma vantagem, mas não múltiplos comportamentos de uma vez. Para criar spies precisamos da ajuda de bibliotecas da própria linguagem. Dessa vez vamos precisar da ajuda da biblioteca [sinonjs](https://sinonjs.org/) para criar o spy.
+##### Spy
+
+Os spies possibilitam a "gravação" do comportamento que está sendo espionado, assim podemos testar por exemplo se uma função foi chamada, quantas vezes ela foi chamada e quais os parâmetros. Aqui podemos testar um comportamento interno, o que é uma vantagem, mas não múltiplos comportamentos de uma vez. Para criar spies precisamos da ajuda de bibliotecas da própria linguagem. Dessa vez vamos precisar da ajuda da biblioteca [sinonjs](https://sinonjs.org/) para criar o spy.
 
 ```javascript
 describe('PokemonsController get()', () => {
@@ -160,7 +164,7 @@ Aqui adicionamos um spy na função "find" para que o Sinon devolva uma referên
 const find = sinon.spy(Database, 'find');
 ```
 
- No assert verificamos se a função foi chamada com o parâmetro esperado que é "pokemon", observe que diferente do fake, nesse caso estamos passando o Database que foi "espiado" pelo sinon. No final restauramos a função original utilizando 'find.restore()'.
+No assert verificamos se a função foi chamada com o parâmetro esperado que é "pokemon", observe que diferente do fake, nesse caso estamos passando o Database que foi "espiado" pelo sinon. No final restauramos a função original utilizando 'find.restore()'.
 
  ```javascript
 const pokemonsController = new PokemonsController(Database);
@@ -170,7 +174,9 @@ sinon.assert.calledWith(find, 'pokemon');
 find.restore();
 ```
 
-- Stub: diferentes dos spies, os stubs conseguem mudar comportamentos, dependendo de como forem chamados, permitindo testar mais cenários. Pode ser usado inclusive para testar código assíncrono.
+##### Stub
+
+Diferentes dos spies, os stubs conseguem mudar comportamentos, dependendo de como forem chamados, permitindo testar mais cenários. Pode ser usado inclusive para testar código assíncrono.
 
 ```javascript
 describe('PokemonsController getPokemon()', () => {
@@ -217,7 +223,9 @@ expect(response).to.be.eql(databaseResponse);
 find.restore();
 ```
 
-- Mock: os mocks são capazes de substituir a dependência permitindo assim verificar vários comportamentos. Você pode utilizar por exemplo para verificar se uma função foi chamada e se ela foi chamada com os argumentos esperados.
+##### Mock
+
+Os mocks são capazes de substituir a dependência permitindo assim verificar vários comportamentos. Você pode utilizar por exemplo para verificar se uma função foi chamada e se ela foi chamada com os argumentos esperados.
 
 ```javascript
 describe('PokemonController get()', () => {
@@ -252,6 +260,8 @@ Temos o “verify()” que verifica que as expectativas foram atingidas e no fin
 databaseMock.verify();
 databaseMock.restore();
 ```
+
+##### Mockar ou não mockar: eis a questão
 
 Quando se fala da utilização de dublês existe quase uma questão filosófica: **"mockar ou não mockar, eis a questão"**. Existem alguns casos que são inevitáveis, como por exemplo testar funções que disparam email, ou utilizam alguma integração externa, nesses casos os dublês com certeza trazem produtividade ao tornarem a execução dos testes mais rápida e menos intermitente.
 
