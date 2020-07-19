@@ -14,6 +14,8 @@ A escolha da ferramenta não é o primeiro passo. Imagine você trabalhando no r
 
 A ideia desse livro é oferecer alguns pontos de vista para ajudar você nessa empreitada.  Não existe pretenção alguma de aqui fundar nenhum padrão ou ideia nova. O que é apresentado nessas páginas é nada mais do que a soma de experiênciasde várias pessoas, então não há intenção alguma de tomar todo crédito, afinal toda construção de um novo conteúdo normalmente é 10% experiência própria e 90% de aprendizado prévio.
 
+Apresentaremos nesse livro alguns códigos para servir como exemplo ao que está sendo explicado no capítulo. Se você ainda não conseguir ler o código e entender, não se preocupe, pois a proposta é que o texto seja o suficiente. O código seria apenas um esforço extra pra demonstrar para aquelas pessoas que conseguem ler o código.
+
 Resumindo, a idéia que esse livro lhe ajude a entender esse assunto, seja você uma pessoa que ja sabe sobre o assunto e queria apenas reforçar o que sabe com base em outros pontos de vistas ou se você é uma pessoa iniciante no assunto e quer de fato entender a partir dos fundamentos.
 
 

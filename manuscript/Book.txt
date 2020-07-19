@@ -1,6 +1,9 @@
 introducao.md
-como-esta-sendo-construido.md
-como-ler.md
-o-que-e-deploy.md
-o-que-e-pr.md
-o-que-tem-que-ter-no-pipeline.md
+como_esta_sendo_construido.md
+como_ler.md
+o_que_e_deploy.md
+estrategia_de_testes.md
+por_que_escrever_testes.md
+definindo_testes.md
+o_que_e_pr.md
+o_que_tem_que_ter_no_pipeline.md

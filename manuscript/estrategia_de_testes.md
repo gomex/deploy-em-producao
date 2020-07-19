@@ -1,4 +1,4 @@
-# Estratégia de Testes - Construindo Confiança
+# Estratégia de Testes - Construindo Confiança (Samanta Cicilia)
 
 ## Introdução
 
