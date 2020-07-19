@@ -158,13 +158,13 @@ describe('PokemonsController get()', () => {
 });
 ```
 
-Aqui adicionamos um spy na função "find" para que o Sinon devolva uma referência a essa função.
+Aqui adicionamos um spy na função "find" para que o Sinon devolva uma referência a essa função:
 
 ```javascript
 const find = sinon.spy(Database, 'find');
 ```
 
-No assert verificamos se a função foi chamada com o parâmetro esperado que é "pokemon", observe que diferente do fake, nesse caso estamos passando o Database que foi "espiado" pelo sinon. No final restauramos a função original utilizando 'find.restore()'.
+No assert verificamos se a função foi chamada com o parâmetro esperado que é "pokemon", observe que diferente do fake, nesse caso estamos passando o Database que foi "espiado" pelo sinon. No final restauramos a função original utilizando `find.restore()`.
 
  ```javascript
 const pokemonsController = new PokemonsController(Database);
@@ -215,7 +215,7 @@ const find = sinon.stub(Database, 'find');
 find.withArgs('pokemon').returns(databaseResponse);
 ```
 
-Depois verificamos se a função foi chamada da forma correta e se recebemos o resultado esperado. No final restauramos a função original utilizando 'find.restore()'.:
+Depois verificamos se a função foi chamada da forma correta e se recebemos o resultado esperado. No final restauramos a função original utilizando `find.restore()`:
 
 ```javascript
 sinon.assert.calledWith(find, 'pokemon');
