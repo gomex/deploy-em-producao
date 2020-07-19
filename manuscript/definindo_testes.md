@@ -20,7 +20,7 @@ São 3 as categorizações:
 
 Testes Unitários são aqueles que tem um escopo mais limitado, normalmente uma simples classe ou método. Esses testes são os que vão te ajudar no dia a dia do processo de desenvolvimento já que eles são mais rápidos de executar, devido ao escopo mais contido. Isso ajuda a otimizar a produtividade dado que esses testes podem ser executados antes de fazer o push para o repositório.
 
-Imagine a seguinte função:
+Imagine a seguinte função onde, dependendo do idioma informado, você receberá como se escreve Paulo nesse idioma:
 
 ```javascript
 # handler.js
@@ -28,7 +28,7 @@ function getNameAccordingLanguage(language) {
   switch(language) {
     case "en":
       return "Paul";
-    case "br":
+    case "pt":
       return "Paulo";
     case "el":
       return "Πάολο";
@@ -39,7 +39,7 @@ function getNameAccordingLanguage(language) {
 module.exports.getNameAccordingLanguage = getNameAccordingLanguage;
 ```
 
-E aqui temos um teste unitário que valida apenas o escopo dessa função:
+E aqui temos um teste unitário que valida apenas o escopo dessa função, testando cada um dos idiomas contidos na função anterior `en-pt-el`, e um teste onde informamos um idioma inexistente para testar o resultado da condição default:
 
 ```javascript
 # __tests__/handler.test.js
@@ -47,7 +47,7 @@ const handler = require('../handler');
 
 test('Name is informed based on Language', () => {
   expect(handler.getNameAccordingLanguage("en")).toBe("Paul");
-  expect(handler.getNameAccordingLanguage("br")).toBe("Paulo");
+  expect(handler.getNameAccordingLanguage("pt")).toBe("Paulo");
   expect(handler.getNameAccordingLanguage("el")).toBe("Πάολο");
   expect(handler.getNameAccordingLanguage("bla")).toBe("👨🏿");
 });
@@ -87,7 +87,7 @@ class PokemonsController {
 
 Os dublês podem ser categorizados em alguns patterns:
 
-- Fake: os fakes possuem uma resposta fixa, independente de como são chamados, podem ser implementados através de uma classe ou função. Uma vantagem de usar fake é que você não precisa ter nenhuma dependência externa como uma biblioteca, mas por outro lado você só consegue validar a saída e não todo o fluxo de comportamento. No exemplo abaixo criamos um fake que vai sempre retornar as informações do Pikachu quando for chamado dentro do teste, ou seja, ao invés da realmente acessarmos o banco de dados para pegar essas informações, o fake fará esse papel de fornecer os dados.  Nesse teste verificamos que a resposta de “getPokemon” do controller responde com os mesmos dados declarados no "databaseResponse", que são os dados do Pikachu.
+- Fake: os fakes possuem uma resposta fixa, independente de como são chamados, podem ser implementados através de uma classe ou função. Uma vantagem de usar fake é que você não precisa ter nenhuma dependência externa como uma biblioteca, mas por outro lado você só consegue validar a saída e não todo o fluxo de comportamento.
 
 ```javascript
 describe('PokemonsController getPokemon()', () => {
@@ -112,9 +112,33 @@ describe('PokemonsController getPokemon()', () => {
 });
 ```
 
-- Spy: os spies possibilitam a "gravação" do comportamento que está sendo espionado, assim podemos testar por exemplo se uma função foi chamada, quantas vezes ela foi chamada e quais os parâmetros. Aqui podemos testar um comportamento interno, o que é uma vantagem, mas não múltiplos comportamentos de uma vez. Para criar spies precisamos da ajuda de bibliotecas da própria linguagem. Dessa vez vamos precisar da ajuda da biblioteca [sinonjs](https://sinonjs.org/) para criar o spy.
+No exemplo acima criamos um fake que vai sempre retornar as informações do Pikachu quando for chamado dentro do teste, ou seja, ao invés da realmente acessarmos o banco de dados para pegar essas informações, o fake fará esse papel de fornecer os dados:
 
-Vamos adicionar um spy na função "find" para que o Sinon devolva uma referência a essa função. No assert verificamos se a função foi chamada com o parâmetro esperado que é "pokemon".
+```javascript
+const databaseResponse = {
+  id: 1,
+  name: 'Pikachu',
+  species: 'mouse',
+  type: 'eletric'
+};
+
+const fakeDatabase = {
+  find() {
+    return databaseResponse;
+  }
+}
+```
+
+Nesse teste, passamos para o PokemonsController o nosso fake, ao invés do Database de verdade, e verificamos que a resposta de “getPokemon” retorna os mesmos dados declarados no "databaseResponse", que são os dados do Pikachu:
+
+```javascript
+const pokemonsController = new PokemonsController(fakeDatabase);
+const response = pokemonsController.getPokemon();
+
+expect(response).to.be.eql(databaseResponse);
+```
+
+- Spy: os spies possibilitam a "gravação" do comportamento que está sendo espionado, assim podemos testar por exemplo se uma função foi chamada, quantas vezes ela foi chamada e quais os parâmetros. Aqui podemos testar um comportamento interno, o que é uma vantagem, mas não múltiplos comportamentos de uma vez. Para criar spies precisamos da ajuda de bibliotecas da própria linguagem. Dessa vez vamos precisar da ajuda da biblioteca [sinonjs](https://sinonjs.org/) para criar o spy.
 
 ```javascript
 describe('PokemonsController get()', () => {
@@ -130,7 +154,23 @@ describe('PokemonsController get()', () => {
 });
 ```
 
-- Stub: diferentes dos spies, os stubs conseguem mudar comportamentos, dependendo de como forem chamados, permitindo testar mais cenários. Pode ser usado inclusive para testar código assíncrono. Nesse caso além de verificarmos se a função foi chamada da forma correta e modificar o comportamento para fazer uma asserção de resultado esperado também. Nesse exemplo "injetamos" os dados do Pikachu para que a nossa função getPokemon retorne esses dados. Lembrando que não estamos acessando o banco de dados de verdade em nenhum momento.
+Aqui adicionamos um spy na função "find" para que o Sinon devolva uma referência a essa função.
+
+```javascript
+const find = sinon.spy(Database, 'find');
+```
+
+ No assert verificamos se a função foi chamada com o parâmetro esperado que é "pokemon", observe que diferente do fake, nesse caso estamos passando o Database que foi "espiado" pelo sinon. No final restauramos a função original utilizando 'find.restore()'.
+
+ ```javascript
+const pokemonsController = new PokemonsController(Database);
+pokemonsController.getPokemon();
+
+sinon.assert.calledWith(find, 'pokemon');
+find.restore();
+```
+
+- Stub: diferentes dos spies, os stubs conseguem mudar comportamentos, dependendo de como forem chamados, permitindo testar mais cenários. Pode ser usado inclusive para testar código assíncrono.
 
 ```javascript
 describe('PokemonsController getPokemon()', () => {
@@ -155,7 +195,29 @@ describe('PokemonsController getPokemon()', () => {
 });
 ```
 
-- Mock: os mocks são capazes de substituir a dependência permitindo assim verificar vários comportamentos. Você pode utilizar por exemplo para verificar se uma função foi chamada e se ela foi chamada com os argumentos esperados. Aqui temos 2 asserts, a primeira para verificar se o método “find” foi chamado uma vez e na segunda se ele foi chamado com o argumento "pokemon", e depois o “verify()” verifica que as expectativas foram atingidas.
+Nesse exemplo "injetamos" os dados do Pikachu para que a nossa função getPokemon retorne esses dados. Lembrando que não estamos acessando o banco de dados de verdade em nenhum momento:
+
+```javascript
+const databaseResponse = {
+  id: 1,
+  name: 'Pikachu',
+  species: 'mouse',
+  type: 'eletric'
+};
+
+const find = sinon.stub(Database, 'find');
+find.withArgs('pokemon').returns(databaseResponse);
+```
+
+Depois verificamos se a função foi chamada da forma correta e se recebemos o resultado esperado. No final restauramos a função original utilizando 'find.restore()'.:
+
+```javascript
+sinon.assert.calledWith(find, 'pokemon');
+expect(response).to.be.eql(databaseResponse);
+find.restore();
+```
+
+- Mock: os mocks são capazes de substituir a dependência permitindo assim verificar vários comportamentos. Você pode utilizar por exemplo para verificar se uma função foi chamada e se ela foi chamada com os argumentos esperados.
 
 ```javascript
 describe('PokemonController get()', () => {
@@ -170,6 +232,25 @@ describe('PokemonController get()', () => {
     databaseMock.restore();
   });
 });
+```
+
+Primeiro criamos o mock do nosso Database:
+
+```javascript
+const databaseMock = sinon.mock(Database);
+```
+
+Depois temos 2 asserções, a primeira para verificar se o método “find” foi chamado uma vez e na segunda se ele foi chamado com o argumento "pokemon":
+
+```javascript
+databaseMock.expects('find').once().withArgs('pokemon');
+```
+
+Temos o “verify()” que verifica que as expectativas foram atingidas e no final restauramos a função original utilizando 'find.restore()':
+
+```javascript
+databaseMock.verify();
+databaseMock.restore();
 ```
 
 Quando se fala da utilização de dublês existe quase uma questão filosófica: **"mockar ou não mockar, eis a questão"**. Existem alguns casos que são inevitáveis, como por exemplo testar funções que disparam email, ou utilizam alguma integração externa, nesses casos os dublês com certeza trazem produtividade ao tornarem a execução dos testes mais rápida e menos intermitente.
