@@ -1,4 +1,4 @@
-# O que é Pull Request?
+# O que é Pull Request? (Rafael Gomes)
 
 ## Introdução
 

@@ -1,4 +1,4 @@
-# O que deve ter no seu pipeline?
+# O que deve ter no seu pipeline? (Rafael Gomes)
 
 #### Introdução
 
