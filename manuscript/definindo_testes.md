@@ -254,7 +254,7 @@ Depois temos 2 asserções, a primeira para verificar se o método “find” fo
 databaseMock.expects('find').once().withArgs('pokemon');
 ```
 
-Temos o “verify()” que verifica que as expectativas foram atingidas e no final restauramos a função original utilizando 'find.restore()':
+Temos o “verify()” que verifica se as expectativas foram atingidas e no final restauramos a função original utilizando 'find.restore()':
 
 ```javascript
 databaseMock.verify();
