@@ -1,5 +1,7 @@
 # O que é deploy? (Rafael Gomes)
 
+## Introdução
+
 Muito se fala sobre deploy e a maioria das pessoas que já estão, há algum tempo, na área de Tecnologia da Informação (TI) , provavelmente já tenham algum entendimento sobre o que é isso, e, quem iniciou na área há pouco, possivelmente já  captou "alguma coisa" pelo contexto.
 
 Essa é a oportunidade para se  estabelecer aqui um entendimento sobre o que é deploy, como ele funciona e porque ele é tão importante para área de TI.
