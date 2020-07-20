@@ -35,6 +35,8 @@ A sugestão é que funcionalidades diferentes sejam tratadas de forma isolada, a
 
 Todo esse processo que descrevi aqui, pode ser feito também baseado em branch, mas a pessoa que colabora precisa ser membro do repositório e não uma pessoa aleatória na internet, pois ela precisa ter permissão para criar branch no repositório. No fim é o mesmo propósito, mas ao invés de repositório inteiro, tudo que expliquei aqui acontece no nível de ramificações.
 
+Por fim, note que em outras plataformas de repositórios online, o conceito de Pull Request pode ter outros nomes como por exemplo Merge Request(Requisição para mergear).
+
 ## Como usar Pull Request para o processo de revisão?
 
 A maioria das organizações utiliza o Pull Request como mecanismo padrão para revisão de código, pois ele é basicamente a "porta de entrada" para a base "oficial" de código, seja em relação ao repositório ou branch.
