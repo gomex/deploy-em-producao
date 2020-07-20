@@ -1,3 +1,4 @@
+agradecimentos.md
 introducao.md
 como_esta_sendo_construido.md
 como_ler.md
