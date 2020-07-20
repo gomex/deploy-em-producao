@@ -53,7 +53,7 @@ test('Name is informed based on Language', () => {
 });
 ```
 
-Esse é um teste que tem o escopo limitado, nesse caso testar que dada uma entrada, nesse caso o idiona, recebemos como resultado o nome "Paulo" de acordo com cada idioma.
+Esse é um teste que tem o escopo limitado, nesse caso testar que dada uma entrada, nesse caso o idioma, recebemos como resultado o nome "Paulo" de acordo com cada idioma.
 
 Esses testes ajudam muito na manutenibilidade posto que como exercitam um escopo mais contido, se um deles quebra você consegue rapidamente identificar o ponto de falha, diferente de um caso onde, por exemplo, você tivesse mais elementos envolvidos como um banco de dados, um container da aplicação, etc.
 
@@ -254,7 +254,7 @@ Depois temos 2 asserções, a primeira para verificar se o método “find” fo
 databaseMock.expects('find').once().withArgs('pokemon');
 ```
 
-Temos o “verify()” que verifica que as expectativas foram atingidas e no final restauramos a função original utilizando 'find.restore()':
+Temos o “verify()” que verifica se as expectativas foram atingidas e no final restauramos a função original utilizando 'find.restore()':
 
 ```javascript
 databaseMock.verify();
@@ -271,7 +271,7 @@ Se a implementação real permite uma execução rápida, determinística e simp
 
 Se não for esse o caso, você precisa avaliar o tempo de execução, o quanto o teste é determinístico ou não (se você não consegue controlar o teste, as chances de você ter intermitência aumentam absurdamente) e o quanto é fácil ou difícil construir as dependências.
 
-Lembre-se de avaliar seu contexto SEMPRE!! E optar pela solução que traz mais segurança para o seu proceso de desenvolvimento.
+Lembre-se de avaliar seu contexto SEMPRE!! E optar pela solução que traz mais segurança para o seu processo de desenvolvimento.
 
 Para se aprofundar nesse assunto eu indico a leitura do [xUnit Patterns - Test Double](http://xunitpatterns.com/Test%20Double.html).
 
@@ -346,7 +346,7 @@ Lembrando que conforme incluímos mais componentes nos testes, a tendência é q
 
 O advento dos microserviços trouxe esse tipo de teste pra um destaque posto que a comunicação entre esses serviços é um possível ponto de falha.
 
-Imagine que você tem um serviço A que consome recursos de um serviço B. O serviço B tem um atributo chamado `email` que não é obrigatório e como esse atributo não é importante para o modelo de negócio do produto A, ele nunca passou esse atributo e nem pretende fazer isso. De repente o serviço B vê a necessidade de tornar o `email` obrigatório e como ele não tem visibilidade que quem são os seus consumidores, ele simplesmente sobe essa alteração para produção e a partir daí o serviço A passa a receber um erro 422 para TODAS as suas chamadas. Daí começa aquela saga que nós conhecemos: abre um incidente em produção, corre para ver o que aconteceu, identifica o problema e com sorte consegue com que o serviço B reverta a alteração até que isso seja melhor alinhado.
+Imagine que você tem um serviço A que consome recursos de um serviço B. O serviço B tem um atributo chamado `email` que não é obrigatório e como esse atributo não é importante para o modelo de negócio do produto A, ele nunca passou esse atributo e nem pretende fazer isso. De repente o serviço B vê a necessidade de tornar o `email` obrigatório e como ele não tem visibilidade de quem são os seus consumidores, ele simplesmente sobe essa alteração para produção e a partir daí o serviço A passa a receber um erro 422 para TODAS as suas chamadas. Daí começa aquela saga que nós conhecemos: abre um incidente em produção, corre para ver o que aconteceu, identifica o problema e com sorte consegue com que o serviço B reverta a alteração até que isso seja melhor alinhado.
 
 É nesse cenário que entram os testes de contrato orientado ao consumidor.
 
