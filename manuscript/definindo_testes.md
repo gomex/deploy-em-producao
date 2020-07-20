@@ -53,7 +53,7 @@ test('Name is informed based on Language', () => {
 });
 ```
 
-Esse é um teste que tem o escopo limitado, nesse caso testar que dada uma entrada, nesse caso o idiona, recebemos como resultado o nome "Paulo" de acordo com cada idioma.
+Esse é um teste que tem o escopo limitado, nesse caso testar que dada uma entrada, nesse caso o idioma, recebemos como resultado o nome "Paulo" de acordo com cada idioma.
 
 Esses testes ajudam muito na manutenibilidade posto que como exercitam um escopo mais contido, se um deles quebra você consegue rapidamente identificar o ponto de falha, diferente de um caso onde, por exemplo, você tivesse mais elementos envolvidos como um banco de dados, um container da aplicação, etc.
 
