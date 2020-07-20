@@ -20,3 +20,5 @@ Obrigado especial a um grupo de pessoas que faz parte de um canal que tenho no t
  - [Morvana Bonin](https://twitter.com/morvanabonin)
  - [Giu](https://twitter.com/ReginaSauro)
  - [Victor Martinez](https://twitter.com/vcrmartinez)
+
+Não posso deixar de agradecer a Aaron Swartz, que sempre foi minha inspiração para manter o conhecimento aberto. Que a sua chama se mantenha acesa para sempre.
