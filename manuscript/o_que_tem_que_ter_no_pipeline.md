@@ -40,5 +40,3 @@ Seguindo essa lógica, o primeiro passo desse pipeline seria o **teste unitário
 - Tempo de feedback
 
 Quando eu falamos de entrega de valor, a preocupação é com o processo de desenvolvimento e não apenas com o produto finalizado. Para o produto finalizando o build talvez seja mais importante do que o teste unitário, pois levando em consideração o processo de desenvolvimento eles tem importâncias bem próximas.
-
-## 
