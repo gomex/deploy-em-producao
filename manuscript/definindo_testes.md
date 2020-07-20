@@ -271,7 +271,7 @@ Se a implementação real permite uma execução rápida, determinística e simp
 
 Se não for esse o caso, você precisa avaliar o tempo de execução, o quanto o teste é determinístico ou não (se você não consegue controlar o teste, as chances de você ter intermitência aumentam absurdamente) e o quanto é fácil ou difícil construir as dependências.
 
-Lembre-se de avaliar seu contexto SEMPRE!! E optar pela solução que traz mais segurança para o seu proceso de desenvolvimento.
+Lembre-se de avaliar seu contexto SEMPRE!! E optar pela solução que traz mais segurança para o seu processo de desenvolvimento.
 
 Para se aprofundar nesse assunto eu indico a leitura do [xUnit Patterns - Test Double](http://xunitpatterns.com/Test%20Double.html).
 
