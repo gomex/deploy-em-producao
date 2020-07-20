@@ -135,7 +135,7 @@ Projetos e prazos apertados são duas coisas que normalmente andam juntos e uma 
 
 Uma dica aqui é fazer com que seu PR seja o menor possível, pois quanto menor a possibilidade de retrabalho no retorno da revisão é menor.
 
-Outro ponto positivo de um PR mínimo está associado a dopamina que é um dos "hormônios da felicidade", como você já deve ter percebido os jogos que mais jogamos costumam ter fases curtas mas investimos horas e mais horas com eles em nossas telas, por qual motivo? Dopamina, pequenas recompensas neuronais que nos dizem que conseguimos alcançar um objetivo. Então quando estiver fazendo um PR, ao invés de tentar fazer uma fase longa e complexa, tente fazer "fases menores", mais atômicas, e corrija coisas pequenas e rápidas (e da forma correta é claro!) para que você e o avaliador dos PRs possam fazer bom uso de pequenas e constantes doses de dopamina ao aprovar ou ser aprovado cada PR.
+Outro ponto positivo de um PR mínimo está associado a dopamina que é um dos "hormônios da felicidade", como você já deve ter percebido os jogos que mais jogamos costumam ter fases curtas, mas investimos horas e mais horas com eles em nossas telas, por qual motivo? Dopamina, pequenas recompensas neuronais que nos dizem que conseguimos alcançar um objetivo. Então quando estiver fazendo um PR, ao invés de tentar fazer uma fase longa e complexa, tente fazer "fases menores", mais atômicas, e corrija coisas pequenas e rápidas (e da forma correta é claro!) para que você e o avaliador dos PRs possam fazer bom uso de pequenas e constantes doses de dopamina ao aprovar ou ser aprovado cada PR.
 
 ## Quantas pessoas devem revisar meu código?
 
