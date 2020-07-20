@@ -354,7 +354,7 @@ Nesse teste o consumidor, serviço A da nossa história, tem um contrato escrito
 
 A ferramenta mais madura altualmente para esse tipo de teste é o [Pact](https://docs.pact.io/). Na imagem abaixo você consegue ver exatamente esse fluxo descrito:
 
-![Pact Flow](resources/imagespact.png)
+![Pact Flow](resources/images/pact.png)
 
 Seja o seu serviço um consumidor ou provedor, é importante se preocupar com os contratos.
 
@@ -437,7 +437,7 @@ A análise estática é uma prática que verifica a qualidade do seu código fon
 
 Uma das ferramentas mais famosas é o [SonarQube](https://www.sonarqube.org/) que tem uma versão on-promisse e cloud, nele você consegue observar algumas métricas que te ajudam inclusive a corrigir bugs e encontrar falhas de segurança antes que as alterações cheguem no cliente. Ele já tem alguns templates de boas práticas baseadas na linguagem, mas você pode configurar e incluir outras verificações como por exemplo [regras de segurança baseadas na OWASP](https://docs.sonarqube.org/latest/user-guide/security-rules/).
 
-![Sonar](resources/imagessonar.png)
+![Sonar](resources/images/sonar.png)
 
 A gente volta nesse assunto quando formos falar de Testes Contínuos e onde encaixar cada uma das verficiações que falamos aqui. :)
 
@@ -451,7 +451,7 @@ Esses testes requerem bastante recurso computacional, o que inviabiliza executá
 
 O exemplo abaixo é do [Stryker Mutator](https://stryker-mutator.io/), uma ferramenta para execução de testes de mutação, ele também provê um dashboard para publicação dos resultados.
 
-![Testes de Mutação](resources/imagesmutacao.png)
+![Testes de Mutação](resources/images/mutacao.png)
 
 Importante lembrar que no caso dos testes de mutação não basta apenas executar, depois da execução é necessário analisar os resultados e planejar como aumentar a cobertura.
 
