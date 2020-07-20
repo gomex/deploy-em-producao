@@ -10,7 +10,7 @@ Pra começar, deploy é um verbo do idioma inglês, cuja tradução mais próxim
 
 Quando se fala em fazer deploy, imagine que isso significa uma forma de posicionar algo, ou seja, é basicamente pegar algo que está em uma posição/localização e colocar em outra.
 
-Isso quer dizer que quando alguém falar que vai "deployar" algo, é basicamente o jeitinho brasileiro de usar uma palavra em inglês e verbalizar ela em português, o que não é de todo ruim, uma vez que quem escuta entende perfeitamente, ou seja, a comunicação funciona e não há problema algum com isso. Chato mesmo é alguém que complica a comunicação para forçar palavras não usuais e assim tentar demonstrar uma certa superioridade linguística. Aconselha-se a leitura [desse livro](https://www.amazon.com.br/Preconceito-Lingu%C3%ADstico-Marcos-Bagno/dp/8579340985/ref=asc_df_8579340985/?tag=googleshopp00-20&linkCode=df0&hvadid=379708411098&hvpos=&hvnetw=g&hvrand=890780466304631420&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1001533&hvtargid=pla-387685959250&psc=1) sobre preconceito linguístico.
+Isso quer dizer que quando alguém falar que vai "deployar" algo, é basicamente o jeitinho brasileiro de usar uma palavra em inglês e verbalizar ela em português, o que não é de todo ruim, uma vez que quem escuta entende perfeitamente, ou seja, a comunicação funciona e não há problema algum com isso. Chato mesmo é alguém que complica a comunicação para forçar palavras não usuais e assim tentar demonstrar uma certa superioridade linguística. Aconselha-se a leitura [desse livro](https://www.amazon.com.br/Preconceito-Lingu%C3%ADstico-Marcos-Bagno/dp/8579340985) sobre preconceito linguístico.
 
 ## Como funciona o deploy de um produto de software
 
