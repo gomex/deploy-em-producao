@@ -1,7 +1,7 @@
 # Como ler esse livro
 
 Ele pode ser lido como a maioria dos livros, que é começando da primeira página até a última, mas você pode pular sem culpa alguns capítulos ou até mesmo ir diretamente no conteúdo que desejar.
-Ele foi construído de uma forma que os conceitos são apresentados e desenvolvidos a medida que são necessários, isso quer dizer que se você pulou alguns capítulos e encontrou dificuldade para entender, talvez voltar atrás e ler os capítulos anteriores talvez ajuda no processo.
+Ele foi construído de uma forma que os conceitos são apresentados e desenvolvidos a medida que são necessários, isso quer dizer que se você pulou alguns capítulos e encontrou alguma dificuldade para entender, talvez retornar um pouco e ler capítulos anteriores possa auxiliar no entendimento.
 
 O aconselhável é que você leia o livro da forma convencional, pois terá a oportunidade de ver outro ponto de vista sobre os conceitos que você já conhece e assim reforçar esse conhecimento.
 
@@ -31,7 +31,7 @@ A ideia é que ele aborde as seguintes coisas:
 
 ## O que você precisa saber pra ler esse livro?
 
-O objetivo desse livro é que ele seja para qualquer pessoa da área de TI, ou seja, para quem está recém entrando também. Alguns termos serão difíceis caso você não seja da área ou tiver pouca experiência, mas em casos como esse, por favor abra um ticket [aqui](https://github.com/gomex/deploy-em-producao/issues) com seu feedback, pois apenas assim será possível fazer um livro que sirva para todas as pessoas.
+O objetivo desse livro é que ele seja para qualquer pessoa da área de TI, ou seja, para quem está começando também. Alguns termos poderão ser difíceis caso você não seja da área ou tiver pouca experiência, mas em casos como esse, por favor abra um ticket [aqui](https://github.com/gomex/deploy-em-producao/issues) com seu feedback, pois apenas assim será possível fazer um livro que sirva para todas as pessoas.
 
 Será necessário muito feedback e colaboração de todas pessoas para entregar um contéudo que sirva tanto para quem começa, como para quem já está com mais experiência. Esse é o desafio.
 
