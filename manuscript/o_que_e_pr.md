@@ -10,8 +10,8 @@ O seu repositório original só poderá ser alterado com commits diretos ou atra
 
 Para evitar qualquer confusão, vamos dar nomes aos repositórios. Temos dois repositórios aqui:
 
-**repositório original**, que é o primeiro repositório, aquele que foi a origem do fork.
-**repositório fork**, que é a cópia exata do **repositório original** no momento do fork.
+ - **repositório original**, que é o primeiro repositório, aquele que foi a origem do fork.
+ - **repositório fork**, que é a cópia exata do **repositório original** no momento do fork.
 
 O pull request, é o pedido para que o **repositório original**, ou uma branch do **repositório original**, faça a ação de pull (puxar) as atualizações do **repositório fork** ou de um branch do próprio repositório. Confuso, né? Vamos para um exemplo.
 

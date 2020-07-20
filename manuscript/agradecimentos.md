@@ -8,7 +8,7 @@ Quero agradecer muito minha companheira, Ana Carla, que sempre me deu todo apoio
 
 Obrigado [Somatório](https://twitter.com/somatorio) que revisa praticamente **tudo** que eu escrevo. Ele tem sido além de tudo um grande amigo. Um dos melhores presentes que tive do Rio Grande do Sul.
 
-Obrigado a [Daniel Barba](https://twitter.com/b4rba88) por ter feito essa capa sensacional.
+Obrigado a [Daniel Barba](https://twitter.com/b4rba88) por ter feito essa capa sensacional. Anotem esse nome, pois ele será sensação como desenvolvedor logo.
 
 Obrigado a [Samanta Cicilia](https://twitter.com/samantacicilia) por ter sido a primeira autora, além de mim, a escrever um capítulo para esse projeto.
 
