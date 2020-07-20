@@ -6,7 +6,7 @@ No nosso contexto eu vou usar a categorização feita pelo Google, que pode ser 
 
 Tamanho tem relação com a quantidade de recursos consumidos pelo teste e escopo tem relação com quanto código aquele teste está validando.
 
-Eu acredito que essa é uma abordagem melhor para falar sobre teste já que pode ser aplicada a qualquer que seja o tipo do projeto: monolitos, microserviços, micro frontends, etc, e não fica preso a quantidade de testes que você precisa ter em cada uma das camadas. Utilizando esse conceito você se desprende um pouco daquela pressão de seguir a pirâmide e consegue ter uma outra visão para analisar que testes fazem sentido para você.
+Eu acredito que essa é uma abordagem melhor para falar sobre teste já que pode ser aplicada a qualquer que seja o tipo do projeto: monolitos, microsserviços, micro frontends, etc, e não fica preso a quantidade de testes que você precisa ter em cada uma das camadas. Utilizando esse conceito você se desprende um pouco daquela pressão de seguir a pirâmide e consegue ter uma outra visão para analisar que testes fazem sentido para você.
 
 São 3 as categorizações:
 
@@ -57,7 +57,7 @@ Esse é um teste que tem o escopo limitado, nesse caso testar que dada uma entra
 
 Esses testes ajudam muito na manutenibilidade posto que como exercitam um escopo mais contido, se um deles quebra você consegue rapidamente identificar o ponto de falha, diferente de um caso onde, por exemplo, você tivesse mais elementos envolvidos como um banco de dados, um container da aplicação, etc.
 
-No decorrer desse tópico vamos falar mais sobre isso, mas vale já começar a reforçar que os testes precisam trazer segurança para o time fazer o deploy em produção sem peso na consciência. Se os testes não revelam os bugs ou se quebram demais desnecessariamente o time acaba perdendo a confiança e a crença de que os testes são um elemento importante no processo de desenvolvimento. Por isso você deve tratar testes como trata código de produção: utilizando boas práticas, fazendo refactor para implementar melhorias e sempre buscando otimização.
+No decorrer desse tópico vamos falar mais sobre isso, mas vale já começar a reforçar que os testes precisam trazer segurança para o time fazer o deploy em produção sem peso na consciência. Se os testes não revelam os bugs ou se quebram demais desnecessariamente o time acaba perdendo a confiança e a crença de que os testes são um elemento importante no processo de desenvolvimento. Por isso você deve tratar testes como trata código de produção: utilizando boas práticas, fazendo refatoração para implementar melhorias e sempre buscando otimização.
 
 Não tem como falar de testes unitários sem tocar no assunto de dublês de teste, que é o que vamos abordar no próximo tópico.
 
@@ -325,7 +325,7 @@ const user = {
 }
 ```
 
-Aqui temos ums constante chamada user, que iremos utilizar no nosso teste. 
+Aqui temos uma constante chamada *user*, que iremos utilizar no nosso teste. 
 
 ```javascript
 describe('The register process', () => {
@@ -344,9 +344,9 @@ Lembrando que conforme incluímos mais componentes nos testes, a tendência é q
 
 #### Testes de Contrato
 
-O advento dos microserviços trouxe esse tipo de teste pra um destaque posto que a comunicação entre esses serviços é um possível ponto de falha.
+O advento dos microsserviços trouxe esse tipo de teste pra um destaque posto que a comunicação entre esses serviços é um possível ponto de falha.
 
-Imagine que você tem um serviço A que consome recursos de um serviço B. O serviço B tem um atributo chamado `email` que não é obrigatório e como esse atributo não é importante para o modelo de negócio do produto A, ele nunca passou esse atributo e nem pretende fazer isso. De repente o serviço B vê a necessidade de tornar o `email` obrigatório e como ele não tem visibilidade de quem são os seus consumidores, ele simplesmente sobe essa alteração para produção e a partir daí o serviço A passa a receber um erro 422 para TODAS as suas chamadas. Daí começa aquela saga que nós conhecemos: abre um incidente em produção, corre para ver o que aconteceu, identifica o problema e com sorte consegue com que o serviço B reverta a alteração até que isso seja melhor alinhado.
+Imagine que você tem um serviço A que consome recursos de um serviço B. O serviço B tem um atributo chamado `email` que não é obrigatório e como esse atributo não é importante para o modelo de negócio do produto A, ele nunca passou esse atributo e nem pretende fazer isso. De repente o serviço B vê a necessidade de tornar o `email` obrigatório e como ele não tem visibilidade de quem são os seus consumidores, ele simplesmente sobe essa alteração para produção e a partir daí o serviço A passa a receber um erro [422](https://httpstatuses.com/422) para TODAS as suas chamadas. Daí começa aquela saga que nós conhecemos: abre um incidente em produção, corre para ver o que aconteceu, identifica o problema e com sorte consegue com que o serviço B reverta a alteração até que isso seja melhor alinhado.
 
 É nesse cenário que entram os testes de contrato orientado ao consumidor.
 
