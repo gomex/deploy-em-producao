@@ -25,15 +25,17 @@ Essa pessoa que pretende colaborar, faz um fork do seu repositório e agora ela 
 
 Todas as mudanças feitas no "colaboradora/idade-de-animal" serão visíveis apenas nesse repositório e todas as mudanças feitas no "gomex/idade-de-animal" depois desse fork não serão automaticamente atualizadas no "colaboradora/idade-de-animal", mas por definição não seria um problema, afinal a funcionalidade que a pessoa está trabalhando deve ser específica, ou seja, o que ela está trabalhando não deveria conflitar com as alterações que acontecem no repositório original, ou seja, não tem mais ninguém além dela trabalhando em "idade de gato", né? Falaremos sobre resolução de conflitos depois.
 
-Depois que a colaboradora adiciona a funcionalidade de calcular a idade de gato o que ela faz? Ela faz um pedido para que o repositório "gomex/idade-de-animal" puxe (pull em português) tudo que "colaboradora/idade-de-animal" tem diferente do seu repositório e agora essa diferença faça parte do repositório oficial. Isso é o Pull Request. Um pedido para que o repositório original se atualize a partir de mudanças feitas no repositório novo criado a partir de um fork.
+Depois que a colaboradora adiciona a funcionalidade de calcular a idade de gato o que ela faz? Ela faz um pedido para que o repositório "gomex/idade-de-animal" puxe (pull em inglês) tudo que "colaboradora/idade-de-animal" tem diferente do seu repositório e agora essa diferença faça parte do repositório oficial. Isso é o Pull Request. Um pedido para que o repositório original se atualize a partir de mudanças feitas no repositório novo criado a partir de um fork.
 
 Você pode estar se perguntando "E se alguém nesse meio tempo adicionou uma funcionalidade nova tipo 'idade de papagaio', isso pode afetar o Pull Request do idade de gato?" A resposta é: depende.
 
 Se a funcionalidade for feita no mesmo local de código mas em linhas diferentes, não teremos problemas. Caso as alterações ocorram nos mesmos arquivos e linhas aí sim teremos um conflito e trataremos disso em outro capítulo.
 
-A minha sugestão é funcionalidades diferentes sejam tratadas de forma isolada, a fim de não causar conflito algum no processo.
+A sugestão é que funcionalidades diferentes sejam tratadas de forma isolada, a fim de não causar conflito algum no processo.
 
 Todo esse processo que descrevi aqui, pode ser feito também baseado em branch, mas a pessoa que colabora precisa ser membro do repositório e não uma pessoa aleatória na internet, pois ela precisa ter permissão para criar branch no repositório. No fim é o mesmo propósito, mas ao invés de repositório inteiro, tudo que expliquei aqui acontece no nível de ramificações.
+
+Por fim, note que em outras plataformas de repositórios online, o conceito de Pull Request pode ter outros nomes como por exemplo Merge Request(Requisição para mergear).
 
 ## Como usar Pull Request para o processo de revisão?
 
@@ -84,7 +86,7 @@ A pessoa que vai olhar um PR ela precisa ter em mente alguns pontos:
 
 Um exemplo:
 
-Você abre o PR sobre idade de gatos, lê a descrição e não está claro pra ti se ideia é criar uma forma separada para calcular idade de outros animais ou apenas colocar uma opção na lógica atual feita para cachorro, sendo assim seu comentário poderia ser: 
+Você abre o PR sobre idade de gatos, lê a descrição e não está claro pra ti se a ideia é criar uma forma separada para calcular idade de outros animais ou apenas colocar uma opção na lógica atual feita para cachorro, sendo assim seu comentário poderia ser:
 
 "Não está claro pra mim se você colocou a lógica de calcular idade pra gato separado porque seja de fato a forma que você acha que seja ideal ou se fez isso apenas para não conflitar com o código original por agora e refatorar no futuro. Eu vou analisar seu código atual separado mesmo, mas adianto que mudar para que evite repetição de código seja uma boa no futuro"
 
@@ -94,7 +96,7 @@ Pronto, com isso você está dizendo que sua análise não levará em conta a qu
 
 A maioria das organizações seguem alguns padrões para como escrever código, seja em sua formatação (ex. quatro espaço, ponto e vírgula em cima ou embaixo) ou em como organizar funções, métodos e afins.
 
-Esse padrão deve estar claro em algum lugar, e a pessoa que vai colaborar deve ler isso antes, mas nem sempre isso é possível e dessa forma a colaboração pode não seguir esse padrão. Você que está avaliando deve deixar bem claro para pessoa qual regra ela está infligindo e qual parte do código isso acontece. O github oferece a funcionalidade de comentar nas linhas do código do PR.
+Esse padrão deve estar claro em algum lugar, e a pessoa que vai colaborar deve ler isso antes, mas nem sempre isso é possível e dessa forma a colaboração pode não seguir esse padrão. Você que está avaliando deve deixar bem claro para esta pessoa qual regra ela está infligindo e qual parte do código isso acontece. O github oferece a funcionalidade de comentar nas linhas do código do PR.
 
 ![Comentário no review](resources/images/pullrequest4.png)
 
@@ -102,11 +104,11 @@ Depois que comentar todo o PR não esqueça de finalizar sua revisão, caso cont
 
 ![Revisão de PR](resources/images/pullrequest5.png)
 
-Se precisar que a pessoa atualize algo para que o PR seja aceito escolha a opção de "Request changes" (Solicita mudanças), caso contrário aprove ou comente sem aprovar, caso precise de mais tempo para decidir sobre aceitar ou não.
+Se precisar que a pessoa atualize algo para que o PR seja aceito escolha a opção de "Request changes" (Solicitar mudanças), caso contrário aprove ou comente sem aprovar, caso precise de mais tempo para decidir sobre aceitar ou não.
 
 ### A forma que a pessoa entregou à funcionalidade é a melhor? Existe maneira mais eficiente de fazer a mesma coisa? 
 
-Esse ponto é um pouco abstrato, pois depende muito da experiência de quem está revisando, mas é talvez a parte **mais importante** desse processo de revisão. Está aqui a grande oportunidade de uma pessoa proporcionar para a outra que mandou o PR maneiras de deixar o código ainda melhor. 
+Esse ponto é um pouco abstrato, pois depende muito da experiência de quem está revisando, mas é talvez a parte **mais importante** desse processo de revisão. Está aqui a grande oportunidade de uma pessoa proporcionar para a outra que mandou o PR as maneiras de deixar o código ainda melhor.
 
 **ATENÇÃO!!!** Não faça uso desse espaço para diminuir ou ridicularizar a pessoa que mandou o PR pois, caso faça isso, além de perder uma grande oportunidade de melhorar a habilidade de outra que você "julga" inferior, você também perderá a oportunidade de ser uma pessoa melhor. Ajudar as pessoas que trabalham no mesmo projeto que você é uma das coisas mais básicas quando trabalhamos  em equipe. Caso tenha problemas em trabalhar dessa forma, aconselho criar um projeto onde você seja a única pessoa a enviar código.
 
@@ -120,18 +122,18 @@ Se sua sugestão tem como objetivo seguir uma boa prática, aponte o link para o
 
 É importante avaliar se há testes o suficientes e não importa se os testes podem ser de exploração ou automatizados, você precisa praticar a avaliação disso. Não precisa ser uma pessoa especializada em QA (Quality Assurance) para fazer isso.
 
-Ter uma pessoa QA no seu time é aconselhável, mas não ache que ela será a única a fazer essa análise. Nos primeiros PR você pode pedir a ajuda dela e fazer essa parte da avaliação juntas, mas aconselho que pratique o suficiente para internalizar esse tipo de revisão, pois a necessidade de entender qualidade de código, assim como segurança, "DevOps" ou afins deve ser de interesse de todos. Esses assuntos devem ser uma preocupação do **time** e não apenas de um cargo específico. A pessoa que está nesse cargo deve ser responsável por ajudar o time a evoluir nesse assunto, ajudando como uma espécie de consultor interno. Repito, essa pessoal **não** deve ser a única responsável sobre o assunto que é experiente.
+Ter uma pessoa QA no seu time é aconselhável, mas não ache que ela será a única a fazer essa análise. Nos primeiros PR você pode pedir a ajuda dela e fazer essa parte da avaliação juntas, mas aconselho que pratique o suficiente para internalizar esse tipo de revisão, pois a necessidade de entender qualidade de código, assim como segurança, "DevOps" ou afins deve ser de interesse de todos. Esses assuntos devem ser uma preocupação do **time** e não apenas de um cargo específico. A pessoa que está nesse cargo deve ser responsável por ajudar o time a evoluir nesse assunto, ajudando como uma espécie de consultor interno. Repito, essa pessoa **não** deve ser a única responsável sobre o assunto que é experiente.
 
 ## Recebi uma lista imensa de coisas a corrigir no meu PR, fico triste?
 
 Caso a pessoa que comentou no seu PR tenha sido respeitosa e cuidadosa ao criar o review não há motivos para tristeza. Encare essa longa lista de correções como uma boa experiência para melhorar sua habilidade em codificação ou documentação.
 
-Tenha em mente que a pessoa que mandou o PR não é necessariamente melhor do que você. Ela apenas dedicou parte do seu tempo para sugerir melhorias em seu trabalho, teve a atenção e cuidado necessário para ajudar o time como um todo para entregar um código melhor para a organização. Ela provavelmente não tem nada contra você e quanto mais detalhista ela for, não entenda o detalhamento como a manifestação de um código de baixa qualidade e sim como um código que pode alcançar outro nível de qualidade auxiliando você a perceber minúcias do seu trabalho.
+Tenha em mente que a pessoa que mandou o PR não é necessariamente melhor do que você. Ela apenas dedicou parte do seu tempo para sugerir melhorias em seu trabalho, teve a atenção e cuidado necessário para ajudar o time como um todo para entregar um código melhor para a organização. Ela provavelmente não tem nada contra você e quanto mais detalhista ela for, não entenda isso como a manifestação de um código de baixa qualidade e sim como um código que pode alcançar outro nível de qualidade, auxiliando você a perceber minúcias do seu trabalho.
 
 Projetos e prazos apertados são duas coisas que normalmente andam juntos e uma longa lista de correções pode ser desanimadora, mas entenda que o problema está no prazo curto que normalmente as empresas trabalham. Nesse caso, o que pode ser feito se divide em duas possibilidades:
 
-- Você pode calcular no futuro o prazo levando em consideração esse nível de exigência na revisão
-- Negociar com a pessoa que revisou partes das críticas, tentando explicar sobre os prazos e afins. 
+- Você pode calcular no futuro o prazo levando em consideração esse nível de exigência na revisão;
+- Negociar com a pessoa que revisou partes das críticas, tentando explicar sobre os prazos e afins.
 
 Uma dica aqui é fazer com que seu PR seja o menor possível, pois quanto menor a possibilidade de retrabalho no retorno da revisão é menor.
 
