@@ -21,4 +21,6 @@ Obrigado especial a um grupo de pessoas que faz parte de um canal que tenho no t
  - [Giu](https://twitter.com/ReginaSauro)
  - [Victor Martinez](https://twitter.com/vcrmartinez)
 
-Não posso deixar de agradecer a Aaron Swartz, que sempre foi minha inspiração para manter o conhecimento aberto. Que a sua chama se mantenha acesa para sempre.
+Eu preciso agradecer também a [Gleydson Silva](https://twitter.com/gleydsonmazioli) que é o responsável pelo projeto [Guia Foca](https://guiafoca.org/) que além de ter sido o lugar onde eu aprendi GNU/Linux, foi também uma grande inspiração para abrir o conhecimento para todas as pessoas. 
+
+Não posso deixar de agradecer a [Aaron Swartz](https://pt.wikipedia.org/wiki/Aaron_Swartz), que sempre foi minha inspiração para manter o conhecimento aberto. Que a sua chama se mantenha acesa para sempre.
