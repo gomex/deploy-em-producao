@@ -1,4 +1,5 @@
 agradecimentos.md
+colaboradoras.md
 prefacio.md
 introducao.md
 como_esta_sendo_construido.md
