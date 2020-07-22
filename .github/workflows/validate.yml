@@ -1,4 +1,4 @@
-name: Checando links quebrados
+name: Validate
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
     
 jobs:
-  markdown-link-check:
+  Checando-links-quebrados:
 
     runs-on: ubuntu-20.04
 
