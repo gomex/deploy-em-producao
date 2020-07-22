@@ -8,7 +8,7 @@ ou não sabe corrigir, por favor abra uma issue.
 
 ### Para qual branch fazer o PR? 
 
-Sempre use a branch preview, pois eu gerarei um preview e então de um merge seguinte que eu mesmo farei de preview para main, será gerado o livro de fato.
+Sempre use a branch **preview**, pois será gerado um preview a partir dessa branch. Após avaliação manual, será mergeado a branch **preview** para branch **main**, que é a branch usada para publicar o livro no leanpub.
 
 ### Página de colaboradoras
 
