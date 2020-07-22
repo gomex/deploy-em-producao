@@ -1,0 +1,16 @@
+name: Validate
+
+on:
+  push:
+    branches: [ main ]
+  pull_request: 
+    branches: [ main ]
+    
+jobs:
+  Checando-links-quebrados:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: gaurav-nelson/github-action-markdown-link-check@v1
