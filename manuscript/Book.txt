@@ -9,4 +9,5 @@ o_que_e_pr.md
 estrategia_de_testes.md
 por_que_escrever_testes.md
 definindo_testes.md
+migracao_banco_dados_relacionais.md
 o_que_tem_que_ter_no_pipeline.md
