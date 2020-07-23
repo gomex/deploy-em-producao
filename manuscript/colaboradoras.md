@@ -5,7 +5,6 @@ Aqui está a lista de pessoas que colaboraram com o livro com Pull Request (PR).
 - [Adail Horst](https://github.com/SpawW)
 - [Vinícius Mamoré](https://github.com/vmamore)
 - [Lays Rodrigues](https://github.com/lays147)
-- [Daniane Pereira Gomes](https://github.com/danianepg)
 
 Nesse [link](https://github.com/gomex/deploy-em-producao/graphs/contributors) você pode acompanhar a colaboração de todas as pessoas, sejam autoras ou colaboradoras.
 
