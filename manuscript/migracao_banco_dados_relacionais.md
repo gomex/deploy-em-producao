@@ -1,3 +1,4 @@
+
 # Migrações em Banco de Dados Relacionais (Daniane Pereira Gomes)
 
 ## Introdução
@@ -36,9 +37,11 @@ Mas então nunca deve-se fazer alterações em banco de dados de sistemas em pro
 É óbvio que um sistema precisa de mudanças e evoluções e deixar de alterar tabelas no banco de dados não é uma opção. Para tratar disso com segurança, contamos com orientações e práticas de mercado como, por exemplo, as sugeridas por [Pramod Sadalage](http://www.sadalage.com/) e [Martin Fowler](https://martinfowler.com/) no artigo "[Evolutionary Database Design](https://martinfowler.com/articles/evodb.html)".
 
 ## Boas Práticas em Migrações
-Toda alteração de banco de dados é tratada como uma migração e significa um refactoring no banco de dados. Para que as alterações ocorram sem impactos destrutivos, algumas boas práticas serão abordadas a seguir.
+Toda alteração de banco de dados é tratada como uma migração e significa um refactoring no banco de dados que resultará na alteração do *schema* da aplicação.
 
-### Schema
+O *schema* é espaço lógico dentro de um banco de dados que agrupa objetos como tabelas, chaves primárias, chaves estrangeiras, views, etc. É uma estrutura criadas para guardar e resgatar dados de forma mais eficaz. Tal estrutura permite a organização e agrupamento das informações de forma que estas façam sentido para a aplicação.  O *schema* define uma espécie de "molde" que será preenchido com dados. Um mesmo banco de dados pode conter vários *schemas*
+
+Para que as alterações ocorram sem impactos destrutivos, algumas boas práticas serão abordadas a seguir.
 
 ### Versionamento de schema
 O *schema* da aplicação deve estar junto do código fonte e demais artefatos de *software*, como testes e outros. As alterações devem fazer uso de alguma ferramenta de controle de versões como o [Git](https://git-scm.com/), para que se mantenha o rastreio de  banco de dados e sua relação com o código fonte ao longo do tempo.
@@ -49,7 +52,11 @@ O *schema* da aplicação deve estar junto do código fonte e demais artefatos d
 Para minimizar a possibilidade de erros, é importante que a equipe mantenha a colaboração. Ao fazer uso do Git, as alterações são submetidas à avaliação de mais membros do time antes de ser efetivamente incorporada ao banco de dados. Nesse estágio também pode haver a revisão dos scripts pela *DBA* (Database Administrator) caso exista alguém a desempenhar esse papel. Alterações destrutivas podem ser detectadas e impedidas de acontecer. O capítulo "[O que é Pull Request? (Rafael Gomes)](o_que_e_pr.md)" explica detalhadamente o processo de revisão.
 
 ### Cópias locais e reintegrações
-Cada pessoa desenvolvedora deve fazer uso de uma instância banco de dados próprio, o qual deve ser constantemente reintegrado com a versão oficial. Essa prática evita alterações ainda não testadas impactem e quebrem o ambiente de um time inteiro. Da mesma forma, a constante reintegração permite detectar possíveis esquecimentos de *commit* de *scripts* antes de chegarem a produção.
+Cada pessoa desenvolvedora deve fazer uso de uma instância banco de dados próprio, o qual deve ser constantemente reintegrado com a versão oficial. O uso de cópias locais permite que seja feito o desenvolvimento de requisitos sem a necessidade de atualização um servidor compartilhado. 
+
+Imagine que você deseja criar uma nova coluna ```categoria``` na tabela ```produto``` que não permite nulos. Se o seu código fonte que trata dessa nova coluna ainda não foi enviado para uma *branch* compartilhada, todas as demais usuárias desse banco de dados terão erros ao tentar inserir novos produtos.
+
+Devido a cópias locais não demandarem que cada alteração seja enviada para um servidor compartilhado, a prática evita que alterações ainda não completamente testadas impactem e quebrem o ambiente de um time inteiro.
 
 ### Tamanho de migrações
 Assim como é aconselhado que os Pull Requests sejam pequenos, as migrações também devem ser pequenas. Pequenas e constantes integrações geralmente causam menos problema e trabalho do que alterações grandes e esporádicas. 
