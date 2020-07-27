@@ -9,7 +9,7 @@ Quando tais alterações envolvem comandos DDL (Data Definition Language), por e
 
 A situação torna-se ainda mais crítica em arquiteturas distribuídas ou de micro-serviços. Imagine a seguinte situação: "*Pedidos*" e "*Produtos*" são sistemas sepados e o serviço "*Pedidos*" acessa o serviço "*Produtos*" para ler o atributo ```quantidade_em_estoque``` da tabela ```produto```.  O diagrama a seguir ilustra a comunicação entre os sistemas de Pedidos e Produtos.
 
-[![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdFBlZGlkby0-PitQcm9kdXRvOiBRdWFsIG8gdmFsb3IgZGUgcXVhbnRpZGFkZV9lbV9lc3RvcXVlIHBhcmEgbyBwcm9kdXRvIHRlY2xhZG8_XHRcblx0UHJvZHV0by0tPj4tUGVkaWRvOiBPIHZhbG9yIMOpIGRlIDEwIHVuaWRhZGVzLlx0XG5cdFx0XHRcdFx0IiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)](https://mermaid-js.github.io/mermaid-live-editor//#/edit/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdFBlZGlkby0-PitQcm9kdXRvOiBRdWFsIG8gdmFsb3IgZGUgcXVhbnRpZGFkZV9lbV9lc3RvcXVlIHBhcmEgbyBwcm9kdXRvIHRlY2xhZG8_XHRcblx0UHJvZHV0by0tPj4tUGVkaWRvOiBPIHZhbG9yIMOpIGRlIDEwIHVuaWRhZGVzLlx0XG5cdFx0XHRcdFx0IiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)
+[![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdFBlZGlkby0-PitQcm9kdXRvOiBRdWFsIG8gdmFsb3IgZGUgXCJxdWFudGlkYWRlX2VtX2VzdG9xdWVcIiBwYXJhIG8gcHJvZHV0byB0ZWNsYWRvP1x0XG5cdFByb2R1dG8tLT4-LVBlZGlkbzogTyB2YWxvciDDqSBkZSAxMCB1bmlkYWRlcy4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor//#/edit/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdFBlZGlkby0-PitQcm9kdXRvOiBRdWFsIG8gdmFsb3IgZGUgXCJxdWFudGlkYWRlX2VtX2VzdG9xdWVcIiBwYXJhIG8gcHJvZHV0byB0ZWNsYWRvP1x0XG5cdFByb2R1dG8tLT4-LVBlZGlkbzogTyB2YWxvciDDqSBkZSAxMCB1bmlkYWRlcy4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)
 
 
 Consideraremos a tabela com a seguinte estrutura:
@@ -27,7 +27,11 @@ O código acima é responsável por criar um tabela de banco de dados, com quatr
 
 Agora imaginamos que a equipe decidiu que não faz sentido a existência do atributo ```quantidade_em_estoque``` em ```produto``` e deseja movê-lo para outra tabela. O atributo é apagado da base de dados e o deploy do serviço "*Produtos*" é realizado com sucesso. 
 
-Entretanto, a equipe que mantém o serviço "*Pedidos*" ainda não fez a alteração na leitura e deploy. Vamos supor que a equipe só conseguirá completar o *refactoring* no mês seguinte e nesse momento continua a tentar ler o atributo ```quantidade_em_estoque```. Qual o resultado disso para o processo como um todo? Erros e indisponibilidade acontecerão no serviços de "*Pedidos*".
+Entretanto, a equipe que mantém o serviço "*Pedidos*" ainda não fez a alteração na leitura e deploy. Vamos supor que a equipe só conseguirá completar o *refactoring* no mês seguinte e nesse momento continua a tentar ler o atributo ```quantidade_em_estoque```. Qual o resultado disso para o processo como um todo? Erros e indisponibilidade acontecerão no serviços de "*Pedidos*". 
+
+[![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdFBlZGlkby0-PlByb2R1dG86IFF1YWwgbyB2YWxvciBkZSBxdWFudGlkYWRlX2VtX2VzdG9xdWUgcGFyYSBvIHByb2R1dG8gdGVjbGFkbz9cdFxuXHRQcm9kdXRvLS14UGVkaWRvOiBOw6NvIHBvc3N1byB1bSBhdHJpYnV0byBcInF1YW50aWRhZGVfZW1fZXN0b3F1ZVwiLlx0IiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)](https://mermaid-js.github.io/mermaid-live-editor//#/edit/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdFBlZGlkby0-PlByb2R1dG86IFF1YWwgbyB2YWxvciBkZSBxdWFudGlkYWRlX2VtX2VzdG9xdWUgcGFyYSBvIHByb2R1dG8gdGVjbGFkbz9cdFxuXHRQcm9kdXRvLS14UGVkaWRvOiBOw6NvIHBvc3N1byB1bSBhdHJpYnV0byBcInF1YW50aWRhZGVfZW1fZXN0b3F1ZVwiLlx0IiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)
+
+O diagrama acima demonstra a interação entre Pedidos e Produtos, onde Pedidos solicita o valor de ```quantidade_em_estoque``` mas Produtos retorna um erro pois desconhece tal campo.
 
 Imagine também que o campo ```descricao``` da tabela ```produtos``` deve tornar-se obrigatório.  A pessoa responsável pela alteração escreve o *script* com alteração da estrutura da tabela modificando o campo para ```not null```. Se tudo correr bem a pipeline identifica a mudança, aplica o *script* automaticamente e o *schema* é alterado. 
 
