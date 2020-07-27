@@ -1,4 +1,3 @@
-
 # Migrações em Banco de Dados Relacionais (Daniane Pereira Gomes)
 
 ## Introdução
@@ -65,7 +64,31 @@ Imagine que você deseja criar uma nova coluna ```categoria``` na tabela ```prod
 Devido a cópias locais não demandarem que cada alteração seja enviada para um servidor compartilhado, a prática evita que alterações ainda não completamente testadas impactem e quebrem o ambiente de um time inteiro.
 
 ### Tamanho de migrações
-Assim como é aconselhado que os Pull Requests sejam pequenos, as migrações também devem ser pequenas. Pequenas e constantes integrações geralmente causam menos problema e trabalho do que alterações grandes e esporádicas. 
+Assim como é aconselhado que os "*Pull Requests*" sejam pequenos, as migrações também devem ser. Pequenas e constantes integrações tendem a causar menos problemas do que alterações grandes e esporádicas. 
+
+Vamos considerar o *script* a seguir como um arquivo de migração nomeado "*V1_2_3__alteracoes_produto_e_estoque.sql*".
+```
+ALTER TABLE produto MODIFY descricao NOT NULL DEFAULT 'Aguardando descrição';
+
+ALTER TABLE estoque MODIFY quantidade float(10,2) DEFAULT NUL;
+```
+
+O código acima altera a coluna ```descricao``` da tabela ```produto``` para não permitir valor nulos e usar o valor padrão 'Aguardando descrição'. Também altera o campo ```quantidade```da tabela ```estoque``` para aceitar valores decimais com o máximo de 10 algarismos antes da vírgula e 2 algarismos depois da vírgula.
+
+Imagine agora que esta migração apresentou erros ao ser executada no banco de dados. Nesse caso, seria necessário a intervenção humana para depurar o script e verificar qual instrução precisamente não pode ser executada. O exemplo citado possui somente duas instruções e neste caso pode até ser simples encontrar qual delas é problemática. Porém, quanto maior a migração mais difícil de depurar o problema e revertê-lo.
+
+O arquivo  "*V1_2_3__alteracoes_produto_e_estoque.sql*" então poderia ser dividido em duas partes, como exemplificado a seguir.
+
+```
+ALTER TABLE produto MODIFY descricao NOT NULL DEFAULT 'Aguardando descrição';
+```
+Arquivo "*V1_2_3__produto_descricao_not_null.sql*" trata somente das alterações na tabela de ```produto```.
+
+```
+ALTER TABLE estoque MODIFY quantidade float(10,2) DEFAULT NUL;
+```
+Arquivo "*V1_2_4__estoque_quantidade_float.sql*" trata somente das alterações na tabela de ```estoque```.
+
 
 ### Compatibilidade retroativa
 E como evitar migrações destrutivas como as citadas nos exemplos de "*Pedidos*" e "*Produtos*"? 
