@@ -7,7 +7,10 @@ Frequentemente o deploy em produção de uma aplicação envolve não só a publ
 
 Quando tais alterações envolvem comandos DDL (Data Definition Language), por exemplo, criação, alteração e remoção de tabelas ou de campos em tabelas tais mudanças podem resultar em tempo de indisponibilidade para a aplicação.
 
-A situação torna-se ainda mais crítica em arquiteturas distribuídas ou de micro-serviços. Imagine a seguinte situação: "*Pedidos*" e "*Produtos*" são sistemas sepados e o serviço "*Pedidos*" acessa o serviço "*Produtos*" para ler o atributo ```quantidade_em_estoque``` da tabela ```produto```.  
+A situação torna-se ainda mais crítica em arquiteturas distribuídas ou de micro-serviços. Imagine a seguinte situação: "*Pedidos*" e "*Produtos*" são sistemas sepados e o serviço "*Pedidos*" acessa o serviço "*Produtos*" para ler o atributo ```quantidade_em_estoque``` da tabela ```produto```.  O diagrama a seguir ilustra a comunicação entre os sistemas de Pedidos e Produtos.
+
+[![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdFBlZGlkby0-PitQcm9kdXRvOiBRdWFsIG8gdmFsb3IgZGUgcXVhbnRpZGFkZV9lbV9lc3RvcXVlIHBhcmEgbyBwcm9kdXRvIHRlY2xhZG8_XHRcblx0UHJvZHV0by0tPj4tUGVkaWRvOiBPIHZhbG9yIMOpIGRlIDEwIHVuaWRhZGVzLlx0XG5cdFx0XHRcdFx0IiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)](https://mermaid-js.github.io/mermaid-live-editor//#/edit/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdFBlZGlkby0-PitQcm9kdXRvOiBRdWFsIG8gdmFsb3IgZGUgcXVhbnRpZGFkZV9lbV9lc3RvcXVlIHBhcmEgbyBwcm9kdXRvIHRlY2xhZG8_XHRcblx0UHJvZHV0by0tPj4tUGVkaWRvOiBPIHZhbG9yIMOpIGRlIDEwIHVuaWRhZGVzLlx0XG5cdFx0XHRcdFx0IiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)
+
 
 Consideraremos a tabela com a seguinte estrutura:
 
