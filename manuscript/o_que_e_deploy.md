@@ -14,7 +14,7 @@ Isso quer dizer que quando alguém falar que vai "deployar" algo, é basicamente
 
 ## Como funciona o deploy de um produto de software
 
-O que aqui se chama de "produto de software" é qualquer conjunto de arquivos que tenha como objetivo entregar uma funcionalidade como produto final. Um exemplo seria um site, que pelo conjunto de arquivos html, css e javascript, entrega uma exibição de informações que é traduzida pelo seu navegador e assim você pode ter acesso a informações navegando na internet.
+O que aqui se chama de "produto de software" é qualquer conjunto de arquivos que tenha como objetivo entregar uma funcionalidade como produto final. Um exemplo seria um site, que pelo conjunto de arquivos HTML, CSS e JavaScript, entrega uma exibição de informações que é traduzida pelo seu navegador e assim você pode ter acesso a informações navegando na internet.
 
 O deploy é o ato de pegar esse conjunto de arquivos e levar até um determinado lugar. Esse lugar é normalmente um servidor, que hospedará esse software e exibirá para o usuário sempre que solicitado.
 
@@ -24,9 +24,9 @@ Normalmente um software passa por alguns destinos antes de chegar no seu habitat
 
 As boas práticas apontam que antes de chegar no ambiente de produção esse software passe por outros ambientes, que normalmente são os seguintes, e muitas vezes segue também nessa ordem:
 
- - Desenvolvimento
- - Teste/Staging
- - Produção
+- Desenvolvimento
+- Teste/Staging
+- Produção
 
 ### Desenvolvimento
 
@@ -34,7 +34,7 @@ As boas práticas apontam que antes de chegar no ambiente de produção esse sof
 
 Normalmente essa é a máquina da pessoa que desenvolve o software, e o verbo "deployar" faz pouco sentido aqui, porque não há uma movimentação de código, uma vez que este será usado na mesma máquina onde foi produzido.
 
-Em alguns casos, a infraestrutura necessária para simular o ambiente de produção é tão complexa que é preciso um ambiente de desenvolvimento fora da máquina local, neste caso,  o verbo "deployar" volta a ter seu sentido completo, pois o código será transferido para um outro ambiente, no caso, um de desenvolvimento remoto.
+Em alguns casos, a infraestrutura necessária para simular o ambiente de produção é tão complexa que é preciso um ambiente de desenvolvimento fora da máquina local, neste caso, o verbo "deployar" volta a ter seu sentido completo, pois o código será transferido para um outro ambiente, no caso, um de desenvolvimento remoto.
 
 ### Teste/Staging
 
@@ -42,7 +42,7 @@ Não existe um nome para esse ambiente que possa ser considerado unânime, mas e
 
 O que aqui é chamado de **análise** será mais detalhado nos capítulos posteriores mas, por hora, basta saber que esse é o processo usado para avaliar se há algum problema no código, normalmente de forma manual, e feito por uma outra pessoa, que analisa seu código a fim de encontrar possíveis erros.
 
-Esse é, em via de regra, o último local que o código "visitará" antes de ser conduzido para o ambiente que será usado pelos usuários reais do serviço.Ou seja,  é aqui o local no qual costumeiramente acontecem os testes mais "pesados".
+Esse é, em via de regra, o último local que o código "visitará" antes de ser conduzido para o ambiente que será usado pelos usuários reais do serviço. Ou seja, é aqui o local no qual costumeiramente acontecem os testes mais "pesados".
 
 Esses testes muitas vezes usam dados mais próximos do que os que seriam usados no ambiente real de forma que validações bem mais elaboradas podem acontecer. Habitualmente os times de software simulam o uso do sistema, de forma automatizada ou não, a fim de encontrar possíveis erros e esses tipos de testes serão assunto de outros capítulos. Por agora basta sabermos que é nesse ambiente que isso habitualmente acontece.
 
@@ -56,8 +56,8 @@ Usando o exemplo anterior do site, basicamente, seria a hipótese de se ter duas
 
 ## Na prática, como funciona o deploy?
 
-Frequentemente, o ato de fazer deploy se resume às ações de copiar os arquivos de um lugar - que pode ser o repositório de código ou de artefato - e depositar ele no ambiente de destino. 
+Frequentemente, o ato de fazer deploy se resume às ações de copiar os arquivos de um lugar - que pode ser o repositório de código ou de artefato - e depositar ele no ambiente de destino.
 
-Seguindo o exemplo anterior do site, o ato de fazer o deploy corresponderia a copiar os arquivos html, css e javascript, que estão no repositório de código, e depositá-los no servidor que hospedará aquele ambiente.
+Seguindo o exemplo anterior do site, o ato de fazer o deploy corresponderia a copiar os arquivos HTML, CSS e JavaScript, que estão no repositório de código, e depositá-los no servidor que hospedará aquele ambiente.
 
 Deploy para testes do site usado como exemplo acima? O ato de fazer deploy seria resumido a copiar os arquivos do repositório de código e depositá-los no servidor que foi designado para ser ambiente de testes.
