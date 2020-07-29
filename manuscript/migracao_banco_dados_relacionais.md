@@ -1,3 +1,4 @@
+
 # Migrações em Banco de Dados Relacionais (Daniane Pereira Gomes)
 
 ## Introdução
@@ -6,7 +7,7 @@ Frequentemente o deploy em produção de uma aplicação envolve não só a publ
 
 Quando tais alterações envolvem comandos DDL (Data Definition Language), por exemplo, criação, alteração e remoção de tabelas ou de campos em tabelas tais mudanças podem resultar em tempo de indisponibilidade para a aplicação.
 
-A situação torna-se ainda mais crítica em arquiteturas distribuídas ou de micro-serviços. Imagine a seguinte situação: "*Pedidos*" e "*Produtos*" são sistemas sepados e o serviço "*Pedidos*" acessa o serviço "*Produtos*" para ler o atributo ```quantidade_em_estoque``` da tabela ```produto```.  O diagrama a seguir ilustra a comunicação entre os sistemas de Pedidos e Produtos.
+A situação torna-se ainda mais crítica em arquiteturas distribuídas ou de micro-serviços. Imagine a seguinte situação: "*Pedido*" e "*Produto*" são sistemas separados e o serviço "*Pedido*" acessa o serviço "*Produto*" para ler o atributo ```quantidade_em_estoque``` da tabela ```produto```.  O diagrama a seguir ilustra a comunicação entre os sistemas de Pedidos e Produtos.
 
 [![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdFBlZGlkby0-PitQcm9kdXRvOiBRdWFsIG8gdmFsb3IgZGUgcXVhbnRpZGFkZV9lbV9lc3RvcXVlIHBhcmEgbyBwcm9kdXRvIHRlY2xhZG8_XG5cdFByb2R1dG8tLT4-LVBlZGlkbzogTyB2YWxvciDDqSBkZSAxMCB1bmlkYWRlcy4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor//#/edit/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdFBlZGlkby0-PitQcm9kdXRvOiBRdWFsIG8gdmFsb3IgZGUgcXVhbnRpZGFkZV9lbV9lc3RvcXVlIHBhcmEgbyBwcm9kdXRvIHRlY2xhZG8_XG5cdFByb2R1dG8tLT4-LVBlZGlkbzogTyB2YWxvciDDqSBkZSAxMCB1bmlkYWRlcy4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)
 
@@ -23,9 +24,9 @@ CREATE TABLE `produto` (
 ```
 O código acima é responsável por criar um tabela de banco de dados, com quatro colunas, sendo a com o nome ```id```, que não pode receber valores nulos e tem os valores incrementados automaticamente pelo banco de dados. As coluna ```nome``` e ```descricao``` podem receber valores alfanuméricos e valores nulos num máximo de 100 e 2000 caracteres respectivamente. A coluna ```quantidade_em_estoque``` pode receber valores numéricos e inteiros até o máximo de 11 algarismos e não aceita valores nulos. A instrução ```PRIMARY KEY (`id`)``` define que a coluna ```id``` é a chave primária da tabela, ou seja, um campo único para cada registro que permite identificá-lo e diferenciá-lo dos demais.
 
-Agora imaginamos que a equipe decidiu que não faz sentido a existência do atributo ```quantidade_em_estoque``` em ```produto``` e deseja movê-lo para outra tabela. O atributo é apagado da base de dados e o deploy do serviço "*Produtos*" é realizado com sucesso. 
+Agora imaginamos que a equipe decidiu que não faz sentido a existência do atributo ```quantidade_em_estoque``` em ```produto``` e deseja movê-lo para outra tabela. O atributo é apagado da base de dados e o deploy do serviço "*Produto*" é realizado com sucesso. 
 
-Entretanto, a equipe que mantém o serviço "*Pedidos*" ainda não fez a alteração na leitura e deploy. Vamos supor que a equipe só conseguirá completar o *refactoring* no mês seguinte e nesse momento continua a tentar ler o atributo ```quantidade_em_estoque```. Qual o resultado disso para o processo como um todo? Erros e indisponibilidade acontecerão no serviços de "*Pedidos*". 
+Entretanto, a equipe que mantém o serviço "*Pedido*" ainda não fez a alteração na leitura e deploy. Vamos supor que a equipe só conseguirá completar o *refactoring* no mês seguinte e nesse momento continua a tentar ler o atributo ```quantidade_em_estoque```. Qual o resultado disso para o processo como um todo? Erros e indisponibilidade acontecerão no serviços de "*Pedido*". 
 
 [![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdFBlZGlkby0-PitQcm9kdXRvOiBRdWFsIG8gdmFsb3IgZGUgcXVhbnRpZGFkZV9lbV9lc3RvcXVlIHBhcmEgbyBwcm9kdXRvIHRlY2xhZG8_XHRcblx0UHJvZHV0by0teC1QZWRpZG86IE7Do28gY29uaGXDp28gbyBhdHJpYnV0byBxdWFudGlkYWRlX2VtX2VzdG9xdWUuXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor//#/edit/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdFBlZGlkby0-PitQcm9kdXRvOiBRdWFsIG8gdmFsb3IgZGUgcXVhbnRpZGFkZV9lbV9lc3RvcXVlIHBhcmEgbyBwcm9kdXRvIHRlY2xhZG8_XHRcblx0UHJvZHV0by0teC1QZWRpZG86IE7Do28gY29uaGXDp28gbyBhdHJpYnV0byBxdWFudGlkYWRlX2VtX2VzdG9xdWUuXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)
 
@@ -33,9 +34,9 @@ O diagrama acima demonstra a interação entre Pedidos e Produtos, onde Pedidos 
 
 Imagine também que o campo ```descricao``` da tabela ```produtos``` deve tornar-se obrigatório.  A pessoa responsável pela alteração escreve o *script* com alteração da estrutura da tabela modificando o campo para ```not null```. Se tudo correr bem a pipeline identifica a mudança, aplica o *script* automaticamente e o *schema* é alterado. 
 
-Quais seriam os possíveis problemas nessa abordagem? Se a tabela já possuir registros e valores nulos, como é o caso do nosso sistema de "*Produtos*", tal comando apresentará em erros.
+Quais seriam os possíveis problemas nessa abordagem? Se a tabela já possuir registros e valores nulos, como é o caso do nosso sistema de "*Produto*", tal comando apresentará em erros.
 
-Os exemplos citados tratam-se de **mudanças destrutivas** e devem ser tratados cuidadosamente principalemente em ambientes de produção. 
+Os exemplos citados tratam-se de **mudanças destrutivas** e devem ser tratados cuidadosamente principalmente em ambientes de produção. 
 
 Mas então nunca deve-se fazer alterações em banco de dados de sistemas em produção? E se for realmente necessário apagar colunas de tabelas?
 
@@ -91,9 +92,23 @@ Arquivo "*V1_2_4__estoque_quantidade_float.sql*" trata somente das alterações 
 
 
 ### Compatibilidade retroativa
-E como evitar migrações destrutivas como as citadas nos exemplos de "*Pedidos*" e "*Produtos*"? 
+E como evitar migrações destrutivas como as citadas nos exemplos de "*Pedido*" e "*Produto*"? 
 
-Para que uma migração não seja destrutiva é necessário que ela possua compatibilidade retroativa, ou seja: a alteração feita no momento presente não pode fazer versões atuais e anteriores do código fonte quebrarem. Se o script for aplicado no banco de dados de produção e o código fonte dos serviços que o acessam não for alterado, essa mudança não pode fazer com que o processo de ponta a ponta pare de funcionar.
+Para que uma migração não seja destrutiva é necessário que ela possua compatibilidade retroativa, ou seja: a alteração feita no versão atual não pode fazer a versão anterior do código fonte deixar de funcionar. 
+
+Se o script for aplicado no banco de dados de produção e o código fonte dos serviços que o acessam não for alterado, essa mudança não pode fazer com que o processo de ponta a ponta apresente erros. 
+
+[![](https://mermaid.ink/img/eyJjb2RlIjoiZmxvd2NoYXJ0IFRCXG4gICAgaWQxWyhCYW5jbyBkZSBkYWRvcyB2ZXJzw6NvIDEuMSldXG4gICAgaWQyKEPDs2RpZ28gZm9udGUgdmVyc8OjbyAxLjApXG4gICAgaWQzKEPDs2RpZ28gZm9udGUgdmVyc8OjbyAxLjEpICAgICAgIFxuICAgIGlkMSA8LS1PIGNhbXBvICdxdWFudGlkYWRlX2VtX2VzdG9xdWUnIGV4aXN0ZT8tLT4gaWQyXG4gICAgaWQxIDwtLUEgdGFiZWxhICdlc3RvcXVlJyBleGlzdGU_LS0-IGlkMyIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2V9)](https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiZmxvd2NoYXJ0IFRCXG4gICAgaWQxWyhCYW5jbyBkZSBkYWRvcyB2ZXJzw6NvIDEuMSldXG4gICAgaWQyKEPDs2RpZ28gZm9udGUgdmVyc8OjbyAxLjApXG4gICAgaWQzKEPDs2RpZ28gZm9udGUgdmVyc8OjbyAxLjEpICAgICAgIFxuICAgIGlkMSA8LS1PIGNhbXBvICdxdWFudGlkYWRlX2VtX2VzdG9xdWUnIGV4aXN0ZT8tLT4gaWQyXG4gICAgaWQxIDwtLUEgdGFiZWxhICdlc3RvcXVlJyBleGlzdGU_LS0-IGlkMyIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2V9)
+
+O diagrama acima ilustra o processo. Podemos notar que o banco de dados está na versão 1.1. Se iniciarmos um serviço com o código fonte da versão **1.0** com o banco de dados na versão **1.1**, o sistema irá buscar pelo atributo ```quantidade_em_estoque``` e deve receber uma resposta de sucesso. Já ao iniciar um serviço com o código fonte na versão **1.1**, o sistema irá buscar pela tabela ```estoque``` na versão **1.1** do banco de dados e o processo deve igualmente acontecer sem problemas. Isso se dá devido à compatibilidade retroativa de versões.
+
+Além de permitir que sistemas externos continuem a funcionar e tenham tempo para fazer alterações, a compatibilidade retroativa é útil se for necessário executar o *rollback* de algum deploy. 
+
+Por exemplo: numa sexta-feira às 17 horas a versão **1.1** de "*Produto*" foi liberada em produção e as migrações no banco de dados foram aplicadas. Porém, após alguns minutos de uso, os usuários começam a reportar que não conseguem criar novos produtos. A equipe decide então voltar o sistema para a versão **1.0**, que não apresentava erros e assim todos podem ir para casa e retomar a investigação na segunda-feira com mais tempo.
+
+O banco de dados já está na versão **1.1**, pois já foram executados os *scripts* de migração. Agora imagine que a migração era destrutiva e simplesmente apagava o atributo ```quantidade_em_estoque```. O que vai acontecer ao "subir" o serviço com o código fonte da versão **1.0**? O serviço simplesmente não irá funcionar e a responsável pelo deploy precisará verificar logs, etc e investigar o porquê do problema. Se detectar a causa, ainda precisará escrever e aplicar manualmente um novo *script* para recriação do atributo que foi apagado. Além de alguém perder seu tempo de descanso para verificar algo que muito provavelmente não foi ela que causou, o sistema terá grande *downtime*, coisa que algumas aplicações não podem ter.
+
+O cuidado com a compatibilidade retroativa previne stress, *downtime* e perdas irreversíveis de dados.
 
 #### Remover campo em tabela
 Como ficaria então nosso exemplo de remoção do atributo ```quantidade_em_estoque```? 
@@ -122,7 +137,7 @@ O comando iniciado com ```ALTER TABLE```  altera a tabela recém criada e adicio
 ##### 2) Período de transição
 Durante o período de transição, tanto o campo ```quantidade_em_estoque``` quanto as informações em ```estoque``` devem ser mantidas e alimentadas. Ou seja, se o produto "Teclado" tinha 10 unidades e 1 foi vendido, ```quantidade_em_estoque``` e o teclado correspondente na tabela ```estoque``` deverão ser atualizados para o valor 9.
 
-Da mesma forma, quando o sistema de "*Pedidos*" (ou outro sistema externo)  fizer uma chamada a *"Produtos"* para saber o número de teclados disponível, a resposta deve ser enviada sem erros tanto quando a requisição for feita para o campo ```quantidade_em_estoque``` quanto para a nova tabela ```estoque```.
+Da mesma forma, quando o sistema de "*Pedido*" (ou outro sistema externo)  fizer uma chamada a *"Produtos"* para saber o número de teclados disponível, a resposta deve ser enviada sem erros tanto quando a requisição for feita para o campo ```quantidade_em_estoque``` quanto para a nova tabela ```estoque```.
 
 A definição do tempo de duração da transição deve ser definida pela equipe. Quanto tempo é necessário para que todos os sistemas que "conversam" com *Produtos* sejam alterados, testados e liberados em produção? Essa pergunta pode ser um bom ponto de partida para a definição da duração do período transitório.
 
