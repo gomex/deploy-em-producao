@@ -11,6 +11,8 @@ Obrigado [Somatório](https://twitter.com/somatorio) que revisa praticamente **t
 Obrigado a [Daniel Barba](https://twitter.com/b4rba88) por ter feito essa capa sensacional. Anotem esse nome, pois ele será sensação como desenvolvedor logo.
 
 Obrigado a [Samanta Cicilia](https://twitter.com/samantacicilia) por ter sido a primeira autora, além de mim, a escrever um capítulo para esse projeto.
+ 
+Obrigado a [Daniane Pereira Gomes](https://twitter.com/danianepg) por ter escrito o capítulo "Migrações em Banco de Dados Relacionais".
 
 Obrigado a [Guto Carvalho](https://twitter.com/gutocarvalho) por ter escrito o prefácio desse livro. Você sempre foi e sempre será uma grande referência nessa área pra mim. Se não fosse o seu material lá no começo, nada disso seria possível.
 

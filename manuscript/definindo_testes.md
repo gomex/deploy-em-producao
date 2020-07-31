@@ -417,11 +417,11 @@ scenarios:
 
 Esse é um exemplo de um script de teste do [Artillery](https://artillery.io/). No meu [blog pessoal](https://medium.com/assertqualityassurance/testes-de-performance-com-artillery-e-datadog-2f2265134202) tem um post contando como utilizá-lo integrado com o DataDog para captura das métricas.
 
-Esse e outros testes não funcionais vão te ajudar muito a validar questões de configuração e infraestrutura, calibrar seu auto-scaling e econtrar gargalos antes que eles te surpreendam em produção.
+Esse e outros testes não funcionais vão te ajudar muito a validar questões de configuração e infraestrutura, calibrar seu auto-scaling e encontrar gargalos antes que eles te surpreendam em produção.
 
 #### Testes de Compatibilidade
 
-Quando falamos de aplicações que possuem a chamada interface de usuário, ou seja, uma aplicação web que acessamos via browser ou um aplicativo utilizado via smartphone, os testes de compatibilidade se tornam extremamente importantes já que conforme sua base de clientes vai crescendo fica impossível acompanhar manualmente os testes das diferentes versões em diferentes plataformas. No caso de aplicações web por exemplo, podemos acessar utilizando o Safari, Chrome, Brave, Firefox, Internet Explorer, Edge e quando falamos de mobile temos uma infinidade de marcas de aparelho como Samsung, Apple, LG, Nokia, Xaiomi, entre outras, além das versões de iOS e Android. Compatibilidade é garantir que sua aplicação funciona nos diferentes devices que o seu usuário pode estar utlizando para acessá-la.
+Quando falamos de aplicações que possuem a chamada interface de usuário, ou seja, uma aplicação web que acessamos via browser ou um aplicativo utilizado via smartphone, os testes de compatibilidade se tornam extremamente importantes já que conforme sua base de clientes vai crescendo fica impossível acompanhar manualmente os testes das diferentes versões em diferentes plataformas. No caso de aplicações web por exemplo, podemos acessar utilizando o Safari, Chrome, Brave, Firefox, Internet Explorer, Edge e quando falamos de mobile temos uma infinidade de marcas de aparelho como Samsung, Apple, LG, Nokia, Xaiomi, entre outras, além das versões de iOS e Android. Compatibilidade é garantir que sua aplicação funciona nos diferentes dispositivos que o seu usuário pode estar utilizando para acessá-la.
 
 Existem serviços onde você consegue executar seus testes em diferentes browsers, sistemas operacionais e resoluções por exemplo, como a [Saucelabs](https://saucelabs.com/) e o [BrowserStack](https://www.browserstack.com/). O mesmo pode ser feito para aplicativos Android e iOs, considerando diferentes versões e modelos de aparelhos.
 
