@@ -35,7 +35,7 @@ Entretanto, a equipe que mantém o serviço "*Pedido*" ainda não fez a alteraç
 
 ![Diagrama de sequência para demonstrar a falha na comunicação entre "*Pedido*" e "*Produto*" quando o campo "quantidade_em_estoque" não existe.](resources/images/migracoes3.png)
 
-O diagrama acima demonstra a interação entre "*Pedido*" e "*Produto*", onde "*Pedido*" solicita o valor de ```quantidade_em_estoque``` mas '*Produto*" retorna um erro pois desconhece tal campo.
+O diagrama acima demonstra a interação entre "*Pedido*" e "*Produto*", onde "*Pedido*" solicita o valor de ```quantidade_em_estoque``` mas "*Produto*" retorna um erro pois desconhece tal campo.
 
 Imagine também que o campo ```descricao``` da tabela ```produto``` deve tornar-se obrigatório.  A pessoa responsável pela alteração escreve o *script* com alteração da estrutura da tabela modificando o campo para ```not null```. Se tudo correr bem a pipeline identifica a mudança, aplica o *script* automaticamente e o *schema* é alterado. 
 
