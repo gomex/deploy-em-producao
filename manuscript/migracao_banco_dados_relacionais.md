@@ -23,7 +23,9 @@ CREATE TABLE `produto` (
   PRIMARY KEY (`id`)
 );
 ```
-O código acima é responsável por criar um tabela de banco de dados, com quatro colunas, sendo a com o nome ```id```, que não pode receber valores nulos e tem os valores incrementados automaticamente pelo banco de dados. As coluna ```nome``` e ```descricao``` podem receber valores alfanuméricos e valores nulos num máximo de 100 e 2000 caracteres respectivamente. A coluna ```quantidade_em_estoque``` pode receber valores numéricos e inteiros até o máximo de 11 algarismos e não aceita valores nulos. A instrução ```PRIMARY KEY (`id`)``` define que a coluna ```id``` é a chave primária da tabela, ou seja, um campo único para cada registro que permite identificá-lo e diferenciá-lo dos demais. A seguir é possível conferir uma representação visual da tabela ```produto``` seguindo a notação dos diagramas de Entidade Relacionamento.
+O código acima é responsável por criar um tabela de banco de dados, com quatro colunas, sendo a com o nome ```id```, que não pode receber valores nulos e tem os valores incrementados automaticamente pelo banco de dados. As coluna ```nome``` e ```descricao``` podem receber valores alfanuméricos e valores nulos num máximo de 100 e 2000 caracteres respectivamente. A coluna ```quantidade_em_estoque``` pode receber valores numéricos e inteiros até o máximo de 11 algarismos e não aceita valores nulos. A instrução ```PRIMARY KEY (`id`)``` define que a coluna ```id``` é a chave primária da tabela, ou seja, um campo único para cada registro que permite identificá-lo e diferenciá-lo dos demais. 
+
+A seguir é possível conferir uma representação visual da tabela ```produto``` seguindo a notação dos diagramas de Entidade Relacionamento.
 
 ![Representação visual da tabela de produtos em notação de diagrama Entidade Relacionamento](resources/images/migracoes6.png)
 
