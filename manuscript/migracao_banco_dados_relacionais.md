@@ -31,7 +31,7 @@ A seguir é possível conferir uma representação visual da tabela ```produto``
 
 Agora imaginamos que a equipe decidiu que não faz sentido a existência do atributo ```quantidade_em_estoque``` em ```produto``` e deseja movê-lo para outra tabela. O atributo é apagado da base de dados e o deploy do serviço "*Produto*" é realizado com sucesso. 
 
-Entretanto, a equipe que mantém o serviço "*Pedido*" ainda não fez a alteração na leitura e deploy. Vamos supor que a equipe só conseguirá completar as alterações no código no mês seguinte e nesse momento continua a tentar ler o atributo ```quantidade_em_estoque```. Qual o resultado disso para o processo como um todo? Erros e indisponibilidade acontecerão no serviços de "*Pedido*". 
+Entretanto, a equipe que mantém o serviço "*Pedido*" ainda não fez a alteração na leitura e deploy em produção. Vamos supor que a equipe só conseguirá completar as alterações no código no mês seguinte e nesse momento continua a tentar ler o atributo ```quantidade_em_estoque```. Qual o resultado disso para o processo como um todo? Erros e indisponibilidade acontecerão no serviços de "*Pedido*". 
 
 ![Diagrama de sequência para demonstrar a falha na comunicação entre "*Pedido*" e "*Produto*" quando o campo "quantidade_em_estoque" não existe.](resources/images/migracoes3.png)
 
