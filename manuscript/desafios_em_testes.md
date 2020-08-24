@@ -10,13 +10,8 @@ Ao se deparar com um teste intermitente, a primeira coisa que você deve fazer �
 
 ### Consumo de Recursos
 
-Outro ponto importante quando falamos de testes médios e grandes é o consumo de recursos. Nem sempre você terá disponível um ambiente cópia de produção para executar os seus testes.
-
-### Isolar as falhas
-TODO
-
-### Quais testes rodar no pré-hook
-TODO
+Outro ponto importante quando falamos de testes médios e grandes é o consumo de recursos. Nem sempre você terá disponível um ambiente cópia de produção para executar os seus testes, seja pela dificuldade de reprodução desse ambiente ou até mesmo pelo custo de mantê-lo. Para isso você pode adotar algumas estratégias que te auxiliem a ter um ambiente que atenda a todas as necessidades. Para componentes externos você pode utilizar um serviço como [WireMock](http://wiremock.org/) para ser o servidor dublê desse componente externo. Você pode também utilizar um ambiente compartilhado com outros times (aqui tome cuidado porque essa decisão pode aumentar sua intermitência posto que existem várias pessoas manipulando o mesmo ambiente).
 
 ### Gestão das falhas
-TODO
+
+Por último, é muito importante fazer a gestão dos testes que falharem e para isso é necessário ter visibilidade do que está acontecendo através de relatórios de execução de testes e fluxos automáticos que parem a "linha de produção" quando algum teste falha. Isso vai te ajudar a entender melhor qual foi o motivo da falha do teste, se é um caso de intermitência ou um bug mesmo. 

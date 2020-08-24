@@ -362,7 +362,7 @@ Seja o seu serviço um consumidor ou provedor, é importante se preocupar com os
 
 ### Testes Grandes
 
-Existem alguns pontos cegos entre os testes que comentamos anteriormente:
+Existem alguns pontos não cobertos entre os testes que comentamos anteriormente:
 
 - Se estamos usando dublês por exemplo, quem garante que aqueles dublês são fiéis a implementação real? E se o time esquecer de atualizar um dublê de um comportamento que foi alterado?
 - Questões de configuração de ambiente, e se o time esquecer de configurar aquela variável na especificação do container? E se tiver um problema na conexão do container da aplicação com o banco de dados?

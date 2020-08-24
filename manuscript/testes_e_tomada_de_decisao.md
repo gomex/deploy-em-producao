@@ -1,3 +1,5 @@
 ## Como usar a estratégia de testes para tomada de decisão
 
-TODO
+Sua estratégia de testes vai ser a grande aliada na tomada de decisão desde a chegada das demandas até o resultado final na mão do cliente. Com a análise estática e os testes de mutação você terá uma visibilidade melhor da qualidade das entregas e isso poderá ser usado de entrada para criação de tarefas que tenham por objetivo aumentar a confiança nos testes e garantir que as partes mais críticas estão sendo bem testadas.
+
+Durante o fluxo de desenvolvimento, o resultado dos testes vai te ajudar a entender se você pode prosseguir e lançar uma nova versão por exemplo, ou se existe algum problema que necessita de ação imediata. E após entregar uma nova funcionalidade para o cliente, você será capaz de avaliar se realmente a sua estratégia está trazendo resultados (software de qualidade em produção) ou se os clientes continuam enfrentando problemas e você precisa entender quais os pontos dentro do processo precisam ser modificados para endereçar isso.
