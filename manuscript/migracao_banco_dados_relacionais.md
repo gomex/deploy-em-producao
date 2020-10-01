@@ -23,25 +23,25 @@ CREATE TABLE `produto` (
   PRIMARY KEY (`id`)
 );
 ```
-O código acima é responsável por criar um tabela de banco de dados, com quatro colunas, sendo a com o nome ```id```, que não pode receber valores nulos e tem os valores incrementados automaticamente pelo banco de dados. As coluna ```nome``` e ```descricao``` podem receber valores alfanuméricos e valores nulos num máximo de 100 e 2000 caracteres respectivamente. A coluna ```quantidade_em_estoque``` pode receber valores numéricos e inteiros até o máximo de 11 algarismos e não aceita valores nulos. A instrução ```PRIMARY KEY (`id`)``` define que a coluna ```id``` é a chave primária da tabela, ou seja, um campo único para cada registro que permite identificá-lo e diferenciá-lo dos demais. 
+O código acima é responsável por criar um tabela de banco de dados, com quatro colunas, sendo a com o nome ```id```, que não pode receber valores nulos e tem os valores incrementados automaticamente pelo banco de dados. As coluna ```nome``` e ```descricao``` podem receber valores alfanuméricos e valores nulos num máximo de 100 e 2000 caracteres respectivamente. A coluna ```quantidade_em_estoque``` pode receber valores numéricos e inteiros até o máximo de 11 algarismos e não aceita valores nulos. A instrução ```PRIMARY KEY (`id`)``` define que a coluna ```id``` é a chave primária da tabela, ou seja, um campo único para cada registro que permite identificá-lo e diferenciá-lo dos demais.
 
 A seguir é possível conferir uma representação visual da tabela ```produto``` seguindo a notação dos diagramas de Entidade Relacionamento.
 
 ![Representação visual da tabela de produtos em notação de diagrama Entidade Relacionamento](resources/images/migracoes6.png)
 
-Agora imaginamos que a equipe decidiu que não faz sentido a existência do atributo ```quantidade_em_estoque``` em ```produto``` e deseja movê-lo para outra tabela. O atributo é apagado da base de dados e o deploy do serviço "*Produto*" é realizado com sucesso. 
+Agora imaginamos que a equipe decidiu que não faz sentido a existência do atributo ```quantidade_em_estoque``` em ```produto``` e deseja movê-lo para outra tabela. O atributo é apagado da base de dados e o deploy do serviço "*Produto*" é realizado com sucesso.
 
-Entretanto, a equipe que mantém o serviço "*Pedido*" ainda não fez a alteração na leitura e deploy em produção. Vamos supor que a equipe só conseguirá completar as alterações no código no mês seguinte e nesse momento continua a tentar ler o atributo ```quantidade_em_estoque```. Qual o resultado disso para o processo como um todo? Erros e indisponibilidade acontecerão no serviços de "*Pedido*". 
+Entretanto, a equipe que mantém o serviço "*Pedido*" ainda não fez a alteração na leitura e deploy em produção. Vamos supor que a equipe só conseguirá completar as alterações no código no mês seguinte e nesse momento continua a tentar ler o atributo ```quantidade_em_estoque```. Qual o resultado disso para o processo como um todo? Erros e indisponibilidade acontecerão no serviços de "*Pedido*".
 
 ![Diagrama de sequência para demonstrar a falha na comunicação entre "*Pedido*" e "*Produto*" quando o campo "quantidade_em_estoque" não existe.](resources/images/migracoes3.png)
 
 O diagrama acima demonstra a interação entre "*Pedido*" e "*Produto*", onde "*Pedido*" solicita o valor de ```quantidade_em_estoque``` mas "*Produto*" retorna um erro pois desconhece tal campo.
 
-Imagine também que o campo ```descricao``` da tabela ```produto``` deve tornar-se obrigatório.  A pessoa responsável pela alteração escreve o *script* com alteração da estrutura da tabela modificando o campo para ```not null```. Se tudo correr bem a pipeline identifica a mudança, aplica o *script* automaticamente e o *schema* é alterado. 
+Imagine também que o campo ```descricao``` da tabela ```produto``` deve tornar-se obrigatório.  A pessoa responsável pela alteração escreve o *script* com alteração da estrutura da tabela modificando o campo para ```not null```. Se tudo correr bem a pipeline identifica a mudança, aplica o *script* automaticamente e o *schema* é alterado.
 
 Quais seriam os possíveis problemas nessa abordagem? Se a tabela já possuir registros e valores nulos, como é o caso do nosso sistema de "*Produto*", tal comando apresentará em erros.
 
-Os exemplos citados tratam-se de **mudanças destrutivas** e devem ser tratados cuidadosamente principalmente em ambientes de produção. 
+Os exemplos citados tratam-se de **mudanças destrutivas** e devem ser tratados cuidadosamente principalmente em ambientes de produção.
 
 Mas então nunca deve-se fazer alterações em banco de dados de sistemas em produção? E se for realmente necessário apagar colunas de tabelas?
 
@@ -63,14 +63,14 @@ O *schema* da aplicação deve estar junto do código fonte e demais artefatos d
 Para minimizar a possibilidade de erros, é importante que a equipe mantenha a colaboração. Ao fazer uso do Git, as alterações são submetidas à avaliação de mais membros do time antes de ser efetivamente incorporada ao banco de dados. Nesse estágio também pode haver a revisão dos scripts pela *DBA* (Database Administrator) caso exista alguém a desempenhar esse papel. Alterações destrutivas podem ser detectadas e impedidas de acontecer. O capítulo "[O que é Pull Request? (Rafael Gomes)](o_que_e_pr.md)" explica detalhadamente o processo de revisão.
 
 ### Cópias locais e reintegrações
-Cada pessoa desenvolvedora deve fazer uso de uma instância de banco de dados próprio, o qual deve ser constantemente reintegrado com a versão oficial. O uso de cópias locais permite que seja feito o desenvolvimento de requisitos sem a necessidade de atualização um servidor compartilhado. 
+Cada pessoa desenvolvedora deve fazer uso de uma instância de banco de dados próprio, o qual deve ser constantemente reintegrado com a versão oficial. O uso de cópias locais permite que seja feito o desenvolvimento de requisitos sem a necessidade de atualização um servidor compartilhado.
 
 Imagine que você deseja criar uma nova coluna ```categoria``` na tabela ```produto``` que não permite nulos. Se o seu código fonte que trata dessa nova coluna ainda não foi enviado para uma *branch* compartilhada, todas as demais usuárias desse banco de dados terão erros ao tentar inserir novos produtos.
 
 Devido a cópias locais não demandarem que cada alteração seja enviada para um servidor compartilhado, a prática evita que alterações ainda não completamente testadas impactem e quebrem o ambiente de um time inteiro.
 
 ### Tamanho de migrações
-Assim como é aconselhado que os "*Pull Requests*" sejam pequenos, as migrações também devem ser. Pequenas e constantes integrações tendem a causar menos problemas do que alterações grandes e esporádicas. 
+Assim como é aconselhado que os "*Pull Requests*" sejam pequenos, as migrações também devem ser. Pequenas e constantes integrações tendem a causar menos problemas do que alterações grandes e esporádicas.
 
 Vamos considerar o *script* a seguir como um arquivo de migração nomeado "*V1_2_3__alteracoes_produto_e_estoque.sql*".
 ```
@@ -97,17 +97,17 @@ Arquivo "*V1_2_4__estoque_quantidade_float.sql*" trata somente das alterações 
 
 
 ### Compatibilidade retroativa
-E como evitar migrações destrutivas como as citadas nos exemplos de "*Pedido*" e "*Produto*"? 
+E como evitar migrações destrutivas como as citadas nos exemplos de "*Pedido*" e "*Produto*"?
 
-Para que uma migração não seja destrutiva é necessário que ela possua compatibilidade retroativa, ou seja: a alteração feita no versão atual não pode fazer a versão anterior do código fonte deixar de funcionar. 
+Para que uma migração não seja destrutiva é necessário que ela possua compatibilidade retroativa, ou seja: a alteração feita no versão atual não pode fazer a versão anterior do código fonte deixar de funcionar.
 
-Se o *script* for aplicado no banco de dados de produção e o código fonte dos serviços que o acessam não for alterado, essa mudança não pode fazer com que o processo de ponta a ponta apresente erros. 
+Se o *script* for aplicado no banco de dados de produção e o código fonte dos serviços que o acessam não for alterado, essa mudança não pode fazer com que o processo de ponta a ponta apresente erros.
 
 ![Exemplo de interação entre os códigos fonte nas versões 1.0 e 1.1com a versão 1.1 do banco de dados.](resources/images/migracoes4.png)
 
 O diagrama acima ilustra o processo. Podemos notar que o banco de dados está na versão 1.1. Se iniciarmos um serviço com o código fonte da versão **1.0** com o banco de dados na versão **1.1**, o sistema irá buscar pelo atributo ```quantidade_em_estoque``` e deve receber uma resposta de sucesso. Já ao iniciar um serviço com o código fonte na versão **1.1**, o sistema irá buscar pela tabela ```estoque``` na versão **1.1** do banco de dados e o processo deve igualmente acontecer sem problemas. Isso se dá devido à compatibilidade retroativa de versões.
 
-Além de permitir que sistemas externos continuem a funcionar e tenham tempo para fazer alterações, a compatibilidade retroativa é útil se for necessário executar o *rollback* de algum deploy. 
+Além de permitir que sistemas externos continuem a funcionar e tenham tempo para fazer alterações, a compatibilidade retroativa é útil se for necessário executar o *rollback* de algum deploy.
 
 Por exemplo: numa sexta-feira às 17 horas a versão **1.1** de "*Produto*" foi liberada em produção e as migrações no banco de dados foram aplicadas. Porém, após alguns minutos de uso, os usuários começam a reportar que não conseguem criar novos produtos. A equipe decide então voltar o sistema para a versão **1.0**, que não apresentava erros e assim todos podem ir para casa e retomar a investigação na segunda-feira com mais tempo.
 
@@ -116,7 +116,7 @@ O banco de dados já está na versão **1.1**, pois já foram executados os *scr
 O cuidado com a compatibilidade retroativa previne stress, *downtime* e perdas irreversíveis de dados.
 
 #### Remover campo em tabela
-Como ficaria então nosso exemplo de remoção do atributo ```quantidade_em_estoque```? 
+Como ficaria então nosso exemplo de remoção do atributo ```quantidade_em_estoque```?
 
 Tal alteração necessitaria passar por 3 etapas:
 
@@ -133,7 +133,7 @@ CREATE TABLE `estoque` (
 ALTER TABLE estoque ADD CONSTRAINT fk_estoque_produto
     FOREIGN KEY (produto_id) REFERENCES produto(id);
 ```
-O código acima cria a tabela com nome ```estoque``` com três colunas. A primeira, nomeada ```id```, aceita números inteiros até o máximo de 11 algarismos, não aceita valores nulos e é auto incrementada pelo banco de dados. As colunas ```produto_id``` e ```quantidade```, aceitam números inteiros até o máximo de 11 algarismos e valores nulos.  
+O código acima cria a tabela com nome ```estoque``` com três colunas. A primeira, nomeada ```id```, aceita números inteiros até o máximo de 11 algarismos, não aceita valores nulos e é auto incrementada pelo banco de dados. As colunas ```produto_id``` e ```quantidade```, aceitam números inteiros até o máximo de 11 algarismos e valores nulos.
 
 A instrução ```PRIMARY KEY (`id`)``` define que a coluna ```id``` é a chave primária da tabela, ou seja, um campo único para cada registro que permite identificá-lo e diferenciá-lo dos demais.
 
@@ -153,7 +153,7 @@ A definição do tempo de duração da transição deve ser definida pela equipe
 ##### 3) Finalização
 Passado o período de transição, o campo ```quantidade_em_estoque``` pode ser finalmente removido, bem como o código que o mantinha.
 
-O mesmo processo pode ser adotado para demais alterações destrutivas. Parece muito trabalho para uma alteração simples? Realmente, esse processo torna as coisas mais complexas, mas não segui-lo pode causar tempo de indisponibilidade do sistema. 
+O mesmo processo pode ser adotado para demais alterações destrutivas. Parece muito trabalho para uma alteração simples? Realmente, esse processo torna as coisas mais complexas, mas não segui-lo pode causar tempo de indisponibilidade do sistema.
 
 O seu cliente pode ter o sistema parado? Quantos pedidos deixarão de ser feitos e quanto dinheiro será perdido caso a API falhar? Esses são pontos a serem considerados.
 
@@ -168,7 +168,7 @@ UPDATE produto SET descricao = 'Aguardando descrição' WHERE descricao IS NULL;
 ALTER TABLE produto MODIFY descricao NOT NULL DEFAULT 'Aguardando descrição';
 ```
 
-O código acima altera todos os registros da tabela ```produto```, preenchendo o campo ```descricao``` com o valor *"Aguardando descrição"* em todos os registros que possuirem ```descricao``` nula. 
+O código acima altera todos os registros da tabela ```produto```, preenchendo o campo ```descricao``` com o valor *"Aguardando descrição"* em todos os registros que possuírem ```descricao``` nula.
 
 Após, altera a estrutura da tabela ```produto```, modificando o campo ```descricao``` para não aceitar valores nulos. Quando a descrição não for informada, o banco de dados preencherá  automaticamente o campo com a informação *"Aguardando descrição"*.
 

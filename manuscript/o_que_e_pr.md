@@ -75,12 +75,12 @@ Algumas pessoas criam uma PR draft (rascunho) para ir atualizando a medida que v
 
 A pessoa que vai olhar um PR ela precisa ter em mente alguns pontos:
 
- - Qual o objetivo daquele PR? Ele está claro na descrição? 
+ - Qual o objetivo daquele PR? Ele está claro na descrição?
  - As mudanças que estão sendo propostas no PR seguem o padrão que é usado nessa organização?
- - A forma que a pessoa entregou à funcionalidade é a melhor? Existe maneira mais eficiente de fazer a mesma coisa? 
+ - A forma que a pessoa entregou à funcionalidade é a melhor? Existe maneira mais eficiente de fazer a mesma coisa?
  - Os testes descritos no PR são o suficiente?
 
-### Qual o objetivo daquele PR? Ele está claro na descrição? 
+### Qual o objetivo daquele PR? Ele está claro na descrição?
 
 É importante estar **muito** claro sobre o que se trata o PR em questão, pois a sua avaliação será com base nisso, sendo assim, a primeira coisa a analisar é a clareza no que está sendo entregue, se houver qualquer inconsistência nesse momento você deve pontuar e deixar claro baseado em que está fazendo a avaliação.
 
@@ -90,7 +90,7 @@ Você abre o PR sobre idade de gatos, lê a descrição e não está claro pra t
 
 "Não está claro pra mim se você colocou a lógica de calcular idade pra gato separado porque seja de fato a forma que você acha que seja ideal ou se fez isso apenas para não conflitar com o código original por agora e refatorar no futuro. Eu vou analisar seu código atual separado mesmo, mas adianto que mudar para que evite repetição de código seja uma boa no futuro"
 
-Pronto, com isso você está dizendo que sua análise não levará em conta a quantidade de repetição de código que isso possa gerar e que você não concorda, mas que por agora não vê problemas nisso. 
+Pronto, com isso você está dizendo que sua análise não levará em conta a quantidade de repetição de código que isso possa gerar e que você não concorda, mas que por agora não vê problemas nisso.
 
 ### As mudanças que estão sendo propostas no PR seguem o padrão que é usado nessa organização?
 
@@ -106,13 +106,13 @@ Depois que comentar todo o PR não esqueça de finalizar sua revisão, caso cont
 
 Se precisar que a pessoa atualize algo para que o PR seja aceito escolha a opção de "Request changes" (Solicitar mudanças), caso contrário aprove ou comente sem aprovar, caso precise de mais tempo para decidir sobre aceitar ou não.
 
-### A forma que a pessoa entregou à funcionalidade é a melhor? Existe maneira mais eficiente de fazer a mesma coisa? 
+### A forma que a pessoa entregou à funcionalidade é a melhor? Existe maneira mais eficiente de fazer a mesma coisa?
 
 Esse ponto é um pouco abstrato, pois depende muito da experiência de quem está revisando, mas é talvez a parte **mais importante** desse processo de revisão. Está aqui a grande oportunidade de uma pessoa proporcionar para a outra que mandou o PR as maneiras de deixar o código ainda melhor.
 
 **ATENÇÃO!!!** Não faça uso desse espaço para diminuir ou ridicularizar a pessoa que mandou o PR pois, caso faça isso, além de perder uma grande oportunidade de melhorar a habilidade de outra que você "julga" inferior, você também perderá a oportunidade de ser uma pessoa melhor. Ajudar as pessoas que trabalham no mesmo projeto que você é uma das coisas mais básicas quando trabalhamos  em equipe. Caso tenha problemas em trabalhar dessa forma, aconselho criar um projeto onde você seja a única pessoa a enviar código.
 
-Mais importante de que enviar as sugestões de mudança e apontar os erros do PR é validar se de fato isso é um erro ou uma abordagem diferente, da qual você discorda. 
+Mais importante de que enviar as sugestões de mudança e apontar os erros do PR é validar se de fato isso é um erro ou uma abordagem diferente, da qual você discorda.
 
 Se sua sugestão melhorar a performance do que será entregue, tente mostrar algum elemento que embase sua sugestão.
 
@@ -135,7 +135,7 @@ Projetos e prazos apertados são duas coisas que normalmente andam juntos e uma 
 - Você pode calcular no futuro o prazo levando em consideração esse nível de exigência na revisão;
 - Negociar com a pessoa que revisou partes das críticas, tentando explicar sobre os prazos e afins.
 
-Uma dica aqui é fazer com que seu PR seja o menor possível, pois quanto menor a possibilidade de retrabalho no retorno da revisão é menor.
+Uma dica aqui é fazer com que seu PR seja o menor possível, assim a possibilidade de retrabalho no retorno da revisão também será menor.
 
 Outro ponto positivo de um PR mínimo está associado a dopamina que é um dos "hormônios da felicidade", como você já deve ter percebido os jogos que mais jogamos costumam ter fases curtas, mas investimos horas e mais horas com eles em nossas telas, por qual motivo? Dopamina, pequenas recompensas neuronais que nos dizem que conseguimos alcançar um objetivo. Então quando estiver fazendo um PR, ao invés de tentar fazer uma fase longa e complexa, tente fazer "fases menores", mais atômicas, e corrija coisas pequenas e rápidas (e da forma correta é claro!) para que você e o avaliador dos PRs possam fazer bom uso de pequenas e constantes doses de dopamina ao aprovar ou ser aprovado cada PR.
 
@@ -147,6 +147,6 @@ O ideal seriam duas pessoas, mas se isso atrasar demais o andamento do seu proje
 
 ## Conclusão
 
-O PR é um método ideal, simples, com possibilidade de interação assíncrona através de comentários no código, possibilidade de debate, múltiplas opiniões e uma forma centralizada de entender como seu código avançou ao passar do tempo, quais os motivos que deixaram determinado comportamento entrar no código e quais foram as argumentações que embasaram as decisões. 
+O PR é um método ideal, simples, com possibilidade de interação assíncrona através de comentários no código, possibilidade de debate, múltiplas opiniões e uma forma centralizada de entender como seu código avançou ao passar do tempo, quais os motivos que deixaram determinado comportamento entrar no código e quais foram as argumentações que embasaram as decisões.
 
 Uma ferramenta ideal, que se usada sabiamente, pode ser muito poderosa!
