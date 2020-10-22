@@ -6,7 +6,7 @@ Há muito tempo o termo deploy é utilizado na área de Tecnologia da Informaç�
 
 Vamos então, juntos, estabelecer uma definição do que é na prática o famoso deploy, como ele funciona, e porque é tão importante para área de TI.
 
-Esta palavra tem origem na língua inglesa e sua tradução para o portugês seria provavelmente: posicionar.
+Esta palavra tem origem na língua inglesa e sua tradução para o português seria provavelmente: posicionar.
 
 Quando se fala em "fazer deploy", imagine que isso significa uma forma de posicionar algo, ou seja, é basicamente pegar algo que está em uma posição/localização e colocar em outra.
 
@@ -50,7 +50,7 @@ Esses testes muitas vezes usam dados mais próximos do que os que seriam usados 
 
 ### Produção
 
-Aqui é oficial, todo produto agora pode ser utilizado pelos clientes. É onde tudo ocorre "para valer" é normalmente maior (em quantidade de recursos) e mais restrito (no que tange a como quem pode fazer alterações como um deploy). É comum o ambiente de produção ser composto por, no mínimo, duas máquinas configuradas com o mesmo mesmo conteúdo. Isso ocorre para criar uma situação chamada de alta-disponibilidade. Neste cenário o serviço é mais resiliente e, caso uma das máquinas seja perdida por falhas inesperadas, o serviço continuará disponível.
+Aqui é oficial, todo produto agora pode ser utilizado pelos clientes. É onde tudo ocorre "para valer" é normalmente maior (em quantidade de recursos) e mais restrito (no que tange a como quem pode fazer alterações como um deploy). É comum o ambiente de produção ser composto por, no mínimo, duas máquinas configuradas com o mesmo conteúdo. Isso ocorre para criar uma situação chamada de alta-disponibilidade. Neste cenário o serviço é mais resiliente e, caso uma das máquinas seja perdida por falhas inesperadas, o serviço continuará disponível.
 
 Usando o exemplo anterior do site, basicamente, seria a hipótese de se ter duas máquinas hospedando os mesmos arquivos do site e, caso aconteça uma falha elétrica, ou qualquer outro problema em uma das máquinas, a segunda pode assumir o serviço sozinha sem muitos prejuízos à disponibilidade do serviço ofertado, que, neste cenário, significa exibir o site para as pessoas que o acessam.
 
