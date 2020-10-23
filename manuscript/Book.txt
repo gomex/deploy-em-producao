@@ -9,7 +9,7 @@ o_que_e_pr.md
 estrategia_de_testes.md
 por_que_escrever_testes.md
 definindo_testes.md
-desafios_em_tests.md
+desafios_em_testes.md
 testes_continuous.md
 testes_e_tomada_de_decisao.md
 testes_conclusao.md
