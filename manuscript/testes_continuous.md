@@ -9,7 +9,7 @@ Pré-submit é o momento antes de enviar as alterações para o repositório. Ne
 ```javascript
 "husky": {
     "hooks": {
-      "pre-push": "npm run standard",
+      "pre-push": "npm run test",
       "...": "..."
     }
   },
