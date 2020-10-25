@@ -15,7 +15,7 @@ Pré-submit é o momento antes de enviar as alterações para o repositório. Ne
   },
 ```
 
-Você pode conferir esse exemplo completo nesse [repositório](https://github.com/samycici/auth-app/blob/master/package.json#L59-L64)
+Você pode conferir esse exemplo completo neste [repositório](https://github.com/samycici/auth-app/blob/master/package.json#L59-L64).
 
 ### Pós-Submit
 
