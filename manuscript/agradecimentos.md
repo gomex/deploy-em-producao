@@ -18,7 +18,7 @@ Obrigado a [Guto Carvalho](https://twitter.com/gutocarvalho) por ter escrito o p
 
 Obrigado especial a um grupo de pessoas que faz parte de um canal que tenho no telegram para avaliar todo material que eu crio para o livro antes dele sair:
  
- - [Braier Alves](https://www.linkedin.com/in/braieralves/)
+ - [Braier Alves](https://github.com/braieralves)
  - [Morvana Bonin](https://twitter.com/morvanabonin)
  - [Giu](https://twitter.com/ReginaSauro)
  - [Victor Martinez](https://twitter.com/vcrmartinez)

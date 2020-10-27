@@ -14,6 +14,8 @@ São 3 as categorizações:
 - Médio: aqui temos testes que executam múltiplos processos mas ainda assim sem acessar componentes externos, nessa categoria entram os testes que acessam banco de dados por exemplo;
 - Grande: esses testes são os que necessitam de uma maior complexidade para execução, nesse momento os sistemas já estão integrados. São mais lentos e menos determinísticos.
 
+Dentro de cada um desses tipos de teste podemos ainda categorizar quais características de qualidade estão sendo avaliadas em funcionais e não funcionais. Quando falarmos de **testes funcionais** nos referimos à validação de características relacionadas ao comportamento da aplicação durante a utilização do sistema; quando falarmos de **testes não funcionais**, nos referimos à avaliação de aspectos de qualidade como desempenho, usabilidade, compatibilidade e outras "idades" onde o objetivo é validar essas características ao invés da funcionalidade em si.
+
 ### Testes Pequenos
 
 #### Testes Unitários
@@ -325,7 +327,7 @@ const user = {
 }
 ```
 
-Aqui temos uma constante chamada *user*, que iremos utilizar no nosso teste. 
+Aqui temos uma constante chamada *user*, que iremos utilizar no nosso teste.
 
 ```javascript
 describe('The register process', () => {
@@ -352,7 +354,7 @@ Imagine que você tem um serviço A que consome recursos de um serviço B. O ser
 
 Nesse teste o consumidor, serviço A da nossa história, tem um contrato escrito especificando suas expectativas em relação ao serviço B e esse contrato é executado no momento dos testes. O pulo do gato aqui é que esses contratos também ficam disponíveis para o serviço B baixar e conferir se as suas mudanças não quebraram nenhuma expectativa. Desse jeito o serviço B além de conhecer todos os seus consumidores e como eles se comportam, também tem uma validação automatizada no seu próprio pipeline que vai impedir que novas mudanças sejam promovidas se algum desses contratos foi quebrado.
 
-A ferramenta mais madura altualmente para esse tipo de teste é o [Pact](https://docs.pact.io/). Na imagem abaixo você consegue ver exatamente esse fluxo descrito:
+A ferramenta mais madura atualmente para esse tipo de teste é o [Pact](https://docs.pact.io/). Na imagem abaixo você consegue ver exatamente esse fluxo descrito:
 
 ![Pact Flow](resources/images/pact.png)
 
@@ -360,7 +362,7 @@ Seja o seu serviço um consumidor ou provedor, é importante se preocupar com os
 
 ### Testes Grandes
 
-Existem alguns pontos cegos entre os testes que comentamos anteriormente:
+Existem alguns pontos não cobertos entre os testes que comentamos anteriormente:
 
 - Se estamos usando dublês por exemplo, quem garante que aqueles dublês são fiéis a implementação real? E se o time esquecer de atualizar um dublê de um comportamento que foi alterado?
 - Questões de configuração de ambiente, e se o time esquecer de configurar aquela variável na especificação do container? E se tiver um problema na conexão do container da aplicação com o banco de dados?
@@ -386,7 +388,7 @@ Uma dica aqui é: avalie os riscos envolvidos e decida a abordagem que traz mais
 
 #### Testes de Desempenho
 
-Outro tipo de teste que está no grupo dos grandões são os testes de desempenho, esses testes normalmente são executados em um ambiente isolado e exercitam todos os componentes da infraestrutura mas você também pode avaliar a perfomance de pequenas unidades para identificar se houve degradação de performance entre uma versão e outra.
+Outro tipo de teste que está no grupo dos grandões são os testes de desempenho, esses testes normalmente são executados em um ambiente isolado e exercitam todos os componentes da infraestrutura mas você também pode avaliar a performance de pequenas unidades para identificar se houve degradação de performance entre uma versão e outra.
 
 São testes com um foco em métricas, então não vamos olhar apenas se um registro foi criado e sim que quando eu crio 100 registros por segundo, eu tenho um determinado consumo de recursos ou até mesmo que meus recursos não tem capacidade suficiente para criar esses 100 registros.
 
@@ -421,29 +423,29 @@ Esse e outros testes não funcionais vão te ajudar muito a validar questões de
 
 #### Testes de Compatibilidade
 
-Quando falamos de aplicações que possuem a chamada interface de usuário, ou seja, uma aplicação web que acessamos via browser ou um aplicativo utilizado via smartphone, os testes de compatibilidade se tornam extremamente importantes já que conforme sua base de clientes vai crescendo fica impossível acompanhar manualmente os testes das diferentes versões em diferentes plataformas. No caso de aplicações web por exemplo, podemos acessar utilizando o Safari, Chrome, Brave, Firefox, Internet Explorer, Edge e quando falamos de mobile temos uma infinidade de marcas de aparelho como Samsung, Apple, LG, Nokia, Xaiomi, entre outras, além das versões de iOS e Android. Compatibilidade é garantir que sua aplicação funciona nos diferentes dispositivos que o seu usuário pode estar utilizando para acessá-la.
+Quando falamos de aplicações que possuem a chamada interface de usuário, ou seja, uma aplicação web que acessamos via browser ou um aplicativo utilizado via smartphone, os testes de compatibilidade se tornam extremamente importantes já que conforme sua base de clientes vai crescendo fica impossível acompanhar manualmente os testes das diferentes versões em diferentes plataformas. No caso de aplicações web por exemplo, podemos acessar utilizando o Safari, Chrome, Brave, Firefox, Internet Explorer, Edge e quando falamos de mobile temos uma infinidade de marcas de aparelho como Samsung, Apple, LG, Nokia, Xiaomi, entre outras, além das versões de iOS e Android. Compatibilidade é garantir que sua aplicação funciona nos diferentes dispositivos que o seu usuário pode estar utilizando para acessá-la.
 
 Existem serviços onde você consegue executar seus testes em diferentes browsers, sistemas operacionais e resoluções por exemplo, como a [Saucelabs](https://saucelabs.com/) e o [BrowserStack](https://www.browserstack.com/). O mesmo pode ser feito para aplicativos Android e iOs, considerando diferentes versões e modelos de aparelhos.
 
-Um outro tipo de teste onde você consegue garantir a compatilidade é o teste de regressão visual, ferramentas como o [BackstopJs](https://github.com/garris/BackstopJS) proporcionam isso.
+Um outro tipo de teste onde você consegue garantir a compatibilidade é o teste de regressão visual, ferramentas como o [BackstopJs](https://github.com/garris/BackstopJS) proporcionam isso.
 
 #### Outras Verificações
 
-Aqui temos algumas verficações bônus que vão te ajudar a elevar a barra de qualidade do seu projeto e garantir que as entregas em produção estão tinindo.
+Aqui temos algumas verificações bônus que vão te ajudar a elevar a barra de qualidade do seu projeto e garantir que as entregas em produção estão tinindo.
 
 ##### Análise Estática
 
 A análise estática é uma prática que verifica a qualidade do seu código fonte. Essas verificações podem ser executadas antes mesmo do push através de um hook fazendo com que antes mesmo de enviar suas alterações você já fica sabendo se ofendeu alguma regra de estilo de código ou teve algum problema com a cobertura dos testes.
 
-Uma das ferramentas mais famosas é o [SonarQube](https://www.sonarqube.org/) que tem uma versão on-promisse e cloud, nele você consegue observar algumas métricas que te ajudam inclusive a corrigir bugs e encontrar falhas de segurança antes que as alterações cheguem no cliente. Ele já tem alguns templates de boas práticas baseadas na linguagem, mas você pode configurar e incluir outras verificações como por exemplo [regras de segurança baseadas na OWASP](https://docs.sonarqube.org/latest/user-guide/security-rules/).
+Uma das ferramentas mais famosas é o [SonarQube](https://www.sonarqube.org/) que tem uma versão on-premise e cloud, nele você consegue observar algumas métricas que te ajudam inclusive a corrigir bugs e encontrar falhas de segurança antes que as alterações cheguem no cliente. Ele já tem alguns templates de boas práticas baseadas na linguagem, mas você pode configurar e incluir outras verificações como por exemplo [regras de segurança baseadas na OWASP](https://docs.sonarqube.org/latest/user-guide/security-rules/).
 
 ![Sonar](resources/images/sonar.png)
 
-A gente volta nesse assunto quando formos falar de Testes Contínuos e onde encaixar cada uma das verficiações que falamos aqui. :)
+A gente volta nesse assunto quando formos falar de Testes Contínuos e onde encaixar cada uma das verificações que falamos aqui. :)
 
 ##### Testes de Mutação
 
-Por fim temos os testes de mutação. A ideia desse tipo de teste é validar a efetivadade dos seus testes. A métrica de cobertura de testes por si só pode ser um número enganoso já que basta que algum teste exercite aquela linha de código que ela já é considerada coberta por testes, mesmo que não tenha nenhuma asserção.
+Por fim temos os testes de mutação. A ideia desse tipo de teste é validar a efetividade dos seus testes. A métrica de cobertura de testes por si só pode ser um número enganoso já que basta que algum teste exercite aquela linha de código que ela já é considerada coberta por testes, mesmo que não tenha nenhuma asserção.
 
 Nos testes de mutação, alguns mutantes são inseridos em tempo de execução no código da aplicação e toda vez que uma alteração é realizada os testes são executados para verificar se vão quebrar. Se o teste quebrar, significa que ele realmente está sendo efetivo posto que uma alteração foi introduzida no código, como por exemplo alterar uma condicional de `!request.authUser.emailConfirmedAt` para `request.authUser.emailConfirmedAt`, e o teste detectou isso como uma anomalia. Agora, se o código for alterado e o teste não quebrar, significa que tem um ponto cego ali que não está sendo testado.
 
