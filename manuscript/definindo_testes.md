@@ -14,6 +14,8 @@ São 3 as categorizações:
 - Médio: aqui temos testes que executam múltiplos processos mas ainda assim sem acessar componentes externos, nessa categoria entram os testes que acessam banco de dados por exemplo;
 - Grande: esses testes são os que necessitam de uma maior complexidade para execução, nesse momento os sistemas já estão integrados. São mais lentos e menos determinísticos.
 
+Dentro de cada um desses tipos de teste podemos ainda categorizar quais características de qualidade estão sendo avaliadas em funcionais e não funcionais. Quando falarmos de **testes funcionais** nos referimos à validação de características relacionadas ao comportamento da aplicação durante a utilização do sistema; quando falarmos de **testes não funcionais**, nos referimos à avaliação de aspectos de qualidade como desempenho, usabilidade, compatibilidade e outras "idades" onde o objetivo é validar essas características ao invés da funcionalidade em si.
+
 ### Testes Pequenos
 
 #### Testes Unitários
@@ -360,7 +362,7 @@ Seja o seu serviço um consumidor ou provedor, é importante se preocupar com os
 
 ### Testes Grandes
 
-Existem alguns pontos cegos entre os testes que comentamos anteriormente:
+Existem alguns pontos não cobertos entre os testes que comentamos anteriormente:
 
 - Se estamos usando dublês por exemplo, quem garante que aqueles dublês são fiéis a implementação real? E se o time esquecer de atualizar um dublê de um comportamento que foi alterado?
 - Questões de configuração de ambiente, e se o time esquecer de configurar aquela variável na especificação do container? E se tiver um problema na conexão do container da aplicação com o banco de dados?
