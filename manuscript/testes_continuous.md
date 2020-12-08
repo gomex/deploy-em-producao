@@ -25,7 +25,7 @@ Depois que o código é enviado para o repositório, partimos para o processo de
 
 Como resultado do passo anterior você terá sua versão candidata, ou seja, um pacote com o código já alterado e que passou por todos os testes. Depois que temos uma versão candidata já publicada em algum ambiente de testes é a hora de executar os testes grandes para validar que os fluxos de negócio estão funcionando de forma integrada com todos os componentes envolvidos. Aqui você pode ter de 1 a N ambientes de teste, algumas empresas tem o ambiente de staging, pré-prod, homolog, os nomes são variados, mas o importante é ter ambientes de teste onde a sua versão será publicada e testada antes de prosseguir para produção.
 
-Depois dessa validação finalmente podemos enviar a nossa mudança para ambiente de produção. :rocket:
+Depois dessa validação finalmente podemos enviar a nossa mudança para ambiente de produção. 🚀
 
 ### Produção
 
