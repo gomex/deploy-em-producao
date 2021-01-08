@@ -8,6 +8,7 @@ Aqui está a lista de pessoas que colaboraram com o livro com Pull Request (PR).
 - [Evellyn Lima](https://github.com/evelew)
 - [Edson Ferreira](https://github.com/edsoncelio)
 - [Kelvin Salton](https://github.com/kelvins)
+- [Paulo Gonçalves](https://github.com/PauloGoncalvesBH)
 
 Nesse [link](https://github.com/gomex/deploy-em-producao/graphs/contributors) você pode acompanhar a colaboração de todas as pessoas, sejam autoras ou colaboradoras.
 
