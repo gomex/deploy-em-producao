@@ -457,6 +457,10 @@ O exemplo abaixo é do [Stryker Mutator](https://stryker-mutator.io/), uma ferra
 
 Importante lembrar que no caso dos testes de mutação não basta apenas executar, depois da execução é necessário analisar os resultados e planejar como aumentar a cobertura.
 
+Caso adote o Stryker Mutator algumas estratégias adicionais podem ser utilizadas para reduzir o impacto do consumo de recurso computacional, como:
+- Gerar os mutantes apenas nas linhas que possuem cobertura de código, ao invés de em todo o código.
+- Executar esses testes em Pull Request apenas para os arquivos alterados. Em JS é possível com a biblioteca [Stryker-diff-runner](https://github.com/tverhoken/stryker-diff-runner).
+
 ### Conclusão
 
 Testes são uma parte crucial do processo de entrega de software, para conseguir fazer entregas de qualidade em produção é imprescindível ter testes que tragam segurança para o time que caso exista algum problema nas alterações realizadas ao longo do ciclo de vida da aplicação, eles vão ser alertados o mais cedo possível e conseguir corrigir antes que esses problemas impactem um cliente.
