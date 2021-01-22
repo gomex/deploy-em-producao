@@ -229,6 +229,8 @@ find.restore();
 
 Os mocks são capazes de substituir a dependência permitindo assim verificar vários comportamentos. Você pode utilizar por exemplo para verificar se uma função foi chamada e se ela foi chamada com os argumentos esperados.
 
+Embora mock tenha comportamento parecido com spy e stub é importante não confundir com ambos. Para aprofundar recomendo a leitura do texto [Mocks Aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html).
+
 ```javascript
 describe('PokemonController get()', () => {
   it('should call database with correct arguments', () => {
