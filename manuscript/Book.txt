@@ -16,3 +16,6 @@ testes_e_tomada_de_decisao.md
 testes_conclusao.md
 migracao_banco_dados_relacionais.md
 o_que_tem_que_ter_no_pipeline.md
+garantindo_qualidade_iac.md
+deploy_de_iac.md
+nao_acabou.md
