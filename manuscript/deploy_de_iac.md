@@ -1,4 +1,4 @@
-# Deploy de Infraestrutura como código
+# Deploy de Infraestrutura como código  (Rafael Gomes)
 
 ## Introdução
 
