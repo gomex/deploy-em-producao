@@ -10,7 +10,7 @@ Enviar o código sem uma validação para que o pipeline "tente" aplicar seu có
 
 O que leva a pessoa que trabalha com infra a cometer esse tipo de atitude? Será que existe outra possibilidade? 
 
-Nesse artigo mostraremos alguns caminhos do que pode ser feito para evitar esse tipo de situação, afinal não é uma boa prática essa atitude de "tentativa e erro". Como estamos falando de infraestrutura, uma tentativa muito equivocada pode causar danos com grandes chances de lhe oferecer novos desafios por algumas horas ou até mesmo dias.
+Mostraremos alguns caminhos do que pode ser feito para evitar esse tipo de situação, afinal não é uma boa prática essa atitude de "tentativa e erro". Como estamos falando de infraestrutura, uma tentativa muito equivocada pode causar danos com grandes chances de lhe oferecer novos desafios por algumas horas ou até mesmo dias.
 
 ## O que seria QA para IaC?
 
