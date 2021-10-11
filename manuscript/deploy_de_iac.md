@@ -1,10 +1,10 @@
-# Deploy de Infraestrutura como código
+# Deploy de Infraestrutura como código  (Rafael Gomes)
 
 ## Introdução
 
-Explicamos [aqui](o_que_e_deploy.md) o que é um deploy, mas nesse artigo falaremos sobre um tipo especial de deploy. Esse que lida com a infraestrutura.
+Explicamos aqui no capítulo "O que é deploy?", mas aqui nesse capítulo falaremos sobre um tipo especial de deploy. Esse que lida com a infraestrutura.
 
-Infraestrutura como código (IaC) é um grande domínio de conhecimento. Nesse artigo falaremos especificamente de infraestrutura de servidores, onde é criado e/ou mantido uma plataforma que receberá código posteriormente.
+Infraestrutura como código (IaC) é um grande domínio de conhecimento. Falaremos especificamente de infraestrutura de servidores, onde é criado e/ou mantido uma plataforma que receberá código posteriormente.
 
 Existem algumas formas de manter uma infraestrutura mantida de forma automatizada. Quando se fala sobre "deploy de infraestrutura como código (Deploy de IaC)" estamos falando de criar e/ou fazer modificação em uma infraestrutura com base em um código *infra as code* (IaC) de um repositório.
 
