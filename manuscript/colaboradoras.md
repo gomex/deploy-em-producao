@@ -1,6 +1,6 @@
 # Colaboradoras
 
-Aqui está a lista de pessoas que colaboraram com o livro com Pull Request (PR). Meu muito obrigado por corrigir, adicionar e assim melhorar o material para toda comunidade:
+Aqui está a lista de pessoas que colaboraram com Pull Request (PR) para este livro :sparkles:. 
 
 - [Adail Horst](https://github.com/SpawW)
 - [Vinícius Mamoré](https://github.com/vmamore)
@@ -10,6 +10,6 @@ Aqui está a lista de pessoas que colaboraram com o livro com Pull Request (PR).
 - [Kelvin Salton](https://github.com/kelvins)
 - [Paulo Gonçalves](https://github.com/PauloGoncalvesBH)
 
-Nesse [link](https://github.com/gomex/deploy-em-producao/graphs/contributors) você pode acompanhar a colaboração de todas as pessoas, sejam autoras ou colaboradoras.
+Meu muito obrigado por melhorarem o material e assim contribuirem para toda a comunidade :tada:.
 
-Meu muito obrigado por corrigir, adicionar e assim melhorar o material para toda comunidade.
+Nesse [link](https://github.com/gomex/deploy-em-producao/graphs/contributors) você pode acompanhar a colaboração de todas as pessoas, sejam autoras ou colaboradoras.
