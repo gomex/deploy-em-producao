@@ -9,7 +9,7 @@ O aconselhável é que você leia o livro da forma convencional, pois terá a op
 
 A ideia desse livro é que ele nunca esteja pronto. Isso pode assustar aquelas pessoas que esperam o "final" de uma história, mas aqui a abordagem é diferente.
 
-A ideia do livro é ser um local onde se possa congregar conhecimentos sobre como fazer deploy em produção a medida que o entendimento e experiências de várias pessoas mudem sobre o assunto, ou seja, sempre terá uma coisa nova para ser falar sobre entrega em produção, correto?
+A ideia do livro é ser um local onde se possa congregar conhecimentos sobre como fazer deploy em produção a medida que o entendimento e experiências de várias pessoas mudem sobre o assunto, ou seja, sempre terá uma coisa nova para se falar sobre entrega em produção, correto?
 
 ## Como será dividido esse livro?
 
