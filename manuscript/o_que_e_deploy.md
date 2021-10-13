@@ -30,7 +30,7 @@ As boas práticas apontam que antes de chegar no ambiente de produção esse sof
 
 ### Desenvolvimento
 
-É o local no qual a pessoa que desenvolve tem acesso direto, é onde se executa rapidamente o código, a fim de verificar se o que está sendo escrito atenderá as expectativas da funcionalidade que está sendo desenvolvida
+É o local no qual a pessoa que desenvolve tem acesso direto, é onde se executa rapidamente o código, a fim de verificar se o que está sendo escrito atenderá as expectativas da funcionalidade que está sendo desenvolvida.
 
 Normalmente essa é a máquina da pessoa que desenvolve o software, e o verbo "deployar" faz pouco sentido aqui, porque não há uma movimentação de código, uma vez que este será usado na mesma máquina onde foi produzido.
 
@@ -44,7 +44,7 @@ O que aqui é chamado de **análise** será mais detalhado nos capítulos poster
 
 Esse é, em via de regra, o último local que o código "visitará" antes de ser conduzido para o ambiente que será usado pelos usuários reais do serviço. Ou seja, é aqui o local no qual costumeiramente acontecem os testes mais "pesados".
 
-Esses testes muitas vezes usam dados mais próximos do que os que seriam usados no ambiente real de forma que validações bem mais elaboradas podem acontecer. Habitualmente os times de software simulam o uso do sistema, de forma automatizada ou não, a fim de encontrar possíveis erros e esses tipos de testes serão assunto de outros capítulos. Por agora basta sabermos que é nesse ambiente que isso habitualmente acontece.
+Esses testes muitas vezes usam dados próximos dos usados em um ambiente real, dessa forma, podem ser realizadas validações mais elaboradas. Habitualmente os times de software simulam o uso do sistema, de forma automatizada ou não, a fim de encontrar possíveis erros e esses tipos de testes serão assunto de outros capítulos. Por agora basta sabermos que é nesse ambiente que isso habitualmente acontece.
 
 É importante salientar que se você copiar os dados de produção para ajudar na validação dos ambientes de "teste" e/ou desenvolvimento, deverá lembrar de apagar dados pessoais das pessoas que utilizam seu sistema. Imagine se fosse você a pessoa que utiliza um sistema, sabendo que seus dados pessoais estão acessíveis para qualquer membro da equipe de desenvolvimento?
 
