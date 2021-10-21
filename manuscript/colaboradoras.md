@@ -9,6 +9,7 @@ Aqui está a lista de pessoas que colaboraram com Pull Request (PR) para este li
 - [Edson Ferreira](https://github.com/edsoncelio)
 - [Kelvin Salton](https://github.com/kelvins)
 - [Paulo Gonçalves](https://github.com/PauloGoncalvesBH)
+- [Ricardo Tássio](https://github.com/ricardotassio)
 
 Meu muito obrigado por melhorarem o material e assim contribuirem para toda a comunidade :tada:.
 
