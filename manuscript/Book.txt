@@ -7,7 +7,6 @@ como_ler.md
 o_que_e_deploy.md
 o_que_e_pipeline.md
 o_que_e_pr.md
-git_basico.md
 estrategia_de_testes.md
 por_que_escrever_testes.md
 definindo_testes.md
