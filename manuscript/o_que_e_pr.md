@@ -33,9 +33,11 @@ Se a funcionalidade for feita no mesmo local de código mas em linhas diferentes
 
 A sugestão é que funcionalidades diferentes sejam tratadas de forma isolada, a fim de não causar conflito algum no processo.
 
-Todo esse processo que descrevi aqui, pode ser feito também baseado em branch, mas a pessoa que colabora precisa ser membro do repositório e não uma pessoa aleatória na internet, pois ela precisa ter permissão para criar branch no repositório. No fim é o mesmo propósito, mas ao invés de repositório inteiro, tudo que expliquei aqui acontece no nível de ramificações.
+Todo esse processo que descrevi aqui, também pode ser feito em um modelo baseado em branch. Nesse modelo a pessoa que colabora precisa ser adicionada como membro do repositório, ter permissões para criar branch e ter acesso a push (empurrar mudanças). Esse é um modelo muito usado por equipes e empresas que colaboram em projetos privados.
 
-Por fim, note que em outras plataformas de repositórios online, o conceito de Pull Request pode ter outros nomes como por exemplo Merge Request(Requisição para mergear).
+Se você quiser conhecer mais sobre esses dois modelos de desenvolvimento colaborativo, sugiro aprofundar a leitura em [Sobre modelos de desenvolvimento colaborativo](https://docs.github.com/pt/github/collaborating-with-pull-requests/getting-started/about-collaborative-development-models)
+
+Por fim, note que em outras plataformas de repositórios online, o conceito de Pull Request pode ter outros nomes como por exemplo Merge Request (requisição para mergear).
 
 ## Como usar Pull Request para o processo de revisão?
 
