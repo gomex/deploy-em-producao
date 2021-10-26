@@ -45,13 +45,13 @@ A maioria das organizações utiliza o Pull Request como mecanismo padrão para 
 
 Normalmente as branchs que serão usadas para construir o artefato final do repositório oficial são protegidas e não podem receber commits diretos, ou seja, tudo que entra nessas branchs devem entrar por um PR (Pull Request). Existe a possibilidade do administrador do repositório mandar o código direto, mas isso deve ser apenas uma exceção. Dito isso, eu reforço, **mesmo os administradores do repositório**, **pessoas desenvolvedoras experientes**, ou até mesmo a **liderança técnica** do time devem mandar suas mudanças por PR e elas devem ser avaliadas por outras pessoas.
 
-Quando começar a trabalhar em uma funcionalidade nova do repositório. Eu faço parte da organização? Tenho acesso a criar uma branch? Caso positivo, eu crio uma branch.
+Quando começar a trabalhar em uma nova funcionalidade do repositório, verifique se você faz parte da organização e tenho acesso a criar uma branch. Caso positivo, crie uma branch.
 
-Existe um Padrão para criação de branch? Eu gosto do modelo "feature/nome-da-funcionalidade" assim fica muito claro para todo mundo no que você está trabalhando. Se você usa algum sistema de ticket para gerenciar as tarefas você pode colocar o identificador do ticket também: ""feature/nome-da-funcionalidade#435".
+Existe um padrão para criação de branch? Eu gosto do modelo "feature/nome-da-funcionalidade" assim fica muito claro para todo mundo no que você está trabalhando. Se você usa algum sistema de ticket para gerenciar as tarefas você pode colocar o identificador do ticket também: ""feature/nome-da-funcionalidade#435".
 
 ![Proposta de fluxo para Pull Request](resources/images/pullrequest2.png)
 
-Lembre-se que sua branch precisa ser bem específica, ou seja, se "aparecer" outra demanda, o aconselhável é abrir outra branch a partir de branch "oficial" (que normalmente é a "master").
+Lembre-se que sua branch precisa ser bem específica, ou seja, se "aparecer" outra demanda, o aconselhável é abrir outra branch a partir de branch "oficial" (que normalmente é a "master" ou "main").
 
 Quando você tiver muita confiança que seu código entrega tudo que a funcionalidade precisa para existir, você deve abrir um PR e na descrição desse PR você deve detalhar qual comportamento esperar dessa mudança que você está propondo.
 
@@ -99,6 +99,8 @@ Pronto, com isso você está dizendo que sua análise não levará em conta a qu
 A maioria das organizações seguem alguns padrões para como escrever código, seja em sua formatação (ex. quatro espaço, ponto e vírgula em cima ou embaixo) ou em como organizar funções, métodos e afins.
 
 Esse padrão deve estar claro em algum lugar, e a pessoa que vai colaborar deve ler isso antes, mas nem sempre isso é possível e dessa forma a colaboração pode não seguir esse padrão. Você que está avaliando deve deixar bem claro para esta pessoa qual regra ela está infligindo e qual parte do código isso acontece. O github oferece a funcionalidade de comentar nas linhas do código do PR.
+
+Algumas discussões sobre detalhes de padrões podem ser tratadas e revisadas automaticamente com uso de ferramentas, como um bom formatador e um linter, que ajuda a economizar muito tempo da equipe com as revisões.
 
 ![Comentário no review](resources/images/pullrequest4.png)
 
