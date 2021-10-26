@@ -1,6 +1,6 @@
 # Colaboradoras
 
-Aqui está a lista de pessoas que colaboraram com Pull Request (PR) para este livro :sparkles:. 
+Aqui está a lista de pessoas que colaboraram com Pull Request (PR) para este livro :sparkles:.
 
 - [Adail Horst](https://github.com/SpawW)
 - [Vinícius Mamoré](https://github.com/vmamore)
@@ -10,6 +10,7 @@ Aqui está a lista de pessoas que colaboraram com Pull Request (PR) para este li
 - [Kelvin Salton](https://github.com/kelvins)
 - [Paulo Gonçalves](https://github.com/PauloGoncalvesBH)
 - [Ricardo Tássio](https://github.com/ricardotassio)
+- [Geidson Benício](https://github.com/geidsonc)
 
 Meu muito obrigado por melhorarem o material e assim contribuirem para toda a comunidade :tada:.
 
