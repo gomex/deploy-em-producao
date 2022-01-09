@@ -10,7 +10,7 @@ Neste capítulo trataremos do aprendizado dos seus comandos mais simples e como 
 
 Normalmente para trabalharmos com o Git precisamos de um terminal. Um terminal é uma aplicação que te permite controlar recursos da sua máquina. 
 
-![Print de um Terminal](./resources/images/terminal.png)
+![Print de um Terminal](resources/images/terminal.png)
 
 No terminal nós digitamos alguns comandos que são interpretados pelo seu sistema operacional. Neste momento vamos instalar o git em nossa máquina:
 
@@ -49,28 +49,28 @@ De uma forma geral podemos considerar que o Git é um gerenciador de estados. O 
 
 Na primeira, é quando usamos o `git init`, aqui estamos dizendo pro Git que desejamos começar um novo repositório e gerenciar as mudanças que acontecerem nesse diretório, por isso nosso diretório contém somente a pasta oculta `.git`*:
 
-![Git Init](./resources/images/git_init.png)
+![Git Init](resources/images/git_init.png)
 
 > *Entraremos em mais detalhes sobre a estrutura dessa pasta oculta em outra oportunidade, por agora, deixamos você com a [documentação oficial do Git](https://git-scm.com/docs/gitrepository-layout).
 
 Na segunda, é quando criamos o nosso novo arquivo, o `new_file.txt`. Vemos na imagem abaixo que o nosso `new_file.txt` está listado em `Untracked files`. Neste caso o Git detecta que houve uma mudança dentro do repositório, porém o estado dessa mudança ainda não foi passado para o Git. Aqui apresentaremos o comando `git status`, que é responsável por isso mesmo, mostrar qual é o estado atual do seu repositório.
 
-![Git Untracked Status](./resources/images/git_untracked.png)
+![Git Untracked Status](resources/images/git_untracked.png)
 
 Na terceira, vamos usar o `git add new_file.txt` para dizer ao Git que queremos que ele seja responsável pela gestão do estado do nosso arquivo.
 
-![Git Add Status](./resources/images/git_add.png)
+![Git Add Status](resources/images/git_add.png)
 
 Agora notamos que nosso arquivo está listado em outra estrutura, o `Changes to be committed`. Neste estado o Git mostra que ele está pronto para gerenciar o estado do nosso arquivo, porém, ainda não demos essa responsabilidade para ele.
 
 Na quarta e última forma, ao utilizar o `git commit -m "Adicionando o novo arquivo"`, o Git finalmente consegue adicionar o `new_file.txt` à sua estrutura e portanto agora, todas as mudanças que ocorrerem em nosso arquivo, o Git vai mostrar o antes e o depois e esperar nossas ações em relações a essas mudanças. 
 
-![Git Commit Status](./resources/images/git_commit.png)
+![Git Commit Status](resources/images/git_commit.png)
 
 ### Git log
 E por último, mas não menos importante, temos o `git log` que nos lista todas as mudanças de estado que "commitamos" no Git. Com este comando podemos ver todos os estados dos arquivos que salvamos em nosso repositório. E podemos ver na imagem a seguir que um `commit` contém muito mais informação além da mensagem de título que usamos na seção anterior, como a Data e Hora que esse `commit` ocorreu, o identificador dele(destacado em laranja) e quem foi o autor dessa alteração.
 
-![GitLog](./resources/images/git_log.png)
+![GitLog](resources/images/git_log.png)
 
 
 **Dica**: Instale o Tig para ter um outro tipo de visualização do `git log`: 
@@ -79,7 +79,7 @@ sudo apt-get install tig
 ```  
 Para ativar o Tig basta digitar `tig` no seu terminal dentro de uma pasta com o git configurado.
 
-![Print do tig](./resources/images/tig.png)
+![Print do tig](resources/images/tig.png)
 
 ---
 ### Conclusão
