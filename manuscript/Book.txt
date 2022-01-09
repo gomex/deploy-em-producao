@@ -6,6 +6,7 @@ como_esta_sendo_construido.md
 como_ler.md
 o_que_e_deploy.md
 o_que_e_pipeline.md
+git_basico.md
 o_que_e_pr.md
 estrategia_de_testes.md
 por_que_escrever_testes.md
