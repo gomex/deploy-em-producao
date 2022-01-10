@@ -81,6 +81,5 @@ Para ativar o Tig basta digitar `tig` no seu terminal dentro de uma pasta com o 
 
 ![Print do tig](resources/images/tig.png)
 
----
 ### Conclusão
 Até aqui nós aprendemos alguns dos comandos básicos do Git e em como usar esta ferramenta para gerenciar as mudanças dentro de nosso diretório. Porém, até agora todas essas mudanças estão em nosso computador. Como fazemos para compartilhar o nosso projeto com outras pessoas? Como salvamos o nosso trabalho em ferramentas como o Github ou Gitlab? Essas e outras perguntas responderemos no próximo capítulo. Até lá. =D
