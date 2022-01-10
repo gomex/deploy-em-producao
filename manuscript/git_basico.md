@@ -10,15 +10,16 @@ Neste capítulo trataremos do aprendizado dos seus comandos mais simples e como 
 
 Normalmente para trabalharmos com o Git precisamos de um terminal. Um terminal é uma aplicação que te permite controlar recursos da sua máquina. 
 
-![Print de um Terminal](resources/images/terminal.png)
+{width: 50%, height: 50%}
+![Print de um Terminal](./resources/images/terminal.png)
 
 No terminal nós digitamos alguns comandos que são interpretados pelo seu sistema operacional. Neste momento vamos instalar o git em nossa máquina:
 
-### Instalar no Windows
+### Instalação no Windows
 No Windows é possível instalar o Git via um binário, que você pode [baixar aqui](https://git-scm.com/downloads) e executar a instalação, ou trabalhar com o [Windows Subsystem for Linux*](https://docs.microsoft.com/pt-br/windows/wsl/install), mais conhecido como WSL, onde o fluxo de instalação do Git é praticamente igual o do Linux que descreveremos a seguir.
 > *Lembre-se que é necessário instalar e configurar o WSL em sua máquina.
 
-### Instalar no Linux
+### Instalação no Linux
 Para instalar o Git no Linux, você pode seguir por dois caminhos: O primeiro executando a instalação pelo seu terminal e o segundo pela loja de aplicativos da sua distribuição. 
 Para manter a simplicidade aqui usaremos o Ubuntu como distribuição base para realizar o processo de instalação e o comando a ser executado em seu terminal é o seguinte:
 
@@ -44,6 +45,7 @@ git commit -m "Adicionando o novo arquivo"
 # Com este comando conseguimos consultar o histórico de commits
 git log
 ```
+
 ### Estados do Git
 De uma forma geral podemos considerar que o Git é um gerenciador de estados. O que fizemos acima muda o estado do Git em 4 formas:
 
