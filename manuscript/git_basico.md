@@ -10,7 +10,6 @@ Neste capítulo trataremos do aprendizado dos seus comandos mais simples e como 
 
 Normalmente para trabalharmos com o Git precisamos de um terminal. Um terminal é uma aplicação que te permite controlar recursos da sua máquina. 
 
-{width: 50%, height: 50%}
 ![Print de um Terminal](./resources/images/terminal.png)
 
 No terminal nós digitamos alguns comandos que são interpretados pelo seu sistema operacional. Neste momento vamos instalar o git em nossa máquina:
